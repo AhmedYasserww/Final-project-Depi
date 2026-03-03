@@ -10,8 +10,11 @@ class CustomButton extends StatelessWidget {
     required this.text,
     required this.onTap,
     this.buttonColor,
-    this.height, this.textButtonColor,
-    this.border
+    this.height,
+    this.textButtonColor,
+    this.border,
+    this.radius,
+    this.widget,
   });
 
   final String text;
@@ -20,6 +23,8 @@ class CustomButton extends StatelessWidget {
   final Color? textButtonColor;
   final double? height;
   final BoxBorder? border;
+  final double? radius;
+  final Widget? widget;
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +32,28 @@ class CustomButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        height: height?? 48,
+        height: height ?? 48,
         decoration: BoxDecoration(
-          border:border,
-          borderRadius: BorderRadius.circular(AppDimensions.buttonRadius),
-          color: buttonColor ?? AppColors.primaryColor,
+          border: border,
+          borderRadius: BorderRadius.circular(
+            radius ?? AppDimensions.buttonRadius2,
+          ),
+          color: buttonColor ?? AppColors.buttonColor,
         ),
         child: Center(
-          child: Text(
-            text,
-            style:AppStyle.styleWhiteRegular16.copyWith(color: textButtonColor ?? Colors.white),
+          child: Row(
+            spacing: 12,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (widget != null) widget!,
+              Text(
+                text,
+                style: AppStyle.styleWhiteRegular16.copyWith(
+
+                  color: textButtonColor ?? Colors.white,
+                ),
+              ),
+            ],
           ),
         ),
       ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/parent_log_in_view.dart';
-
 import 'core/helper_functions/on_generate_routes.dart';
+import 'feature/parent_auth/presentation/views/parent_log_in_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,9 +20,8 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Inter',
 
       ),
-      onGenerateRoute: onGenerateRoutes,
-      initialRoute: ParentLogInView.routeName,
-
+       onGenerateRoute: onGenerateRoutes,
+       initialRoute: ParentLogInView.routeName,
     );
   }
 }

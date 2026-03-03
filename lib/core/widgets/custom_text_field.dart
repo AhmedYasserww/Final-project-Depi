@@ -12,7 +12,11 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.controller,
     this.hintText,
+    this.labelText,
     this.keyboardType,
+    this.hintColor,
+    this.fillColor,
+    this.borderColor,
   });
 
   final void Function(String?)? onSaved;
@@ -22,8 +26,12 @@ class CustomTextField extends StatelessWidget {
   final bool obscureText;
   final TextEditingController? controller;
   final String? hintText;
+  final String? labelText;
   final TextInputType? keyboardType;
   final Widget? suffixIcon;
+  final Color? hintColor;
+  final Color? fillColor;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +42,13 @@ class CustomTextField extends StatelessWidget {
       onSaved: onSaved,
       onChanged: onChange,
       validator: validator,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: const Color(0xffF9FAFA),
 
-        prefixIcon: prefixIcon != null
-            ? Icon(prefixIcon, size: 30)
-            : null,
+      decoration: InputDecoration(
+        labelText: labelText,
+        filled: true,
+        fillColor:  fillColor ?? Color(0xffF9FAFA),
+
+        prefixIcon: prefixIcon != null ? Icon(prefixIcon, size: 30) : null,
 
         prefixIconColor: WidgetStateColor.resolveWith((states) {
           if (states.contains(WidgetState.error)) {
@@ -54,7 +62,11 @@ class CustomTextField extends StatelessWidget {
 
         suffixIcon: suffixIcon,
         hintText: hintText,
-        hintStyle: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: Color(0xff666666)),
+        hintStyle: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+          color: hintColor ?? Color(0xFFF1F1F1),
+        ),
 
         enabledBorder: _buildBorder(AppColors.palletBorderColor),
         focusedBorder: _buildBorder(AppColors.primaryColor),
@@ -67,11 +79,8 @@ class CustomTextField extends StatelessWidget {
 
   OutlineInputBorder _buildBorder([Color? color]) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(
-        color: color ?? AppColors.primaryColor,
-        width: 1,
-      ),
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide(color: color ?? AppColors.borderColor, width: 1),
     );
   }
 }
