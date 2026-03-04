@@ -24,9 +24,8 @@ class MyApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-       // onGenerateRoute: onGenerateRoutes,
-       // initialRoute: ParentLogInView.routeName,
-      home:CreateAccountViewBody(),
+       onGenerateRoute: onGenerateRoutes,
+       initialRoute: ParentLogInView.routeName,
     );
   }
 }
