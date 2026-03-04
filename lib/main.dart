@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'core/helper_functions/on_generate_routes.dart';
 import 'feature/parent_auth/presentation/views/parent_log_in_view.dart';
+import 'feature/parent_auth/presentation/views/widgets/create_account_view_body.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,10 +19,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
         fontFamily: 'Inter',
-
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFFFFFFFF),
+          elevation: 0,
+        ),
       ),
-       onGenerateRoute: onGenerateRoutes,
-       initialRoute: ParentLogInView.routeName,
+       // onGenerateRoute: onGenerateRoutes,
+       // initialRoute: ParentLogInView.routeName,
+      home:CreateAccountViewBody(),
     );
   }
 }

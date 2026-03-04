@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 import 'package:kids_education_learning/core/utils/app_color.dart';
 import 'package:kids_education_learning/core/widgets/custom_button.dart';
+import 'package:kids_education_learning/core/widgets/custom_terms_and_privacy_text.dart';
 import 'package:kids_education_learning/core/widgets/custom_text_field.dart';
 import 'package:kids_education_learning/core/widgets/custom_label_text.dart';
 import 'package:kids_education_learning/core/widgets/custom_title_text_in_screen.dart';
@@ -47,15 +49,24 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
                         children: [
                           Expanded(
                             child: GestureDetector(
-                              onTap: () => setState(() => isParentSelected = true),
+                              onTap: () =>
+                                  setState(() => isParentSelected = true),
                               child: AnimatedContainer(
                                 duration: Duration(milliseconds: 250),
                                 padding: EdgeInsets.symmetric(vertical: 6),
                                 decoration: BoxDecoration(
-                                  color: isParentSelected ? Colors.white : Colors.transparent,
+                                  color: isParentSelected
+                                      ? Colors.white
+                                      : Colors.transparent,
                                   borderRadius: BorderRadius.circular(7),
                                   boxShadow: isParentSelected
-                                      ? [BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2))]
+                                      ? [
+                                          BoxShadow(
+                                            color: Colors.black12,
+                                            blurRadius: 4,
+                                            offset: Offset(0, 2),
+                                          ),
+                                        ]
                                       : [],
                                 ),
                                 child: Center(
@@ -63,7 +74,9 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
                                     "Parent",
                                     style: TextStyle(
                                       color: Color(0xFF0D1B48),
-                                      fontWeight: isParentSelected ? FontWeight.bold : FontWeight.w500,
+                                      fontWeight: isParentSelected
+                                          ? FontWeight.bold
+                                          : FontWeight.w500,
                                     ),
                                   ),
                                 ),
@@ -72,15 +85,24 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
                           ),
                           Expanded(
                             child: GestureDetector(
-                              onTap: () => setState(() => isParentSelected = false),
+                              onTap: () =>
+                                  setState(() => isParentSelected = false),
                               child: AnimatedContainer(
                                 duration: Duration(milliseconds: 250),
                                 padding: EdgeInsets.symmetric(vertical: 6),
                                 decoration: BoxDecoration(
-                                  color: !isParentSelected ? Colors.white : Colors.transparent,
+                                  color: !isParentSelected
+                                      ? Colors.white
+                                      : Colors.transparent,
                                   borderRadius: BorderRadius.circular(7),
                                   boxShadow: !isParentSelected
-                                      ? [BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2))]
+                                      ? [
+                                          BoxShadow(
+                                            color: Colors.black12,
+                                            blurRadius: 4,
+                                            offset: Offset(0, 2),
+                                          ),
+                                        ]
                                       : [],
                                 ),
                                 child: Center(
@@ -88,7 +110,9 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
                                     "Teacher",
                                     style: TextStyle(
                                       color: Color(0xFF0D1B48),
-                                      fontWeight: !isParentSelected ? FontWeight.bold : FontWeight.w500,
+                                      fontWeight: !isParentSelected
+                                          ? FontWeight.bold
+                                          : FontWeight.w500,
                                     ),
                                   ),
                                 ),
@@ -101,33 +125,44 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
-                    child: LabelText(label: 'Email',),
+                    child: LabelText(label: 'Email'),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 4),
                     child: SizedBox(
-                        height: 48,
-                        child: CustomTextField(hintText: "youremail@gmail.com",hintColor: Color(0xFF121261),fillColor: Color(0xFFF1F1F1),)),
+                      height: 48,
+                      child: CustomTextField(
+                        hintText: "youremail@gmail.com",
+                        hintColor: Color(0xFF121261),
+                        fillColor: Color(0xFFF1F1F1),
+                      ),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
-                    child: LabelText(label: "Parent's Name",),
+                    child: LabelText(label: "Parent's Name"),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 4),
                     child: SizedBox(
-                        height: 48,
-                        child: CustomTextField(fillColor: Colors.white,)),
+                      height: 48,
+                      child: CustomTextField(fillColor: Colors.white),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
-                    child: LabelText(label: 'Password',),
+                    child: LabelText(label: 'Password'),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 4),
                     child: SizedBox(
-                        height: 48,
-                        child: CustomTextField(hintText: "*********",hintColor: Color(0xFF121261),fillColor: Colors.white,)),
+                      height: 48,
+                      child: CustomTextField(
+                        hintText: "*********",
+                        hintColor: Color(0xFF121261),
+                        fillColor: Colors.white,
+                      ),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 24),
@@ -135,6 +170,13 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
                       text: 'Sign Up',
                       onTap: () {},
                       buttonColor: AppColors.buttonColor,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: TermsAndPrivacyText(
+                      onTermsTap: () {},
+                      onPrivacyTap: () {},
                     ),
                   ),
                 ],
