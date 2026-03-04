@@ -216,7 +216,8 @@ class AppStyle {
     color: Color(0xFFFFFFFF),
     fontSize: 16,
     fontFamily: "Inter",
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w600,
+    letterSpacing: -.03,
   );
   static const styleRegular16 = TextStyle(
     color: Color(0xFF1A1515),
