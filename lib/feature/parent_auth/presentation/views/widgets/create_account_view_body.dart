@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:kids_education_learning/core/utils/app_color.dart';
+import 'package:kids_education_learning/core/utils/app_dimensions.dart';
 import 'package:kids_education_learning/core/widgets/custom_button.dart';
 import 'package:kids_education_learning/core/widgets/custom_terms_and_privacy_text.dart';
 import 'package:kids_education_learning/core/widgets/custom_text_field.dart';
 import 'package:kids_education_learning/core/widgets/custom_label_text.dart';
 import 'package:kids_education_learning/core/widgets/custom_title_text_in_screen.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/add_child_name_view.dart';
 
 class CreateAccountViewBody extends StatefulWidget {
   const CreateAccountViewBody({super.key});
@@ -21,29 +23,25 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Back'),
         leading: IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.back)),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
-            child: SizedBox(
-              width: 361,
+            child: Padding(
+              padding:  EdgeInsets.symmetric(horizontal: AppDimensions.authScreenPadding),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20),
-                    child: CustomTitleText(text: 'Create Account'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 24),
-                    child: Container(
+                  SizedBox(height: 24,),
+                  CustomTitleText(text: 'Create Account'),
+                   SizedBox(height: 24,),
+                    Container(
                       height: 40,
                       padding: EdgeInsets.all(4),
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(7),
+                        color: Color(0xffEEEEEF),
+                        borderRadius: BorderRadius.circular(8),
                       ),
                       child: Row(
                         children: [
@@ -52,13 +50,13 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
                               onTap: () =>
                                   setState(() => isParentSelected = true),
                               child: AnimatedContainer(
-                                duration: Duration(milliseconds: 250),
+                                duration: Duration(milliseconds: 350),
                                 padding: EdgeInsets.symmetric(vertical: 6),
                                 decoration: BoxDecoration(
                                   color: isParentSelected
                                       ? Colors.white
                                       : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(7),
+                                  borderRadius: BorderRadius.circular(8),
                                   boxShadow: isParentSelected
                                       ? [
                                           BoxShadow(
@@ -88,13 +86,13 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
                               onTap: () =>
                                   setState(() => isParentSelected = false),
                               child: AnimatedContainer(
-                                duration: Duration(milliseconds: 250),
+                                duration: Duration(milliseconds: 350),
                                 padding: EdgeInsets.symmetric(vertical: 6),
                                 decoration: BoxDecoration(
                                   color: !isParentSelected
                                       ? Colors.white
                                       : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(7),
+                                  borderRadius: BorderRadius.circular(8),
                                   boxShadow: !isParentSelected
                                       ? [
                                           BoxShadow(
@@ -122,7 +120,6 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
                         ],
                       ),
                     ),
-                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
                     child: LabelText(label: 'Email'),
@@ -159,8 +156,10 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
                       height: 48,
                       child: CustomTextField(
                         hintText: "*********",
+                        isFilled: false,
                         hintColor: Color(0xFF121261),
-                        fillColor: Colors.white,
+                       // fillColor: Colors.white,
+suffixIcon: Icon(Icons.visibility_off,color: Color(0xffAFAFAF),size: 20,),
                       ),
                     ),
                   ),
@@ -168,7 +167,9 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
                     padding: const EdgeInsets.only(top: 24),
                     child: CustomButton(
                       text: 'Sign Up',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).pushNamed(AddChildNameView.routeName);
+                      },
                       buttonColor: AppColors.buttonColor,
                     ),
                   ),

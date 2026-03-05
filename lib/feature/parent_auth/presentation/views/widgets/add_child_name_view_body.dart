@@ -6,6 +6,9 @@ import 'package:kids_education_learning/core/widgets/custom_label_text.dart';
 import 'package:kids_education_learning/core/widgets/custom_subtitle_text_in_screen.dart';
 import 'package:kids_education_learning/core/widgets/custom_text_field.dart';
 import 'package:kids_education_learning/core/widgets/custom_title_text_in_screen.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/choose_goal_view.dart';
+
+import '../choose_activity_view.dart';
 
 class AddChildNameViewBody extends StatelessWidget {
   const AddChildNameViewBody({super.key});
@@ -13,17 +16,14 @@ class AddChildNameViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       backgroundColor: AppColors.backGroundColor,
-      body: Padding(
-        padding: const EdgeInsets.only(
-          left: AppDimensions.homeScreenPadding,
-          right: AppDimensions.homeScreenPadding,
-        ),
-        child: SafeArea(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppDimensions.authScreenPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 32),
               CustomTitleText(text: 'Add children'),
               CustomSubtitleText(
                 text: 'You can only add 1 child on a free plan.',
@@ -32,22 +32,20 @@ class AddChildNameViewBody extends StatelessWidget {
               SizedBox(height: 24),
               LabelText(label: 'Child’s Name'),
               SizedBox(height: 8),
-              SizedBox(
-                height: 48,
-                child: CustomTextField(
-                  hintText: 'Jacob',
-                  hintColor: Color(0xFF000846),
-                ),
+              CustomTextField(
+                hintText: 'Jacob',
+                hintColor: Color(0xFF000846),
+                isFilled: false,
               ),
               Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 12.0),
-                child: CustomButton(
-                  text: 'Continue',
-                  onTap: () {},
-                  buttonColor: AppColors.buttonColor,
-                ),
+              CustomButton(
+                text: 'Continue',
+                onTap: () {
+                  Navigator.of(context).pushNamed(ChooseGoalView.routeName);
+                },
+                buttonColor: AppColors.buttonColor,
               ),
+              SizedBox(height: 12,),
             ],
           ),
         ),

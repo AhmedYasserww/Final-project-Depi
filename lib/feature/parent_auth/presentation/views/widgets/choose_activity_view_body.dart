@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kids_education_learning/core/utils/app_color.dart';
 import 'package:kids_education_learning/core/widgets/custom_activity_button.dart';
 import 'package:kids_education_learning/core/widgets/custom_button.dart';
-import 'package:kids_education_learning/feature/account_created_view.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/account_created_view.dart';
 
 class ChooseActivityViewBody extends StatefulWidget {
   const ChooseActivityViewBody({super.key});

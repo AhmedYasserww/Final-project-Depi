@@ -75,7 +75,7 @@ class _CustomActivityButtonState extends State<CustomActivityButton> {
                           : Color(0xFFDFDFDF),
                       width: 2,
                     ),
-                    shape: const CircleBorder(),
+                    shape: const CircleBorder(), // يخليها دايرة
                   ),
                 ),
               ),

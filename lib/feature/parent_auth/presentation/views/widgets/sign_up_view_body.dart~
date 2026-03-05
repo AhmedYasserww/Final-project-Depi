@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kids_education_learning/core/utils/app_color.dart';
-import 'package:kids_education_learning/core/utils/app_dimensions.dart';
 import 'package:kids_education_learning/core/utils/app_images.dart';
 import 'package:kids_education_learning/core/widgets/custom_button.dart';
 import 'package:kids_education_learning/core/widgets/custom_text_field.dart';
@@ -19,7 +18,7 @@ class SignUpViewBody extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding:  EdgeInsets.symmetric(horizontal: AppDimensions.authScreenPadding),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

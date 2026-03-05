@@ -40,15 +40,10 @@ class _ChooseGoalViewBodyState extends State<ChooseGoalViewBody> {
           Spacer(),
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 16, bottom: 40),
-            child: CustomButton(text: "continue", onTap: () {
-              Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return ChooseActivityView();
-              },
-            ),
-          );
+            child:
+            CustomButton(text: "continue",
+                onTap: () {
+            Navigator.of(context).pushNamed(ChooseActivityView.routeName);
             }),
           ),
           

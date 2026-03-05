@@ -19,7 +19,7 @@ class TermsAndPrivacyText extends StatelessWidget {
         style: TextStyle(
 
           fontSize: 12,
-          color: Color(0xff707070),
+          color: Colors.grey[600],
           height: 1.5,
         ),
         children: [
