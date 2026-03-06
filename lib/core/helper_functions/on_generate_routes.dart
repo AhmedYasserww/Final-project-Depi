@@ -1,31 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/add_child_name_view.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/create_account_view.dart';
-
 import '../../feature/parent_auth/presentation/views/choose_activity_view.dart';
 import '../../feature/parent_auth/presentation/views/choose_goal_view.dart';
 import '../../feature/parent_auth/presentation/views/sign_up_view.dart';
+import '../../feature/parent_auth/presentation/views/lessons_view.dart';
 
 Route<dynamic> onGenerateRoutes(RouteSettings settings) {
   switch (settings.name) {
     // case SplashView.routeName:
     //   return MaterialPageRoute(builder: (context) => const SplashView());
 
-
     case SignUpView.routeName:
       return MaterialPageRoute(builder: (context) => const SignUpView());
     case AddChildNameView.routeName:
       return MaterialPageRoute(builder: (context) => const AddChildNameView());
     case CreateAccountView.routeName:
+      return MaterialPageRoute(builder: (context) => const CreateAccountView());
+    case ChooseActivityView.routeName:
       return MaterialPageRoute(
-        builder: (context) => const CreateAccountView(),
+        builder: (context) => const ChooseActivityView(),
       );
-        case ChooseActivityView.routeName:
-          return MaterialPageRoute(builder: (context) => const ChooseActivityView());
-        case ChooseGoalView.routeName:
-          return MaterialPageRoute(builder: (context) => const ChooseGoalView());
-    //     case HomeView.routeName:
-    //       return MaterialPageRoute(builder: (context) => const HomeView());
+    case ChooseGoalView.routeName:
+      return MaterialPageRoute(builder: (context) => const ChooseGoalView());
+    case LessonsView.routeName:
+      return MaterialPageRoute(builder: (context) => const LessonsView());
     //     case SearchView.routeName:
     //       return MaterialPageRoute(builder: (context) => const SearchView());
     //     case ProductDetailsView.routeName:
