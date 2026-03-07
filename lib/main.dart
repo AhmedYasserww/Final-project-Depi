@@ -25,9 +25,8 @@ class MyApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-       onGenerateRoute: onGenerateRoutes,
-       initialRoute: SignUpView.routeName,
+      onGenerateRoute: onGenerateRoutes,
+      initialRoute: SignUpView.routeName,
     );
   }
 }
-

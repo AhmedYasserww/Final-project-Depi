@@ -80,10 +80,18 @@ class AppImages {
   static const String orderProcessing = 'assets/images/processing_icon.svg';
   static const String orderArrivedIcon = "assets/images/order_arrived_icon.svg";
   static const String orderOutOfDeliveryIcon = "assets/images/order_out_of_delivery.svg";
-static const String orderShippedIcon = "assets/images/order_shipped_icon.svg";
+  static const String orderShippedIcon = "assets/images/order_shipped_icon.svg";
 
-static const String emptyOrderImage = "assets/images/empty_order.svg";
-static const String emptyReturnImage = "assets/images/empty_return.svg";
-static const String emptyFavoriteImage = "assets/images/empty_favorite.svg";
+  static const String emptyOrderImage = "assets/images/empty_order.svg";
+  static const String emptyReturnImage = "assets/images/empty_return.svg";
+  static const String emptyFavoriteImage = "assets/images/empty_favorite.svg";
+  static const String bellIcon = "assets/images/bell.svg";
+  static const String cloud= "assets/images/cloud.svg";
+  static const String cardShapes = "assets/images/card-shapes.svg";
+  static const String frame = "assets/images/frame.svg";
+  static const String cracterA = "assets/images/A.svg";
+  static const String numbers = "assets/images/numbers.svg";
+
+
 
 }
