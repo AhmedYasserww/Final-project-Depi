@@ -15,4 +15,5 @@ abstract class AppColors {
   static const buttonColor = Color(0xFF6671C2);
   static const activeStateColor = Color(0xFFEAEDFF);
   static const completeStateColor = Color(0xFFE6F8E6);
+  static const darkBlueColor = Color(0xFF343B6E);
 }

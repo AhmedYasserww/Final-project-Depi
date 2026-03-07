@@ -91,6 +91,10 @@ class AppImages {
   static const String frame = "assets/images/frame.svg";
   static const String cracterA = "assets/images/A.svg";
   static const String numbers = "assets/images/numbers.svg";
+  static const String imageWom = "assets/images/imageWom.png";
+  static const String imageMan = "assets/images/imageMan.png";
+  static const String country  = "assets/images/country.png";
+
 
 
 

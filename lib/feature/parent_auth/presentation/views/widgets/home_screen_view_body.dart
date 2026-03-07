@@ -30,7 +30,6 @@ class HomeScreenViewBody extends StatelessWidget {
         child: Column(
           children: [
 
-            /// overview ثابت
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: Row(
