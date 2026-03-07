@@ -21,7 +21,7 @@ class AppStyle {
     fontWeight: FontWeight.w700,
   );
   static const styleBold20 = TextStyle(
-    color: Color(0xFF1A1515),
+    color: Color(0xFF000846),
     fontSize: 20,
     fontFamily: "Inter",
     fontWeight: FontWeight.w700,
@@ -33,7 +33,7 @@ class AppStyle {
     fontWeight: FontWeight.w700,
   );
   static const styleBold32 = TextStyle(
-    color: Color(0xFF1A1515),
+    color: Color(0xFF000846),
     fontSize: 32,
     fontFamily: "Inter",
     fontWeight: FontWeight.w700,
@@ -129,8 +129,20 @@ class AppStyle {
     fontFamily: "Inter",
     fontWeight: FontWeight.w500,
   );
+  static const styleMediumActiveState14 = TextStyle(
+    color: Color(0xFF343B6E),
+    fontSize: 14,
+    fontFamily: "Inter",
+    fontWeight: FontWeight.w500,
+  );
+  static const styleMediumCompletedState14 = TextStyle(
+    color: Color(0xFF343B6E),
+    fontSize: 14,
+    fontFamily: "Inter",
+    fontWeight: FontWeight.w500,
+  );
   static const styleWhiteMedium14 = TextStyle(
-    color: Color(0xFFFFFFFF),
+    color: Color(0xFF097B09),
     fontSize: 14,
     fontFamily: "Inter",
     fontWeight: FontWeight.w500,
@@ -195,7 +207,7 @@ class AppStyle {
     fontWeight: FontWeight.w400,
   );
   static const styleRegular14 = TextStyle(
-    color: Color(0xFF1A1515),
+    color: Color(0xFF000846),
     fontSize: 14,
     fontFamily: "Inter",
     fontWeight: FontWeight.w400,
@@ -226,7 +238,7 @@ class AppStyle {
     fontWeight: FontWeight.w400,
   );
   static const styleGreyRegular16 = TextStyle(
-    color: Color(0xFF666666),
+    color: Color(0xFF707070),
     fontSize: 16,
     fontFamily: "Inter",
     fontWeight: FontWeight.w400,

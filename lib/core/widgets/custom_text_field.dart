@@ -17,13 +17,13 @@ class CustomTextField extends StatelessWidget {
     this.hintColor,
     this.fillColor,
     this.borderColor,
-    this.isFilled = true
+    this.isFilled = true,
   });
 
   final void Function(String?)? onSaved;
   final void Function(String?)? onChange;
   final String? Function(String?)? validator;
-  final IconData? prefixIcon;
+  final Widget? prefixIcon;
   final bool obscureText;
   final TextEditingController? controller;
   final String? hintText;
@@ -33,7 +33,7 @@ class CustomTextField extends StatelessWidget {
   final Color? hintColor;
   final Color? fillColor;
   final Color? borderColor;
-  final bool? isFilled ;
+  final bool? isFilled;
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +46,11 @@ class CustomTextField extends StatelessWidget {
       validator: validator,
 
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
         labelText: labelText,
         filled: isFilled,
-        fillColor:  fillColor ?? Color(0xffF9FAFA),
-
-        prefixIcon: prefixIcon != null ? Icon(prefixIcon, size: 30) : null,
-
+        fillColor: fillColor ?? Color(0xFFF6F6F6),
+        prefixIcon: prefixIcon,
         prefixIconColor: WidgetStateColor.resolveWith((states) {
           if (states.contains(WidgetState.error)) {
             return Colors.red;
@@ -65,12 +64,12 @@ class CustomTextField extends StatelessWidget {
         suffixIcon: suffixIcon,
         hintText: hintText,
         hintStyle: TextStyle(
-          fontSize: 12,
+          fontSize: 16,
           fontWeight: FontWeight.w400,
-          color: hintColor ?? Color(0xffA5A5A5),
+          color: hintColor ?? Color(0xFF707070),
         ),
 
-        enabledBorder: _buildBorder(AppColors.palletBorderColor),
+        enabledBorder: _buildBorder(AppColors.textFieldBorderColor),
         focusedBorder: _buildBorder(AppColors.primaryColor),
         errorBorder: _buildBorder(Colors.red),
         focusedErrorBorder: _buildBorder(Colors.red),
