@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'core/helper_functions/on_generate_routes.dart';
 import 'feature/parent_auth/presentation/views/sign_up_view.dart';
-import 'feature/parent_auth/presentation/views/widgets/create_account_view_body.dart';
-import 'feature/parent_auth/presentation/views/widgets/sign_up_view_body.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +10,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,9 +23,9 @@ class MyApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-       onGenerateRoute: onGenerateRoutes,
-       initialRoute: SignUpView.routeName,
+
+      onGenerateRoute: onGenerateRoutes,
+      initialRoute: SignUpView.routeName,
     );
   }
 }
-

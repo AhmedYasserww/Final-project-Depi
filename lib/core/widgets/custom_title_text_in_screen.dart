@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class CustomTitleText extends StatelessWidget {
   final String text;
-  final double fontSize;
+  final double? fontSize;
   final FontWeight fontWeight;
   final Color? color;
 
   const CustomTitleText({
     super.key,
     required this.text,
-    this.fontSize = 24,
+    this.fontSize,
     this.fontWeight = FontWeight.w600,
     this.color,
   });
@@ -19,7 +19,7 @@ class CustomTitleText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontSize: fontSize,
+        fontSize: fontSize ?? 24,
         fontWeight: fontWeight,
         color: color,
       ),

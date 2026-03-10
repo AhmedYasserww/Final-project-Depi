@@ -8,6 +8,7 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     required this.text,
+    this.textStyle,
     required this.onTap,
     this.buttonColor,
     this.height,
@@ -18,6 +19,7 @@ class CustomButton extends StatelessWidget {
   });
 
   final String text;
+  final TextStyle? textStyle;
   final void Function() onTap;
   final Color? buttonColor;
   final Color? textButtonColor;
@@ -48,7 +50,7 @@ class CustomButton extends StatelessWidget {
               if (widget != null) widget!,
               Text(
                 text,
-                style: AppStyle.styleWhiteRegular16.copyWith(
+                style: (textStyle ?? AppStyle.styleWhiteRegular16).copyWith(
 
                   color: textButtonColor ?? Colors.white,
                 ),
