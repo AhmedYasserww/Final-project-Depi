@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/lessons_view.dart';
 import 'core/helper_functions/on_generate_routes.dart';
 import 'feature/parent_auth/presentation/views/sign_up_view.dart';
-import 'feature/parent_auth/presentation/views/widgets/create_account_view_body.dart';
-import 'feature/parent_auth/presentation/views/widgets/sign_up_view_body.dart';
-import 'feature/parent_auth/presentation/views/widgets/home_screen_view_body.dart';
-import 'feature/parent_auth/presentation/views/widgets/schedul_view_body.dart';
 
 
 void main() {

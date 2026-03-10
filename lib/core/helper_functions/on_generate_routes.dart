@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/add_child_name_view.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/create_account_view.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/shop_view.dart';
 import '../../feature/parent_auth/presentation/views/choose_activity_view.dart';
 import '../../feature/parent_auth/presentation/views/choose_goal_view.dart';
 import '../../feature/parent_auth/presentation/views/inbox_chat_view.dart';
@@ -28,8 +29,8 @@ Route<dynamic> onGenerateRoutes(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const LessonsView());
         case InboxChatView.routeName:
           return MaterialPageRoute(builder: (context) => const InboxChatView());
-    //     case ProductDetailsView.routeName:
-    //       return MaterialPageRoute(builder: (context) => const ProductDetailsView());
+        case ShopView.routeName:
+          return MaterialPageRoute(builder: (context) => const ShopView());
     //     case FindSizeView.routeName:
     //       return MaterialPageRoute(builder: (context) => const FindSizeView());
     //     case ProductView.routeName:

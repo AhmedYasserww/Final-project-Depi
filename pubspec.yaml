@@ -68,6 +68,9 @@ flutter:
      - assets/icons/search_icon.jpg
      - assets/icons/start_lesson_icon.svg
      - assets/icons/start_lesson_icon.jpg
+     - assets/icons/shop_icon.svg
+     - assets/icons/teacher_shop_icon.svg
+     - assets/icons/category_shop_icon.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

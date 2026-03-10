@@ -14,6 +14,12 @@ class AppStyle {
     fontFamily: "Inter",
     fontWeight: FontWeight.w700,
   );
+  static const styleBoldShopButton16 = TextStyle(
+    color: Color(0xFFFFFFFF),
+    fontSize: 16,
+    fontFamily: "Inter",
+    fontWeight: FontWeight.w700,
+  );
   static const styleBold18 = TextStyle(
     color: Color(0xFF1A1515),
     fontSize: 18,
@@ -35,6 +41,12 @@ class AppStyle {
   static const styleBold32 = TextStyle(
     color: Color(0xFF000846),
     fontSize: 32,
+    fontFamily: "Inter",
+    fontWeight: FontWeight.w700,
+  );
+  static const styleBoldShop16 = TextStyle(
+    color: Color(0xFF000846),
+    fontSize: 16,
     fontFamily: "Inter",
     fontWeight: FontWeight.w700,
   );
@@ -240,6 +252,12 @@ class AppStyle {
   static const styleGreyRegular16 = TextStyle(
     color: Color(0xFF707070),
     fontSize: 16,
+    fontFamily: "Inter",
+    fontWeight: FontWeight.w400,
+  );
+  static const styleGreyRegularShop14 = TextStyle(
+    color: Color(0xFF707070),
+    fontSize: 14,
     fontFamily: "Inter",
     fontWeight: FontWeight.w400,
   );
