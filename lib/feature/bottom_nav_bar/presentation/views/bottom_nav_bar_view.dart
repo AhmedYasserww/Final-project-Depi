@@ -1,0 +1,264 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../../core/utils/app_color.dart';
+import '../../../../core/utils/app_images.dart';
+import '../../../parent_auth/presentation/views/home_view.dart';
+import '../../../parent_auth/presentation/views/inbox_chat_view.dart';
+import '../../../parent_auth/presentation/views/lessons_view.dart';
+import '../../../parent_auth/presentation/views/schedul_view.dart';
+import '../../../parent_auth/presentation/views/shop_view.dart';
+
+class CustomNavigationBar extends StatefulWidget {
+  const CustomNavigationBar({super.key});
+  static const String routeName = 'bottom-nav-bar';
+
+  @override
+  State<CustomNavigationBar> createState() => _CustomNavigationBarState();
+}
+
+class _CustomNavigationBarState extends State<CustomNavigationBar> {
+  int selectedIndex = 0;
+
+  final List<Widget> screens = [
+    HomeView(),
+    LessonsView(),
+    ScheduleView(),
+    InboxChatView(),
+     ShopView(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+
+        body: IndexedStack(
+          index: selectedIndex,
+          children: screens,
+        ),
+
+        bottomNavigationBar: Container(
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(16),
+              topRight: Radius.circular(16),
+            ),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 30,
+                offset: Offset(0, -6),
+              ),
+            ],
+          ),
+
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _navItem(0, "Home", AppImages.homeIcon, AppImages.homeFilled),
+              _navItem(1, "Lessons", AppImages.lessonIcon, AppImages.productFilled),
+              _navItem(2, "Schedule", AppImages.scheduleIcon, AppImages.cartFilled),
+              _navItem(3, "Inbox", AppImages.inboxIcon, AppImages.moreIcon),
+              _navItem(4, "More", AppImages.moreIcon, AppImages.moreIcon),
+
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+  Widget _navItem(int index, String title, String outlinedSvg, String filledSvg) {
+    bool selected = index == selectedIndex;
+
+    return Expanded(
+      child: InkWell(
+        onTap: () => setState(() => selectedIndex = index),
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              child: Transform.translate(
+                offset: selected ? const Offset(0, -16) : Offset.zero,
+                child: selected
+                    ? Container(
+                  width: 54,
+                  height: 54,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: 44,
+                    height: 44,
+                    padding: const EdgeInsets.all(10),
+                    decoration: const ShapeDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment(0.0, 1.0),
+                        end: Alignment(1.0, -1.0),
+                        colors: [
+                          Color(0xFFA4CAFE),
+                          Color(0xFF3F83F8),
+                        ],
+                      ),
+                      shape: OvalBorder(),
+                    ),
+                    child: SvgPicture.asset(
+                      outlinedSvg,
+                      width: 24,
+                      height: 24,
+                      colorFilter: const ColorFilter.mode(
+                        Colors.white,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  ),
+                )
+                    : SvgPicture.asset(
+                  outlinedSvg,
+                  width: 24,
+                  height: 24,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 4),
+
+            Transform.translate(
+              offset: selected ? const Offset(0, -15) : Offset.zero,
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: selected
+                      ? const Color(0xFF1E429F)
+                      : const Color(0xFF4B5563),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+// class MoreView extends StatelessWidget {
+//   const MoreView({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Scaffold(
+//       body: Center(child: Text("More View")),
+//     );
+//   }
+// }
+/*
+Widget _navItem(int index, String title, String outlinedSvg, String filledSvg) {
+  bool selected = index == selectedIndex;
+
+  return Expanded(
+    child: InkWell(
+      onTap: () => setState(() => selectedIndex = index),
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+
+          TweenAnimationBuilder<double>(
+            tween: Tween(
+              begin: selected ? 0 : -16,
+              end: selected ? -16 : 0,
+            ),
+            duration: const Duration(milliseconds: 600),
+            curve: Curves.easeOutBack, // كيرف واضح
+            builder: (context, value, child) {
+              return Transform.translate(
+                offset: Offset(0, value),
+                child: child,
+              );
+            },
+
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 400),
+              transitionBuilder: (child, animation) {
+
+                return ScaleTransition(
+                  scale: animation,
+                  child: FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  ),
+                );
+              },
+
+              child: selected
+                  ? Container(
+                key: const ValueKey("selected"),
+
+                padding: const EdgeInsets.all(6),
+
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+
+                child: CircleAvatar(
+                  radius: 18,
+                  backgroundColor: AppColors.primaryColor,
+
+                  child: SvgPicture.asset(
+                    filledSvg,
+                    width: 28,
+                    height: 28,
+                    color: Colors.white,
+                  ),
+                ),
+              )
+                  : SvgPicture.asset(
+                outlinedSvg,
+                key: const ValueKey("normal"),
+
+                width: 24,
+                height: 24,
+
+                color: Colors.grey.shade600,
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 6),
+
+          AnimatedDefaultTextStyle(
+            duration: const Duration(milliseconds: 400),
+            curve: Curves.easeOut,
+
+            style: TextStyle(
+              fontSize: selected ? 13 : 12,
+              fontWeight:
+              selected ? FontWeight.bold : FontWeight.normal,
+              color: AppColors.primaryTextColor,
+            ),
+
+            child: Text(title),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+ */

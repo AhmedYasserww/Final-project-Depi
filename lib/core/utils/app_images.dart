@@ -1,7 +1,4 @@
 class AppImages {
-  static const String onboardingImage1 = 'assets/images/onboarding_image_1.svg';
-  static const String onboardingImage2 = 'assets/images/_Onboarding_2.svg';
-  static const String onboardingImage3 = 'assets/images/onboarding_image_3.svg';
   static const String logo = 'assets/images/logo.svg';
   static const String facebook = 'assets/images/facebook.png';
   static const String apple = 'assets/images/apple.png';
@@ -40,8 +37,6 @@ class AppImages {
   static const String cartFilled = 'assets/images/cart_filled.svg';
   static const String productOutlined = 'assets/images/product-outlined.svg';
   static const String productFilled = 'assets/images/product-filled.svg';
-  static const String moreIcon = 'assets/images/more_outlined.svg';
-
   static const String info2Image = 'assets/images/info2.svg';
   static const String sellerIcon = 'assets/images/seller_icon.svg';
   static const String notificationIcon = 'assets/images/notification_icon.svg';
@@ -69,11 +64,6 @@ class AppImages {
   static const String arrivedIcon = 'assets/images/arrived_icon.svg';
   static const String circleAvatar ='assets/images/circle_avatar.svg';
 
-  static const String statusIcon = 'assets/images/status_icon.svg';
-  static const String priceIcon = 'assets/images/price_icon.svg';
-  static const String orderIcon = 'assets/images/order_icon.svg';
-  static const String deliveryIcon = 'assets/images/mdi_location.svg';
-  static const String dateIcon = 'assets/images/date_icon.svg';
 
   static const String correctSolidIcon = 'assets/images/solid_success_icon.svg';
   static const String checkDouble = 'assets/images/check-double.svg';
@@ -94,6 +84,12 @@ class AppImages {
   static const String imageWom = "assets/images/imageWom.png";
   static const String imageMan = "assets/images/imageMan.png";
   static const String country  = "assets/images/country.png";
+
+  static const String homeIcon = "assets/images/home.svg";
+  static const String scheduleIcon = "assets/images/calendar.svg";
+  static const String lessonIcon = "assets/images/lessons.svg";
+  static const String inboxIcon = "assets/images/inbox.svg";
+  static const String moreIcon = "assets/images/more.svg";
 
 
 

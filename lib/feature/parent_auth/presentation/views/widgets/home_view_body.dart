@@ -5,8 +5,8 @@ import 'package:kids_education_learning/core/utils/app_images.dart';
 import 'package:kids_education_learning/core/widgets/custom_stat_card.dart';
 import 'package:kids_education_learning/core/widgets/custom_category_card.dart';
 
-class HomeScreenViewBody extends StatelessWidget {
-  const HomeScreenViewBody({super.key});
+class HomeViewBody extends StatelessWidget {
+  const HomeViewBody({super.key});
 
   static const stats = [
     ['1', 'Lesson(s)\nin progress', Icons.rocket_launch, Colors.red],
