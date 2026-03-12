@@ -8,11 +8,11 @@ import 'feature/parent_auth/presentation/views/sign_up_view.dart';
 
 void main() {
   runApp(
-    // DevicePreview(
-    //   enabled: !kReleaseMode,
-    //   builder: (context) => MyApp(),
-    // ),
-    MyApp(),
+    DevicePreview(
+       enabled: !kReleaseMode,
+       builder: (context) => MyApp(),
+    ),
+   // MyApp(),
   );
 }
 
@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
        debugShowCheckedModeBanner: false,
-      //  useInheritedMediaQuery: true,
-      // locale: DevicePreview.locale(context),
+        useInheritedMediaQuery: true,
+       locale: DevicePreview.locale(context),
 
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
