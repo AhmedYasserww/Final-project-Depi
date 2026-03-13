@@ -29,15 +29,16 @@ Route<dynamic> onGenerateRoutes(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const ChooseGoalView());
     case LessonsView.routeName:
       return MaterialPageRoute(builder: (context) => const LessonsView());
-        case InboxChatView.routeName:
-          return MaterialPageRoute(builder: (context) => const InboxChatView());
-        case ShopView.routeName:
-          return MaterialPageRoute(builder: (context) => const ShopView());
+    case InboxChatView.routeName:
+      return MaterialPageRoute(builder: (context) => const InboxChatView());
+    case ShopView.routeName:
+      return MaterialPageRoute(builder: (context) => const ShopView());
     case ScheduleView.routeName:
       return MaterialPageRoute(builder: (context) => const ScheduleView());
-      case CustomNavigationBar.routeName:
-        return MaterialPageRoute(builder: (context) => const CustomNavigationBar());
-
+    case CustomNavigationBar.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const CustomNavigationBar(),
+      );
 
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());

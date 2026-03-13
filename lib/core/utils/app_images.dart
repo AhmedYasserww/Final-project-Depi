@@ -90,8 +90,8 @@ class AppImages {
   static const String lessonIcon = "assets/images/lessons.svg";
   static const String inboxIcon = "assets/images/inbox.svg";
   static const String moreIcon = "assets/images/more.svg";
-
-
+  static const String profilePic = 'assets/images/prof pic.png';
+  static const String iconSearchBar = 'assets/images/prof pic.png';
 
 
 }
