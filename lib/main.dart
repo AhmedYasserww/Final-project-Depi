@@ -1,9 +1,10 @@
-import 'package:device_preview/device_preview.dart';
+// import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'core/helper_functions/on_generate_routes.dart';
 import 'feature/bottom_nav_bar/presentation/views/bottom_nav_bar_view.dart';
 import 'feature/parent_auth/presentation/views/sign_up_view.dart';
+import 'feature/parent_auth/presentation/views/widgets/inbox_chat_view_body.dart';
 
 
 void main() {
@@ -34,9 +35,9 @@ class MyApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-
-      onGenerateRoute: onGenerateRoutes,
-      initialRoute: SignUpView.routeName,
+      home: InboxChatViewBody(),
+      // onGenerateRoute: onGenerateRoutes,
+      // initialRoute: SignUpView.routeName,
     );
   }
 }
