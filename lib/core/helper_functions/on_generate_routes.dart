@@ -9,6 +9,7 @@ import '../../feature/parent_auth/presentation/views/inbox_chat_view.dart';
 import '../../feature/parent_auth/presentation/views/schedul_view.dart';
 import '../../feature/parent_auth/presentation/views/sign_up_view.dart';
 import '../../feature/parent_auth/presentation/views/lessons_view.dart';
+import '../../feature/parent_auth/presentation/views/teacher_detailes_view.dart';
 
 Route<dynamic> onGenerateRoutes(RouteSettings settings) {
   switch (settings.name) {
@@ -29,15 +30,20 @@ Route<dynamic> onGenerateRoutes(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const ChooseGoalView());
     case LessonsView.routeName:
       return MaterialPageRoute(builder: (context) => const LessonsView());
-        case InboxChatView.routeName:
-          return MaterialPageRoute(builder: (context) => const InboxChatView());
-        case ShopView.routeName:
-          return MaterialPageRoute(builder: (context) => const ShopView());
+    case InboxChatView.routeName:
+      return MaterialPageRoute(builder: (context) => const InboxChatView());
+    case ShopView.routeName:
+      return MaterialPageRoute(builder: (context) => const ShopView());
     case ScheduleView.routeName:
       return MaterialPageRoute(builder: (context) => const ScheduleView());
-      case CustomNavigationBar.routeName:
-        return MaterialPageRoute(builder: (context) => const CustomNavigationBar());
-
+    case CustomNavigationBar.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const CustomNavigationBar(),
+      );
+    case TeacherDetailsView.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const TeacherDetailsView(),
+      );
 
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());

@@ -5,7 +5,8 @@ class TermsAndPrivacyText extends StatelessWidget {
   final VoidCallback? onTermsTap;
   final VoidCallback? onPrivacyTap;
 
-  const TermsAndPrivacyText({
+  const
+  TermsAndPrivacyText({
     super.key,
     this.onTermsTap,
     this.onPrivacyTap,

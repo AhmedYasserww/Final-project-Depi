@@ -99,12 +99,19 @@ class AppStyle {
 
   //////////////////////////////////////
   //Medium
+
   static const styleMedium16 = TextStyle(
     color: Color(0xFF1A1515),
     fontSize: 16,
     fontFamily: "Inter",
     fontWeight: FontWeight.w500,
+  );static const styleUploadPhoto16 = TextStyle(
+    color: Color(0xFF343B6E),
+    fontSize: 16,
+    fontFamily: "Inter",
+    fontWeight: FontWeight.w500,
   );
+
   static const styleMedium12 = TextStyle(
     color: Color(0xFF1A1515),
     fontSize: 12,
@@ -221,6 +228,12 @@ class AppStyle {
   static const styleRegular14 = TextStyle(
     color: Color(0xFF000846),
     fontSize: 14,
+    fontFamily: "Inter",
+    fontWeight: FontWeight.w400,
+  );
+  static const CountryStyleTextForm = TextStyle(
+    color: Color(0xFF000846),
+    fontSize: 16,
     fontFamily: "Inter",
     fontWeight: FontWeight.w400,
   );
