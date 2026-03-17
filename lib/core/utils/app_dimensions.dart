@@ -6,4 +6,5 @@ class AppDimensions {
   static const double authScreenPadding = 16;
   static const double lessonScreenPadding = 16;
   static const double lessonScreenTopPadding = 30;
+  static const double teacherScheduleScreenTopPadding = 30;
 }
