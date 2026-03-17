@@ -1,5 +1,7 @@
 class AppImages {
   static const String logo = 'assets/images/logo.svg';
+  static const String avatar = 'assets/images/avatar.png';
+  static const String Au = 'assets/images/Au.png';
   static const String facebook = 'assets/images/facebook.png';
   static const String apple = 'assets/images/apple.png';
   static const String google = 'assets/images/google.png';

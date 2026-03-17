@@ -89,14 +89,14 @@ class AppStyle {
     fontSize: 16,
     fontFamily: "Inter",
     fontWeight: FontWeight.w600,
-    letterSpacing: -.03
+    letterSpacing: -.03,
   );
   static const styleSemiBoldGrey16 = TextStyle(
     color: Color(0xFF707070),
     fontSize: 16,
     fontFamily: "Inter",
     fontWeight: FontWeight.w600,
-    letterSpacing: -.03
+    letterSpacing: -.03,
   );
   static const styleScheduleSemiBold16 = TextStyle(
     color: Color(0xFF343B6E),
@@ -137,12 +137,20 @@ class AppStyle {
 
   //////////////////////////////////////
   //Medium
+
   static const styleMedium16 = TextStyle(
     color: Color(0xFF1A1515),
     fontSize: 16,
     fontFamily: "Inter",
     fontWeight: FontWeight.w500,
   );
+  static const styleUploadPhoto16 = TextStyle(
+    color: Color(0xFF343B6E),
+    fontSize: 16,
+    fontFamily: "Inter",
+    fontWeight: FontWeight.w500,
+  );
+
   static const styleMedium12 = TextStyle(
     color: Color(0xFF1A1515),
     fontSize: 12,
@@ -237,7 +245,7 @@ class AppStyle {
     fontFamily: "Inter",
     fontWeight: FontWeight.w400,
   );
-  static const   styleGreyRegular12= TextStyle(
+  static const styleGreyRegular12 = TextStyle(
     color: Color(0xff666666),
     fontSize: 12,
     fontFamily: "Inter",
@@ -286,6 +294,12 @@ class AppStyle {
     fontFamily: "Inter",
     fontWeight: FontWeight.w400,
     letterSpacing: -0.43,
+  );
+  static const countryStyleTextForm = TextStyle(
+    color: Color(0xFF000846),
+    fontSize: 16,
+    fontFamily: "Inter",
+    fontWeight: FontWeight.w400,
   );
   static const styleRegular20 = TextStyle(
     color: Color(0xFF1A1515),
@@ -348,6 +362,4 @@ class AppStyle {
     fontFamily: "Inter",
     fontWeight: FontWeight.w400,
   );
-
-  
 }
