@@ -21,7 +21,7 @@ class CustomTitleText extends StatelessWidget {
       style: TextStyle(
         fontSize: fontSize ?? 24,
         fontWeight: fontWeight,
-        color: color,
+        color: color??Color(0xFF000846),
       ),
     );
   }

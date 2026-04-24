@@ -4,6 +4,7 @@ import '../utils/app_color.dart';
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
+
     this.onSaved,
     this.onChange,
     this.validator,
@@ -18,6 +19,8 @@ class CustomTextField extends StatelessWidget {
     this.fillColor,
     this.borderColor,
     this.isFilled = true,
+    this.maxlines,
+    this.minlines,
   });
 
   final void Function(String?)? onSaved;
@@ -34,19 +37,22 @@ class CustomTextField extends StatelessWidget {
   final Color? fillColor;
   final Color? borderColor;
   final bool? isFilled;
+  final int? maxlines;
+  final int? minlines;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      keyboardType: keyboardType,
+      keyboardType: maxlines != 1 ? TextInputType.multiline : keyboardType,
       obscureText: obscureText,
       onSaved: onSaved,
       onChanged: onChange,
       validator: validator,
-
+      maxLines: maxlines ?? 1,
+      minLines: minlines ?? 1,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+        contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
         labelText: labelText,
         filled: isFilled,
         fillColor: fillColor ?? Color(0xFFF6F6F6),

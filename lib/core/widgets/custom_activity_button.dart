@@ -5,10 +5,19 @@ class CustomActivityButton extends StatefulWidget {
   const CustomActivityButton({
     super.key,
     required this.leading,
+    this.raduis,
+    this.bottomPadding,
+    this.rightPadding,
+    this.leftPadding,
+    this.topPadding,
   });
 
   final String leading;
-
+  final double ?raduis;
+  final double ?bottomPadding;
+  final double ?rightPadding;
+  final double ?leftPadding;
+  final double ?topPadding;
   @override
   State<CustomActivityButton> createState() => _CustomActivityButtonState();
 }
@@ -19,7 +28,7 @@ class _CustomActivityButtonState extends State<CustomActivityButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16.0, right: 16, bottom: 16),
+      padding: EdgeInsets.only(left: widget.leftPadding ?? 16.0, right: widget.rightPadding ?? 16, bottom: widget.bottomPadding ?? 16, top: widget.topPadding ?? 0),
       child: GestureDetector(
         onTap: () {
           setState(() {
@@ -30,7 +39,7 @@ class _CustomActivityButtonState extends State<CustomActivityButton> {
           width: double.infinity,
           height: 48,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
+            borderRadius:BorderRadius.circular(widget.raduis?? 100),
             border: ispressed
                 ? Border.all(color: Color(0xFFB4BBFF), width: 1)
                 : Border.all(color: Color(0xFFDFDFDF), width: 2),
