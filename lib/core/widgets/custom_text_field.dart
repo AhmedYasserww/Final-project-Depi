@@ -4,6 +4,7 @@ import '../utils/app_color.dart';
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
+
     this.onSaved,
     this.onChange,
     this.validator,
@@ -12,36 +13,50 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.controller,
     this.hintText,
+    this.labelText,
     this.keyboardType,
+    this.hintColor,
+    this.fillColor,
+    this.borderColor,
+    this.isFilled = true,
+    this.maxlines,
+    this.minlines,
   });
 
   final void Function(String?)? onSaved;
   final void Function(String?)? onChange;
   final String? Function(String?)? validator;
-  final IconData? prefixIcon;
+  final Widget? prefixIcon;
   final bool obscureText;
   final TextEditingController? controller;
   final String? hintText;
+  final String? labelText;
   final TextInputType? keyboardType;
   final Widget? suffixIcon;
+  final Color? hintColor;
+  final Color? fillColor;
+  final Color? borderColor;
+  final bool? isFilled;
+  final int? maxlines;
+  final int? minlines;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      keyboardType: keyboardType,
+      keyboardType: maxlines != 1 ? TextInputType.multiline : keyboardType,
       obscureText: obscureText,
       onSaved: onSaved,
       onChanged: onChange,
       validator: validator,
+      maxLines: maxlines ?? 1,
+      minLines: minlines ?? 1,
       decoration: InputDecoration(
-        filled: true,
-        fillColor: const Color(0xffF9FAFA),
-
-        prefixIcon: prefixIcon != null
-            ? Icon(prefixIcon, size: 30)
-            : null,
-
+        contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+        labelText: labelText,
+        filled: isFilled,
+        fillColor: fillColor ?? Color(0xFFF6F6F6),
+        prefixIcon: prefixIcon,
         prefixIconColor: WidgetStateColor.resolveWith((states) {
           if (states.contains(WidgetState.error)) {
             return Colors.red;
@@ -54,9 +69,13 @@ class CustomTextField extends StatelessWidget {
 
         suffixIcon: suffixIcon,
         hintText: hintText,
-        hintStyle: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: Color(0xff666666)),
+        hintStyle: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+          color: hintColor ?? Color(0xFF707070),
+        ),
 
-        enabledBorder: _buildBorder(AppColors.palletBorderColor),
+        enabledBorder: _buildBorder(AppColors.textFieldBorderColor),
         focusedBorder: _buildBorder(AppColors.primaryColor),
         errorBorder: _buildBorder(Colors.red),
         focusedErrorBorder: _buildBorder(Colors.red),
@@ -67,11 +86,8 @@ class CustomTextField extends StatelessWidget {
 
   OutlineInputBorder _buildBorder([Color? color]) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(
-        color: color ?? AppColors.primaryColor,
-        width: 1,
-      ),
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide(color: color ?? AppColors.borderColor, width: 1),
     );
   }
 }

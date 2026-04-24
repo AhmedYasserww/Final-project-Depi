@@ -1,46 +1,51 @@
 import 'package:flutter/material.dart';
-
-import '../../feature/parent_auth/presentation/views/parent_log_in_view.dart';
-
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/add_child_name_view.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/create_account_view.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/shop_view.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/teacher_schedule_view.dart';
+import '../../feature/bottom_nav_bar/presentation/views/bottom_nav_bar_view.dart';
+import '../../feature/parent_auth/presentation/views/choose_activity_view.dart';
+import '../../feature/parent_auth/presentation/views/choose_goal_view.dart';
+import '../../feature/parent_auth/presentation/views/inbox_chat_view.dart';
+import '../../feature/parent_auth/presentation/views/schedul_view.dart';
+import '../../feature/parent_auth/presentation/views/sign_up_view.dart';
+import '../../feature/parent_auth/presentation/views/lessons_view.dart';
+import '../../feature/parent_auth/presentation/views/teacher_detailes_view.dart';
 
 Route<dynamic> onGenerateRoutes(RouteSettings settings) {
   switch (settings.name) {
     // case SplashView.routeName:
     //   return MaterialPageRoute(builder: (context) => const SplashView());
 
-     case ParentLogInView.routeName:
-       return MaterialPageRoute(builder: (context) => const ParentLogInView());
-    // case LogInView.routeName:
-    //   return MaterialPageRoute(builder: (context) => const LogInView());
-//     case RegisterView.routeName:
-//       return MaterialPageRoute(builder: (context) => const RegisterView());
-//     case ForgetPasswordView.routeName:
-//       return MaterialPageRoute(builder: (context) => const ForgetPasswordView());
-//     case VerificationView.routeName:
-//       return MaterialPageRoute(builder: (context) => const VerificationView());
-//     case CustomNavigationBar.routeName:
-//       return MaterialPageRoute(builder: (context) => const CustomNavigationBar());
-//     case HomeView.routeName:
-//       return MaterialPageRoute(builder: (context) => const HomeView());
-//     case SearchView.routeName:
-//       return MaterialPageRoute(builder: (context) => const SearchView());
-//     case ProductDetailsView.routeName:
-//       return MaterialPageRoute(builder: (context) => const ProductDetailsView());
-//     case FindSizeView.routeName:
-//       return MaterialPageRoute(builder: (context) => const FindSizeView());
-//     case ProductView.routeName:
-//       return MaterialPageRoute(builder: (context) => const ProductView());
-//     case VtoView.routeName:
-//       return MaterialPageRoute(builder: (context) => const VtoView());
-//     case CartView.routeName:
-//       return MaterialPageRoute(builder: (context) => const CartView());
-//     case DeliveryAddressView.routeName:
-//       return MaterialPageRoute(builder: (context) => const DeliveryAddressView());
-//     case DeliveryOptionView.routeName:
-//       return MaterialPageRoute(builder: (context) => const DeliveryOptionView());
-//     case PaymentMethodView.routeName:
-//       return MaterialPageRoute(builder: (context) => const PaymentMethodView());
-
+    case SignUpView.routeName:
+      return MaterialPageRoute(builder: (context) => const SignUpView());
+    case AddChildNameView.routeName:
+      return MaterialPageRoute(builder: (context) => const AddChildNameView());
+    case CreateAccountView.routeName:
+      return MaterialPageRoute(builder: (context) => const CreateAccountView());
+    case ChooseActivityView.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const ChooseActivityView(),
+      );
+    case ChooseGoalView.routeName:
+      return MaterialPageRoute(builder: (context) => const ChooseGoalView());
+    case LessonsView.routeName:
+      return MaterialPageRoute(builder: (context) => const LessonsView());
+    case InboxChatView.routeName:
+      return MaterialPageRoute(builder: (context) => const InboxChatView());
+    case ShopView.routeName:
+      return MaterialPageRoute(builder: (context) => const ShopView());
+    case ScheduleView.routeName:
+      return MaterialPageRoute(builder: (context) => const ScheduleView());
+    case CustomNavigationBar.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const CustomNavigationBar(),
+      );
+    case TeacherScheduleView.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const TeacherScheduleView(),
+      );
+    
 
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());
