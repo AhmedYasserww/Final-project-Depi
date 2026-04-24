@@ -92,6 +92,4 @@ class AppImages {
   static const String moreIcon = "assets/images/more.svg";
 
 
-
-
 }
