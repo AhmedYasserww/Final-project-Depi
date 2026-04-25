@@ -26,19 +26,34 @@ class _ScheduleViewBodyState extends State<ScheduleViewBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Schedule", style: AppStyle.styleBold32),
+
+            /// TITLE
+            const Flexible(
+              child: Text(
+                "Schedule",
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppStyle.styleBold32,
+              ),
+            ),
+
             const SizedBox(height: 8),
-            Text(
-              "Find a suitable teacher to schedule lesson\nfor your child.",
+
+            const Text(
+              "Find a suitable teacher to schedule lesson for your child.",
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
               style: AppStyle.styleGreyRegular16,
             ),
+
             const SizedBox(height: 16),
 
+            /// SEARCH
             Row(
               children: [
                 Expanded(
                   child: SizedBox(
-                    height: 38,
+                    height: 42,
                     child: CustomTextField(
                       prefixIcon: SizedBox(
                         width: 22,
@@ -57,39 +72,54 @@ class _ScheduleViewBodyState extends State<ScheduleViewBody> {
                   onTap: () {},
                   child: SvgPicture.asset(
                     "assets/icons/filter_icon.svg",
-                    width: 33,
-                    height: 33,
+                    width: 34,
+                    height: 34,
                   ),
                 ),
               ],
             ),
 
-            const SizedBox(height: 25),
+            const SizedBox(height: 20),
 
+            /// TEACHERS GRID
             Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-                childAspectRatio: 0.85,
-                children: [
-                  CustomTeacherCard(
-                    name: "Sarah Eastwood",
-                    sessions: "43 sessions",
-                    reviews: "(19 reviews)",
-                    price: "\$80/hr",
+              child: GridView.builder(
+                itemCount: 2,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                  childAspectRatio: 0.72,
+                ),
+                itemBuilder: (context, index) {
+                  final teachers = [
+                    {
+                      "name": "Sarah Eastwood",
+                      "sessions": "43 sessions",
+                      "reviews": "(19 reviews)",
+                      "price": "\$80/hr",
+                      "image": AppImages.imageWom
+                    },
+                    {
+                      "name": "Noah Dawson",
+                      "sessions": "58 sessions",
+                      "reviews": "(32 reviews)",
+                      "price": "\$80/hr",
+                      "image": AppImages.imageMan
+                    }
+                  ];
+
+                  final teacher = teachers[index];
+
+                  return CustomTeacherCard(
+                    name: teacher["name"]!,
+                    sessions: teacher["sessions"]!,
+                    reviews: teacher["reviews"]!,
+                    price: teacher["price"]!,
                     flagIcon: AppImages.country,
-                    image: AppImages.imageWom,
-                  ),
-                  CustomTeacherCard(
-                    name: "Noah Dawson",
-                    sessions: "58 sessions",
-                    reviews: "(32 reviews)",
-                    price: "\$80/hr",
-                    flagIcon: AppImages.country,
-                    image: AppImages.imageMan,
-                  ),
-                ],
+                    image: teacher["image"]!,
+                  );
+                },
               ),
             ),
           ],
