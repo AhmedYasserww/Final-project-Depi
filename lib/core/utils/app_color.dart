@@ -19,3 +19,6 @@ abstract class AppColors {
   static const darkBlueColor = Color(0xFF343B6E);
   static const blackColor = Color(0xFF000000);
 }
+  static const iconArrowDown = Color(0xFF707070);
+  static const switchColor = Color(0x1F787880);
+}
