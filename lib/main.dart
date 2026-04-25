@@ -13,11 +13,11 @@ import 'feature/parent_auth/presentation/views/widgets/teacher_details_view_body
 
 void main() {
   runApp(
-    // DevicePreview(
-    //   enabled: !kReleaseMode,
-    //   builder: (context) => MyApp(),
-    // ),
-    MyApp(),
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => MyApp(),
+    ),
+    // MyApp(),
   );
 }
 

@@ -1,41 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:kids_education_learning/core/utils/app_images.dart';
+import 'package:kids_education_learning/core/utils/app_style.dart';
 
-class ChatsScreen extends StatelessWidget {
-  ChatsScreen({super.key});
+import '../utils/app_color.dart';
+
+class CustomChatListView extends StatelessWidget {
+  CustomChatListView({super.key});
 
   final List<Map<String, dynamic>> chats = [
     {
       'name': 'Sarah Eastwood',
       'message': 'Hi Sarah, I have scheduled our next...',
       'time': '1hr',
-      'image': 'assets/images/prof pic.png',
+      'image': AppImages.profilePic,
     },
     {
       'name': 'Noah Dawson',
       'message': 'Hi Sarah, I have scheduled our next lesson',
       'time': '',
-      'image': 'assets/images/prof pic.png',
+      'image': AppImages.profilePic,
     },
     {
       'name': 'Olivia Hayes',
       'message': 'Hi Sarah, I have scheduled our next lesson',
       'time': '',
-      'image': 'assets/images/prof pic.png',
+      'image': AppImages.profilePic,
     },
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: List.generate(chats.length, (index) {
+    return ListView.builder(
+      itemCount: chats.length,
+      itemBuilder: (context, index) {
         final chat = chats[index];
 
         return ChatItem(
-          name: chat['name']!,
-          message: chat['message']!,
-          image: chat['image']!,
+          name: chat['name'],
+          message: chat['message'],
+          image: chat['image'],
         );
-      }),
+      },
     );
   }
 }
@@ -59,15 +64,12 @@ class ChatItem extends StatelessWidget {
         print("Open Chat");
       },
       leading: CircleAvatar(radius: 28, backgroundImage: AssetImage(image)),
-      title: Text(
-        name,
-        style: const TextStyle(color:Color(0xFF000846),fontWeight: FontWeight.w500, fontSize: 16),
-      ),
+      title: Text(name, style: AppStyle.styleChatListView),
       subtitle: Text(
         message,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: const TextStyle(color: Color(0xFF707070)),
+        style: const TextStyle(color: AppColors.subtitleListTile),
       ),
     );
   }

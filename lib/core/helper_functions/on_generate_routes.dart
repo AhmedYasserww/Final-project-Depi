@@ -41,11 +41,6 @@ Route<dynamic> onGenerateRoutes(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => const CustomNavigationBar(),
       );
-    case TeacherScheduleView.routeName:
-      return MaterialPageRoute(
-        builder: (context) => const TeacherScheduleView(),
-      );
-    
 
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());

@@ -235,7 +235,11 @@ class AppStyle {
     fontFamily: "Inter",
     fontWeight: FontWeight.w500,
   );
-
+  static const styleChatListView = TextStyle(
+    color: Color(0xFF000846),
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
+  );
   //////////////////////////////////////////////////////
   //Regular
 
@@ -350,16 +354,11 @@ class AppStyle {
     fontFamily: "Inter",
     fontWeight: FontWeight.w400,
   );
-  static const styleRegular17 = TextStyle(
-    color: Color(0xFF000846),
-    fontSize: 17,
+  static const hintStyle = TextStyle(
+    color: Color(0xFF707070),
+    fontSize: 18,
     fontFamily: "Inter",
     fontWeight: FontWeight.w400,
   );
-  static const styleScheduleRegular16 = TextStyle(
-    color: Color(0xFF000846),
-    fontSize: 16,
-    fontFamily: "Inter",
-    fontWeight: FontWeight.w400,
-  );
+
 }
