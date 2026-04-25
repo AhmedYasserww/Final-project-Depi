@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-       debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       //  useInheritedMediaQuery: true,
       // locale: DevicePreview.locale(context),
       theme: ThemeData(
@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
+
       
       // home: TeacherScheduleView(),
       onGenerateRoute: onGenerateRoutes,
