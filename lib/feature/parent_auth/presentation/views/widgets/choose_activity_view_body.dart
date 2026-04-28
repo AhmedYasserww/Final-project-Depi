@@ -58,14 +58,7 @@ class _ChooseActivityViewBodyState extends State<ChooseActivityViewBody> {
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 16, bottom: 40),
             child: CustomButton(text: "continue", onTap: () {
-              Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return LetIsGoView();
-              },
-            ),
-          );
+            Navigator.of(context).pushNamed(LetIsGoView.routeName);
             }),
           ),
         ],

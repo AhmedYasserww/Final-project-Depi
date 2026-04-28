@@ -10,27 +10,27 @@ class InboxChatViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     // appBar: AppBar(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: CustomTitleText(text: "Inbox",fontSize: 32,),
+      // appBar: AppBar(),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomTitleText(text: "Inbox", fontSize: 32),
+              SizedBox(height: 8),
+              CustomSubtitleText(
+                text:
+                    "Connect with the teachers you've scheduled lessons with.",
+                fontSize: 16,
+              ),
+              SizedBox(height: 24),
+              CustomSearchBar(),
+              SizedBox(height: 24),
+              Expanded(child: CustomChatListView()),
+            ],
           ),
-          SizedBox(height: 8),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: CustomSubtitleText(
-              text: "Connect with the teachers you've scheduled lessons with.",
-              fontSize: 16,
-            ),
-          ),
-          SizedBox(height: 24),
-          CustomSearchBar(),
-          SizedBox(height: 24),
-          SizedBox(width: 393, child: ChatsScreen()),
-        ],
+        ),
       ),
     );
   }

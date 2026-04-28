@@ -7,8 +7,6 @@ import 'package:kids_education_learning/core/widgets/custom_button.dart';
 import 'package:kids_education_learning/core/widgets/custom_slider_thump_shape.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/working_hours/teacher_working_hours_bottom_sheet.dart';
 
-import '../let_is_go_view.dart';
-
 class TeacherScheduleViewBody extends StatefulWidget {
   const TeacherScheduleViewBody({super.key});
   @override
@@ -178,9 +176,7 @@ class _TeacherScheduleViewBodyState extends State<TeacherScheduleViewBody> {
             ),
 
             Spacer(),
-            CustomButton(text: "Continue", onTap: () {
-              Navigator.of(context).pushNamed(LetIsGoView.routeName);
-            }),
+            CustomButton(text: "Continue", onTap: () {}),
             SizedBox(height: 16),
             CustomButton(
               text: "Skip for now",
