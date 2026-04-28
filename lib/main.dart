@@ -4,14 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/schedul_view.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/teacher_schedule_view.dart';
 import 'core/helper_functions/on_generate_routes.dart';
+import 'core/service_locator/service_locator.dart';
 import 'feature/bottom_nav_bar/presentation/views/bottom_nav_bar_view.dart';
 import 'feature/parent_auth/presentation/views/create_account_view.dart';
-import 'feature/parent_auth/presentation/views/sign_up_view.dart';
+import 'feature/parent_auth/presentation/views/log_in_view.dart';
 import 'feature/parent_auth/presentation/views/widgets/create_account_view_body.dart';
 import 'feature/parent_auth/presentation/views/widgets/teacher_details_view_body.dart';
 
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  setupServiceLocator();
   runApp(
     // DevicePreview(
     //   enabled: !kReleaseMode,
@@ -42,7 +45,7 @@ class MyApp extends StatelessWidget {
       
       // home: TeacherScheduleView(),
       onGenerateRoute: onGenerateRoutes,
-      initialRoute: SignUpView.routeName,
+      initialRoute: LogInView.routeName,
     );
   }
 }

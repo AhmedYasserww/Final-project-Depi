@@ -8,7 +8,7 @@ import '../../feature/parent_auth/presentation/views/choose_goal_view.dart';
 import '../../feature/parent_auth/presentation/views/inbox_chat_view.dart';
 import '../../feature/parent_auth/presentation/views/let_is_go_view.dart';
 import '../../feature/parent_auth/presentation/views/schedul_view.dart';
-import '../../feature/parent_auth/presentation/views/sign_up_view.dart';
+import '../../feature/parent_auth/presentation/views/log_in_view.dart';
 import '../../feature/parent_auth/presentation/views/lessons_view.dart';
 import '../../feature/parent_auth/presentation/views/teacher_detailes_view.dart';
 import '../../feature/parent_auth/presentation/views/teacher_schedule_view.dart';
@@ -18,8 +18,8 @@ Route<dynamic> onGenerateRoutes(RouteSettings settings) {
   // case SplashView.routeName:
   //   return MaterialPageRoute(builder: (context) => const SplashView());
 
-    case SignUpView.routeName:
-      return MaterialPageRoute(builder: (context) => const SignUpView());
+    case LogInView.routeName:
+      return MaterialPageRoute(builder: (context) => const LogInView());
     case AddChildNameView.routeName:
       return MaterialPageRoute(builder: (context) => const AddChildNameView());
     case CreateAccountView.routeName:
