@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kids_education_learning/core/service_locator/service_locator.dart';
+import 'package:kids_education_learning/feature/parent_auth/data/repos/auth_repo_imp.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_profile/teacher_profile_cubit.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_register/teacher_register_cubit.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/add_child_name_view.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/create_account_view.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/shop_view.dart';
@@ -15,15 +20,21 @@ import '../../feature/parent_auth/presentation/views/teacher_schedule_view.dart'
 
 Route<dynamic> onGenerateRoutes(RouteSettings settings) {
   switch (settings.name) {
-  // case SplashView.routeName:
-  //   return MaterialPageRoute(builder: (context) => const SplashView());
+    // case SplashView.routeName:
+    //   return MaterialPageRoute(builder: (context) => const SplashView());
 
     case LogInView.routeName:
       return MaterialPageRoute(builder: (context) => const LogInView());
     case AddChildNameView.routeName:
       return MaterialPageRoute(builder: (context) => const AddChildNameView());
     case CreateAccountView.routeName:
-      return MaterialPageRoute(builder: (context) => const CreateAccountView());
+      return MaterialPageRoute(
+        builder: (context) => BlocProvider(
+          create: (context) =>
+              TeacherRegisterCubit(authRepo: getIt.get<AuthRepoImpl>()),
+          child: const CreateAccountView(),
+        ),
+      );
     case ChooseActivityView.routeName:
       return MaterialPageRoute(
         builder: (context) => const ChooseActivityView(),
@@ -39,13 +50,22 @@ Route<dynamic> onGenerateRoutes(RouteSettings settings) {
     case ScheduleView.routeName:
       return MaterialPageRoute(builder: (context) => const ScheduleView());
     case CustomNavigationBar.routeName:
-      return MaterialPageRoute(builder: (context) => const CustomNavigationBar());
-      case TeacherDetailsView.routeName:
-        return MaterialPageRoute(builder: (context) => const TeacherDetailsView());
-case TeacherScheduleView.routeName:
-        return MaterialPageRoute(builder: (context) => const TeacherScheduleView());
-        case LetIsGoView.routeName:
-          return MaterialPageRoute(builder: (context) => const LetIsGoView());
+      return MaterialPageRoute(
+        builder: (context) => const CustomNavigationBar(),
+      );
+    case TeacherDetailsView.routeName:
+      return MaterialPageRoute(
+        builder: (context) => BlocProvider(
+          create: (context) => getIt.get<TeacherProfileCubit>(),
+          child: const TeacherDetailsView(),
+        ),
+      );
+    case TeacherScheduleView.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const TeacherScheduleView(),
+      );
+    case LetIsGoView.routeName:
+      return MaterialPageRoute(builder: (context) => const LetIsGoView());
 
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());

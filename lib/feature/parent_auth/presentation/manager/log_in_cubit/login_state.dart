@@ -1,4 +1,3 @@
-// features/auth/presentation/manager/login_cubit/login_state.dart
 part of 'login_cubit.dart';
 
 @immutable

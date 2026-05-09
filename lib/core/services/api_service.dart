@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -65,6 +68,7 @@ class ApiService {
       throw Exception("Network error: ${e.message}");
     }
   }
+
   /// GET REQUEST
   ///
   Future<dynamic> get({
@@ -89,8 +93,6 @@ class ApiService {
       );
     }
   }
-
-
 
   /// POST JSON REQUEST
   Future<dynamic> post({
@@ -138,6 +140,45 @@ class ApiService {
     }
   }
 
+  /// PUT MULTIPART
+  Future<dynamic> putMultipart({
+  required String endPoint,
+  required FormData data,
+  String? token,
+}) async {
+  try {
+    final resolvedToken = await _resolveToken(token);
+    log("🔑 Resolved Token: $resolvedToken");
+    final response = await dio.put(
+      endPoint,
+      data: data,
+      options: Options(
+        headers: {
+          if (resolvedToken != null) "Authorization": "Bearer $resolvedToken",
+        },
+        responseType: ResponseType.plain, // 👈 get raw string response
+      ),
+    );
+
+    // 👇 Log everything about the response
+    log("📦 Status Code: ${response.statusCode}");
+    log("📦 Response Headers: ${response.headers}");
+    log("📦 Raw Response Body: '${response.data}'");
+    log("📦 Response Body length: ${response.data?.length}");
+
+    if (response.data is String && (response.data as String).isNotEmpty) {
+      return jsonDecode(response.data);
+    }
+
+    return response.data;
+  } on DioException catch (e) {
+    log("❌ DioException status: ${e.response?.statusCode}");
+    log("❌ DioException headers: ${e.response?.headers}");
+    log("❌ DioException data: ${e.response?.data}");
+    log("❌ DioException message: ${e.message}");
+    return _handleDioError(e);
+  }
+}
   /// DELETE REQUEST
   Future<dynamic> delete({
     required String endPoint,
@@ -160,6 +201,7 @@ class ApiService {
       return _handleDioError(e);
     }
   }
+
   /// PUT REQUEST
   Future<dynamic> put({
     required String endPoint,

@@ -1,5 +1,5 @@
-// cubit calls repo directly
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kids_education_learning/core/helper_functions/save_user_data.dart';
 import 'package:kids_education_learning/feature/parent_auth/data/repos/auth_repo.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_register/teacher_register_state.dart';
 
@@ -21,9 +21,13 @@ class TeacherRegisterCubit extends Cubit<TeacherRegisterState> {
       fullName: fullName,
     );
 
-    result.fold(
-      (failure) => emit(TeacherRegisterFailure(failure.errorMessage)),
-      (entity)  => emit(TeacherRegisterSuccess(entity)),
-    );
+    if (result.isLeft()) {
+      final failure = result.fold((f) => f, (_) => null)!;
+      emit(TeacherRegisterFailure(failure.errorMessage));
+    } else {
+      final entity = result.fold((_) => null, (e) => e)!;
+      await UserPreferences.saveToken(entity.accessToken); // ✅ properly awaited
+      emit(TeacherRegisterSuccess(entity));                // ✅ emits after save
+    }
   }
 }
