@@ -1,5 +1,8 @@
+// core/di/service_locator.dart
+
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/manager/parent_register/parent_register_cubit.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_profile/teacher_profile_cubit.dart';
 
 import '../../feature/parent_auth/data/repos/auth_repo_imp.dart';
@@ -10,14 +13,21 @@ final getIt = GetIt.instance;
 
 void setupServiceLocator() {
   getIt.registerSingleton<ApiService>(ApiService(dio: Dio()));
-  getIt.registerSingleton<AuthRepoImpl>(AuthRepoImpl(apiService:getIt.get<ApiService>(),));
+
+  getIt.registerSingleton<AuthRepoImpl>(
+    AuthRepoImpl(apiService: getIt.get<ApiService>()),
+  );
+
   getIt.registerFactory<LoginCubit>(
         () => LoginCubit(getIt.get<AuthRepoImpl>()),
   );
-   getIt.registerFactory<TeacherProfileCubit>(
-    () => TeacherProfileCubit(
-      authRepo: getIt.get<AuthRepoImpl>(),
-    ),
+
+  getIt.registerFactory<TeacherProfileCubit>(
+        () => TeacherProfileCubit(authRepo: getIt.get<AuthRepoImpl>()),
+  );
+
+  //  ParentRegisterCubit
+  getIt.registerFactory<ParentRegisterCubit>(
+        () => ParentRegisterCubit(authRepo: getIt.get<AuthRepoImpl>()),
   );
 }
-
