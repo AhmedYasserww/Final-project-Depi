@@ -6,6 +6,7 @@ import 'package:kids_education_learning/feature/parent_auth/presentation/manager
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_register/teacher_register_cubit.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/add_child_name_view.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/create_account_view.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/home_view.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/shop_view.dart';
 import '../../feature/bottom_nav_bar/presentation/views/bottom_nav_bar_view.dart';
 import '../../feature/parent_auth/presentation/views/choose_activity_view.dart';
@@ -41,6 +42,8 @@ Route<dynamic> onGenerateRoutes(RouteSettings settings) {
       );
     case ChooseGoalView.routeName:
       return MaterialPageRoute(builder: (context) => const ChooseGoalView());
+    case HomeView.routeName:
+      return MaterialPageRoute(builder: (context) => const HomeView());
     case LessonsView.routeName:
       return MaterialPageRoute(builder: (context) => const LessonsView());
     case InboxChatView.routeName:

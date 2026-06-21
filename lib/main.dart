@@ -43,9 +43,8 @@ class MyApp extends StatelessWidget {
       ),
 
       
-      // home: TeacherScheduleView(),
       onGenerateRoute: onGenerateRoutes,
-      initialRoute: CreateAccountView.routeName,
+      initialRoute: LogInView.routeName,
     );
   }
 }
