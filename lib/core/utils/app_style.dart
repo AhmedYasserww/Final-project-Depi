@@ -366,6 +366,12 @@ class AppStyle {
     fontFamily: "Inter",
     fontWeight: FontWeight.w400,
   );
+  static const achievementsStyle = TextStyle(
+    color: Color(0xFF707070),
+    fontSize: 16,
+    fontFamily: "Inter",
+    fontWeight: FontWeight.w600,
+  );
 
     static const TextStyle linkTerms = TextStyle(
     fontSize: 14,
