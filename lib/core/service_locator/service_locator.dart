@@ -2,6 +2,8 @@
 
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:kids_education_learning/feature/parent_auth/data/repos/category_repo_imp.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/manager/category_cubit/category_cubit.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/parent_register/parent_register_cubit.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_profile/teacher_profile_cubit.dart';
 
@@ -19,15 +21,23 @@ void setupServiceLocator() {
   );
 
   getIt.registerFactory<LoginCubit>(
-        () => LoginCubit(getIt.get<AuthRepoImpl>()),
+    () => LoginCubit(getIt.get<AuthRepoImpl>()),
   );
 
   getIt.registerFactory<TeacherProfileCubit>(
-        () => TeacherProfileCubit(authRepo: getIt.get<AuthRepoImpl>()),
+    () => TeacherProfileCubit(authRepo: getIt.get<AuthRepoImpl>()),
   );
 
   //  ParentRegisterCubit
   getIt.registerFactory<ParentRegisterCubit>(
-        () => ParentRegisterCubit(authRepo: getIt.get<AuthRepoImpl>()),
+    () => ParentRegisterCubit(authRepo: getIt.get<AuthRepoImpl>()),
+  );
+
+  getIt.registerSingleton<CategoryRepoImpl>(
+    CategoryRepoImpl(apiService: getIt<ApiService>()),
+  );
+
+  getIt.registerFactory<CategoryCubit>(
+    () => CategoryCubit(getIt<CategoryRepoImpl>()),
   );
 }
