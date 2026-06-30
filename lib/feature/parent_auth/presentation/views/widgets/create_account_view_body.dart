@@ -1,20 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kids_education_learning/core/helper_functions/validators.dart';
 import 'package:kids_education_learning/core/utils/app_color.dart';
 import 'package:kids_education_learning/core/utils/app_dimensions.dart';
+import 'package:kids_education_learning/core/utils/app_style.dart';
 import 'package:kids_education_learning/core/widgets/custom_button.dart';
 import 'package:kids_education_learning/core/widgets/custom_terms_and_privacy_text.dart';
 import 'package:kids_education_learning/core/widgets/custom_text_field.dart';
 import 'package:kids_education_learning/core/widgets/custom_label_text.dart';
 import 'package:kids_education_learning/core/widgets/custom_title_text_in_screen.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/manager/parent_register/parent_register_cubit.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/manager/parent_register/parent_register_state.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_register/teacher_register_cubit.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_register/teacher_register_state.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/add_child_name_view.dart';
-
-import '../../../../../core/widgets/custom_parent_form.dart';
-import '../../../../../core/widgets/custom_teacher_form.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/log_in_view.dart';
 import '../teacher_detailes_view.dart';
 
 class CreateAccountViewBody extends StatefulWidget {
@@ -25,18 +26,44 @@ class CreateAccountViewBody extends StatefulWidget {
 }
 
 class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
-  bool isParentSelected = true;
+  static const _toggleAnimationDuration = Duration(milliseconds: 350);
+
+  bool _isParentSelected = true;
+  bool _obscurePassword = true;
+
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _fullNameController = TextEditingController(); // for teacher
+  final _parentNameController = TextEditingController();
+  final _teacherNameController = TextEditingController();
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
-    _fullNameController.dispose();
+    _parentNameController.dispose();
+    _teacherNameController.dispose();
     super.dispose();
+  }
+
+  void _submit() {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
+    if (_isParentSelected) {
+      context.read<ParentRegisterCubit>().parentRegister(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+        fullName: _parentNameController.text.trim(),
+      );
+    } else {
+      context.read<TeacherRegisterCubit>().teacherRegister(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+        fullName: _teacherNameController.text.trim(),
+      );
+    }
   }
 
   @override
@@ -44,10 +71,8 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {
-            // Navigator.pop(context);
-          },
-          icon: Icon(CupertinoIcons.back),
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(CupertinoIcons.back),
         ),
       ),
       body: SafeArea(
@@ -62,201 +87,51 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
                     CustomTitleText(text: 'Create Account'),
-                    SizedBox(height: 24),
-                    Container(
-                      height: 40,
-                      padding: EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        color: AppColors.switchColor,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () =>
-                                  setState(() => isParentSelected = true),
-                              child: AnimatedContainer(
-                                duration: Duration(milliseconds: 350),
-                                padding: EdgeInsets.symmetric(vertical: 6),
-                                decoration: BoxDecoration(
-                                  color: isParentSelected
-                                      ? AppColors.backGroundColor
-                                      : AppColors.switchColor,
-                                  borderRadius: BorderRadius.circular(8),
-                                  boxShadow: isParentSelected
-                                      ? [
-                                          BoxShadow(
-                                            color: Colors.black12,
-                                            blurRadius: 4,
-                                            offset: Offset(0, 2),
-                                          ),
-                                        ]
-                                      : [],
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    "Parent",
-                                    style: TextStyle(
-                                      color: Color(0xFF000846),
-                                      fontWeight: isParentSelected
-                                          ? FontWeight.w600
-                                          : FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
+                    const SizedBox(height: 24),
+                    _buildRoleToggle(),
+                    SizedBox(height: 16),
+                    LabelText(label: 'Email'),
+                    SizedBox(height: 4),
+                    _buildEmailField(),
+                    SizedBox(height: 16),
+                    _isParentSelected
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              LabelText(label: "Parent's Name"),
+                              const SizedBox(height: 4),
+                              CustomTextField(
+                                controller: _parentNameController,
+                                validator: Validators.validateName,
+                                isFilled: false,
                               ),
-                            ),
-                          ),
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () =>
-                                  setState(() => isParentSelected = false),
-                              child: AnimatedContainer(
-                                duration: Duration(milliseconds: 350),
-                                padding: EdgeInsets.symmetric(vertical: 6),
-                                decoration: BoxDecoration(
-                                  color: !isParentSelected
-                                      ? AppColors.backGroundColor
-                                      : AppColors.switchColor,
-                                  borderRadius: BorderRadius.circular(8),
-                                  boxShadow: !isParentSelected
-                                      ? [
-                                          BoxShadow(
-                                            color: Colors.black12,
-                                            blurRadius: 4,
-                                            offset: Offset(0, 2),
-                                          ),
-                                        ]
-                                      : [],
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    "Teacher",
-                                    style: TextStyle(
-                                      color: Color(0xFF000846),
-                                      fontWeight: !isParentSelected
-                                          ? FontWeight.w400
-                                          : FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
+                            ],
+                          )
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              LabelText(label: "Teacher's Name"),
+                              SizedBox(height: 4),
+                              CustomTextField(
+                                controller: _teacherNameController,
+                                validator: Validators.validateName,
+                                isFilled: false,
                               ),
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: LabelText(label: 'Email'),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4),
-                      child: SizedBox(
-                        height: 48,
-                        child: CustomTextField(
-                          controller: _emailController,
-                          hintText: "youremail@gmail.com",
-                          hintColor: Color(0xFF121261),
-                          fillColor: Color(0xFFF1F1F1),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: isParentSelected
-                          ? const ParentForm()
-                          : TeacherForm(
-                              fullNameController: _fullNameController,
-                            ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: LabelText(label: 'Password'),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4),
-                      child: SizedBox(
-                        height: 48,
-                        child: CustomTextField(
-                          controller: _passwordController,
-                          hintText: "*********",
-                          isFilled: false,
-                          hintColor: Color(0xFF121261),
-                          // fillColor: Colors.white,
-                          suffixIcon: IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.visibility_off_outlined,
-                              color: Color(0xffAFAFAF),
-                              size: 20,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 24),
-                      child:
-                          BlocConsumer<
-                            TeacherRegisterCubit,
-                            TeacherRegisterState
-                          >(
-                            listener: (context, state) {
-                              if (state is TeacherRegisterSuccess) {
-                                Navigator.pushNamed(
-                                  context,
-                                  TeacherDetailsView.routeName,
-                                );
-                              } else if (state is TeacherRegisterFailure) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text(state.errorMessage)),
-                                );
-                              }
-                            },
-                            builder: (context, state) {
-                              return CustomButton(
-                                text: state is TeacherRegisterLoading
-                                    ? 'Loading...'
-                                    : 'Sign Up',
-                                onTap: state is TeacherRegisterLoading
-                                    ? () {}
-                                    : () {
-                                        if (isParentSelected) {
-                                          Navigator.pushNamed(
-                                            context,
-                                            AddChildNameView.routeName,
-                                          );
-                                        } else {
-                                          context
-                                              .read<TeacherRegisterCubit>()
-                                              .teacherRegister(
-                                                email: _emailController.text
-                                                    .trim(),
-                                                password: _passwordController
-                                                    .text
-                                                    .trim(),
-                                                fullName: _fullNameController
-                                                    .text
-                                                    .trim(),
-                                              );
-                                        }
-                                      },
-                                buttonColor: AppColors.buttonColor,
-                              );
-                            },
-                          ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: TermsAndPrivacyText(
-                        onTermsTap: () {},
-                        onPrivacyTap: () {},
-                      ),
-                    ),
+
+                    SizedBox(height: 16),
+                    LabelText(label: 'Password'),
+                    SizedBox(height: 4),
+                    _buildPasswordField(),
+                    const SizedBox(height: 10),
+                    TermsAndPrivacyText(onTermsTap: () {}, onPrivacyTap: () {}),
+                    const SizedBox(height: 24),
+                    _buildSignUpButton(),
+                    const SizedBox(height: 16),
+                    _buildLoginRow(),
                   ],
                 ),
               ),
@@ -264,6 +139,162 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildRoleToggle() {
+    return Container(
+      height: 40,
+      padding: const EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        color: AppColors.switchColor,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        children: [
+          _buildToggleOption(
+            label: 'Parent',
+            selected: _isParentSelected,
+            onTap: () => setState(() => _isParentSelected = true),
+          ),
+          _buildToggleOption(
+            label: 'Teacher',
+            selected: !_isParentSelected,
+            onTap: () => setState(() => _isParentSelected = false),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildToggleOption({
+    required String label,
+    required bool selected,
+    required VoidCallback onTap,
+  }) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: AnimatedContainer(
+          duration: _toggleAnimationDuration,
+          padding: const EdgeInsets.symmetric(vertical: 6),
+          decoration: BoxDecoration(
+            color: selected ? AppColors.backGroundColor : AppColors.switchColor,
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: selected
+                ? const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 4,
+                      offset: Offset(0, 2),
+                    ),
+                  ]
+                : const [],
+          ),
+          child: Center(
+            child: Text(
+              label,
+              style: TextStyle(
+                color: const Color(0xFF000846),
+                fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEmailField() {
+    return CustomTextField(
+      controller: _emailController,
+      hintText: 'youremail@gmail.com',
+      hintColor: const Color(0xFF121261),
+      fillColor: const Color(0xFFF1F1F1),
+      validator: Validators.validateEmail,
+    );
+  }
+
+  Widget _buildPasswordField() {
+    return CustomTextField(
+      controller: _passwordController,
+      isFilled: false,
+      hintText: 'Enter your password',
+      obscureText: _obscurePassword,
+      suffixIcon: GestureDetector(
+        onTap: () => setState(() => _obscurePassword = !_obscurePassword),
+        child: Icon(
+          _obscurePassword
+              ? Icons.visibility_off_outlined
+              : Icons.visibility_outlined,
+        ),
+      ),
+      validator: Validators.validatePassword,
+    );
+  }
+
+  Widget _buildSignUpButton() {
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<ParentRegisterCubit, ParentRegisterState>(
+          listener: (context, state) {
+            if (state is ParentRegisterSuccess) {
+              Navigator.pushNamed(context, AddChildNameView.routeName);
+            } else if (state is ParentRegisterFailure) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+            }
+          },
+        ),
+        BlocListener<TeacherRegisterCubit, TeacherRegisterState>(
+          listener: (context, state) {
+            if (state is TeacherRegisterSuccess) {
+              Navigator.pushNamed(context, TeacherDetailsView.routeName);
+            } else if (state is TeacherRegisterFailure) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+            }
+          },
+        ),
+      ],
+      child: BlocBuilder<ParentRegisterCubit, ParentRegisterState>(
+        builder: (context, parentState) {
+          return BlocBuilder<TeacherRegisterCubit, TeacherRegisterState>(
+            builder: (context, teacherState) {
+              final isLoading = _isParentSelected
+                  ? parentState is ParentRegisterLoading
+                  : teacherState is TeacherRegisterLoading;
+
+              return CustomButton(
+                text: 'Sign Up',
+                isLoading: isLoading,
+                onTap: _submit,
+                buttonColor: AppColors.buttonColor,
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildLoginRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('Already have an account?', style: AppStyle.styleGreyRegular14),
+        TextButton(
+          style: TextButton.styleFrom(
+            padding: const EdgeInsets.only(left: 3),
+            minimumSize: Size.zero,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          ),
+          onPressed: () => Navigator.pushNamed(context, LogInView.routeName),
+          child: Text('Login', style: AppStyle.linkTerms),
+        ),
+      ],
     );
   }
 }

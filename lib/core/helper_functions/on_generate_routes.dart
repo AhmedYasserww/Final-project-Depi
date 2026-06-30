@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kids_education_learning/core/service_locator/service_locator.dart';
+import 'package:kids_education_learning/feature/bottom_nav_bar/presentation/views/parent_nav_bar_view.dart';
+import 'package:kids_education_learning/feature/bottom_nav_bar/presentation/views/teacher_nav_bar_view.dart';
 import 'package:kids_education_learning/feature/parent_auth/data/repos/auth_repo_imp.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_profile/teacher_profile_cubit.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_register/teacher_register_cubit.dart';
@@ -52,10 +54,10 @@ Route<dynamic> onGenerateRoutes(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const ShopView());
     case ScheduleView.routeName:
       return MaterialPageRoute(builder: (context) => const ScheduleView());
-    case CustomNavigationBar.routeName:
-      return MaterialPageRoute(
-        builder: (context) => const CustomNavigationBar(),
-      );
+    case ParentNavBarView.routeName:
+      return MaterialPageRoute(builder: (_) => const ParentNavBarView());
+    case TeacherNavBarView.routeName:
+      return MaterialPageRoute(builder: (_) => const TeacherNavBarView());
     case TeacherDetailsView.routeName:
       return MaterialPageRoute(
         builder: (context) => BlocProvider(

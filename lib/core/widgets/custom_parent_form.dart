@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:kids_education_learning/core/helper_functions/validators.dart';
 
 import 'custom_label_text.dart';
 import 'custom_text_field.dart';
 
 class ParentForm extends StatelessWidget {
-  const ParentForm({super.key});
+  final TextEditingController fullNameController;
+
+  const ParentForm({
+    super.key,
+    required this.fullNameController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +18,10 @@ class ParentForm extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         LabelText(label: "Parent's Name"),
-        SizedBox(height: 4),
-        SizedBox(
-          height: 48,
-          child: CustomTextField(),
+        const SizedBox(height: 4),
+        CustomTextField(
+          controller: fullNameController,
+          validator: Validators.validateName,
         ),
       ],
     );

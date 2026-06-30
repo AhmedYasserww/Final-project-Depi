@@ -4,8 +4,8 @@ import 'package:kids_education_learning/core/utils/app_style.dart';
 import 'package:kids_education_learning/core/widgets/custom_lesson_card_father.dart';
 import 'package:kids_education_learning/core/widgets/custom_stat_card_father.dart';
 
-class ScheduledLessonsBody extends StatelessWidget {
-  const ScheduledLessonsBody({super.key});
+class TeacherHomeViewBody extends StatelessWidget {
+  const TeacherHomeViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {

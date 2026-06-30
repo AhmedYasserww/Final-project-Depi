@@ -4,6 +4,7 @@ import 'package:kids_education_learning/core/utils/app_dimensions.dart';
 import 'package:kids_education_learning/core/utils/app_style.dart';
 import 'package:kids_education_learning/core/widgets/custom_activity_button.dart';
 import 'package:kids_education_learning/core/widgets/custom_button.dart';
+import 'package:kids_education_learning/core/widgets/custom_location_button.dart';
 import 'package:kids_education_learning/core/widgets/custom_slider_thump_shape.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/working_hours/teacher_working_hours_bottom_sheet.dart';
 
@@ -18,6 +19,17 @@ class TeacherScheduleViewBody extends StatefulWidget {
 
 class _TeacherScheduleViewBodyState extends State<TeacherScheduleViewBody> {
   double value = 30;
+    final Set<String> _selectedLocations = {};
+
+  void _toggleLocation(String location) {
+    setState(() {
+      if (_selectedLocations.contains(location)) {
+        _selectedLocations.remove(location);
+      } else {
+        _selectedLocations.add(location);
+      }
+    });
+  }
   String formatDuration(double minutes) {
     int m = minutes.round();
 
@@ -163,24 +175,36 @@ class _TeacherScheduleViewBodyState extends State<TeacherScheduleViewBody> {
             SizedBox(height: 24),
             Text("Location", style: AppStyle.styleSemiBold14),
             SizedBox(height: 4),
-            CustomActivityButton(
+            CustomLocationButton(
               leading: "Virtual (Online)",
               raduis: 10,
               bottomPadding: 8,
               leftPadding: 0,
               rightPadding: 0,
+              isSelected: _selectedLocations.contains("Virtual (Online)"),
+              onTap: () => _toggleLocation("Virtual (Online)"),
             ),
-            CustomActivityButton(
+            CustomLocationButton(
               leading: "In-Person",
               raduis: 10,
               leftPadding: 0,
               rightPadding: 0,
+              isSelected: _selectedLocations.contains("In-Person"),
+              onTap: () => _toggleLocation("In-Person"),
             ),
 
             Spacer(),
-            CustomButton(text: "Continue", onTap: () {
-              Navigator.of(context).pushNamed(LetIsGoView.routeName);
-            }),
+            CustomButton(
+              text: "Continue",
+              onTap: _selectedLocations.isEmpty
+                  ? () {}
+                  : () {
+                      Navigator.of(context).pushNamed(LetIsGoView.routeName);
+                    },
+              buttonColor: _selectedLocations.isEmpty
+                  ? Colors.grey
+                  : null,
+            ),
             SizedBox(height: 16),
             CustomButton(
               text: "Skip for now",

@@ -8,12 +8,35 @@ class ChooseActivityViewBody extends StatefulWidget {
   const ChooseActivityViewBody({super.key});
 
   @override
-  State<ChooseActivityViewBody> createState() => _ChooseActivityViewBodyState();
+  State<ChooseActivityViewBody> createState() =>
+      _ChooseActivityViewBodyState();
 }
 
 class _ChooseActivityViewBodyState extends State<ChooseActivityViewBody> {
+  final Set<String> _selectedActivities = {};
+
+  void _toggleActivity(String activity) {
+    setState(() {
+      if (_selectedActivities.contains(activity)) {
+        _selectedActivities.remove(activity);
+      } else {
+        _selectedActivities.add(activity);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final activities = [
+      "Storytelling",
+      "Alphabet Games",
+      "Rhyming Games",
+      "Counting Games",
+      "Shapes and Colors",
+      "Drawing and Colouring",
+      "All of the above",
+    ];
+
     return Container(
       color: AppColors.backGroundColor,
       child: Column(
@@ -46,20 +69,27 @@ class _ChooseActivityViewBodyState extends State<ChooseActivityViewBody> {
             ),
           ),
 
-          CustomActivityButton(leading: "Storytelling"),
-          CustomActivityButton(leading: "Alphabet Games"),
-          CustomActivityButton(leading: "Rhyming Games"),
-          CustomActivityButton(leading: "Counting Games"),
-          CustomActivityButton(leading: "Shapes and Colors"),
-          CustomActivityButton(leading: "Drawing and Colouring"),
-          CustomActivityButton(leading: "All of the above"),
+          for (final activity in activities)
+            CustomActivityButton(
+              leading: activity,
+              isSelected: _selectedActivities.contains(activity),
+              onTap: () => _toggleActivity(activity),
+            ),
 
           Spacer(),
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 16, bottom: 40),
-            child: CustomButton(text: "continue", onTap: () {
-            Navigator.of(context).pushNamed(LetIsGoView.routeName);
-            }),
+            child: CustomButton(
+              text: "continue",
+              onTap: _selectedActivities.isEmpty
+                  ? () {}
+                  : () {
+                      Navigator.of(context).pushNamed(LetIsGoView.routeName);
+                    },
+              buttonColor: _selectedActivities.isEmpty
+                  ? Colors.grey
+                  : AppColors.buttonColor,
+            ),
           ),
         ],
       ),
