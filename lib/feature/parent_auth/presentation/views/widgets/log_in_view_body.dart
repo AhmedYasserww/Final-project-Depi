@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kids_education_learning/feature/bottom_nav_bar/presentation/views/bottom_nav_bar_view.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/home_view.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/teacher_detailes_view.dart';
 import '../../../../../core/utils/app_color.dart';
 import '../../../../../core/utils/app_dimensions.dart';
 import '../../../../../core/utils/app_images.dart';
@@ -45,7 +47,19 @@ class _LoginViewBodyState extends State<LoginViewBody> {
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
-         Navigator.of(context).pushReplacementNamed(CustomNavigationBar.routeName);
+          final role = state.loginEntity.role;
+
+          if (role == 'Teacher') {
+            Navigator.of(
+              context,
+            ).pushReplacementNamed(TeacherDetailsView.routeName);
+          } else if (role == 'Parent') {
+            Navigator.of(context).pushReplacementNamed(HomeView.routeName);
+          } else {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text('Unknown role: $role')));
+          }
         } else if (state is LoginFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

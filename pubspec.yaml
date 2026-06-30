@@ -41,6 +41,8 @@ dependencies:
   flutter_bloc: ^9.1.1
   pretty_dio_logger: ^1.4.0
   get_it: ^7.7.0
+  image_picker: ^1.2.2
+  country_picker: ^2.0.27
 
 
 dev_dependencies:

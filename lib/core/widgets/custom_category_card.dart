@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:kids_education_learning/core/utils/app_images.dart';
 
 class CustomCategoryCard extends StatelessWidget {
   const CustomCategoryCard({
     super.key,
     required this.title,
-    required this.icon,
+    required this.imageUrl,
   });
 
   final String title;
-  final String icon;
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,18 @@ class CustomCategoryCard extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 SvgPicture.asset(AppImages.cloud, width: 80),
-                SvgPicture.asset(icon, width: 35),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.network(
+                    imageUrl,
+                    width: 35,
+                    height: 35,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return const Icon(Icons.image_not_supported, size: 28);
+                    },
+                  ),
+                ),
               ],
             ),
           ),

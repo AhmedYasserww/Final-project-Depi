@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kids_education_learning/core/widgets/custom_button.dart';
 import 'package:kids_education_learning/feature/bottom_nav_bar/presentation/views/bottom_nav_bar_view.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/home_view.dart';
 
 class LetIsGoViewBody extends StatelessWidget {
   const LetIsGoViewBody({super.key});
@@ -31,7 +32,7 @@ class LetIsGoViewBody extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 16, right: 16, bottom: 24),
               child: CustomButton(text: "Let's go", onTap: () {
-                Navigator.of(context).pushNamed(CustomNavigationBar.routeName);
+                Navigator.of(context).pushNamed(HomeView.routeName);
               }),
             ),
           ),

@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kids_education_learning/core/utils/app_color.dart';
-import 'package:kids_education_learning/core/utils/app_images.dart';
-
 import 'package:kids_education_learning/core/widgets/custom_stat_card.dart';
 import 'package:kids_education_learning/core/widgets/custom_category_card.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/manager/category_cubit/category_cubit.dart';
 
-class HomeViewBody extends StatelessWidget {
+class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
+
+  @override
+  State<HomeViewBody> createState() => _HomeViewBodyState();
+}
+
+class _HomeViewBodyState extends State<HomeViewBody> {
 
   static const stats = [
     ['1', 'Lesson(s)\nin progress', Icons.rocket_launch, Colors.red],
     ['10', 'Lessons\ncompleted', Icons.check_circle, Colors.green],
     ['4', 'Categories\ncompleted', Icons.grid_view_rounded, Colors.deepPurple],
     ['5', 'Achievements', Icons.emoji_events, Colors.amber],
-  ];
-
-  static const lessons = [
-    ['A-E-I-O-U', AppImages.cracterA],
-    ['Mixing \nColours', AppImages.frame],
-    ['Matching \nNumbers', AppImages.numbers],
-    ['Super \nShapes', AppImages.cardShapes],
   ];
 
   @override
@@ -29,7 +28,6 @@ class HomeViewBody extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-
             /// HEADER
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -75,7 +73,6 @@ class HomeViewBody extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
                       const SizedBox(height: 8),
 
                       /// STATS GRID
@@ -103,7 +100,7 @@ class HomeViewBody extends StatelessWidget {
                       const SizedBox(height: 32),
 
                       const Text(
-                        'Lessons',
+                        'Categories',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -127,23 +124,52 @@ class HomeViewBody extends StatelessWidget {
 
                       const SizedBox(height: 16),
 
-                      /// LESSONS GRID
-                      GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: lessons.length,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
-                          childAspectRatio: 1.6,
-                        ),
-                        itemBuilder: (context, index) {
-                          final e = lessons[index];
-                          return CustomCategoryCard(
-                            title: e[0] as String,
-                            icon: e[1] as String,
-                          );
+                      /// CATEGORIES FROM API
+                      BlocBuilder<CategoryCubit, CategoryState>(
+                        builder: (context, state) {
+                          if (state is CategoryLoading) {
+                            return const Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(24),
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
+                          }
+
+                          if (state is CategoryFailure) {
+                            return Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(24),
+                                child: Text(state.errorMessage),
+                              ),
+                            );
+                          }
+
+                          if (state is CategorySuccess) {
+                            final categories = state.categories;
+
+                            return GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: categories.length,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 10,
+                                childAspectRatio: 1.6,
+                              ),
+                              itemBuilder: (context, index) {
+                                final category = categories[index];
+                                return CustomCategoryCard(
+                                  title: category.categoryName,
+                                  imageUrl: category.categoryImageUrl,
+                                );
+                              },
+                            );
+                          }
+
+                          return const SizedBox.shrink();
                         },
                       ),
 
