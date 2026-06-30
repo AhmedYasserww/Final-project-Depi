@@ -11,6 +11,7 @@ import '../../../../../core/widgets/custom_label_text.dart';
 import '../../../../../core/widgets/custom_subtitle_text_in_screen.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../core/widgets/custom_title_text_in_screen.dart';
+import '../teacher_schedule_view.dart';
 
 class TeacherDetailsViewBody extends StatelessWidget {
   const TeacherDetailsViewBody({super.key});
@@ -123,7 +124,9 @@ class TeacherDetailsViewBody extends StatelessWidget {
               ),
               CustomButton(
                 text: 'Continue',
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushNamed(TeacherScheduleView.routeName);
+                },
                 buttonColor: AppColors.buttonColor,
               ),
             ],

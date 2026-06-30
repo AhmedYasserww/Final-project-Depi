@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kids_education_learning/core/utils/app_color.dart';
+import 'package:kids_education_learning/core/utils/app_style.dart';
+
+import '../utils/app_images.dart';
 
 class CustomSearchBar extends StatelessWidget {
   const CustomSearchBar({super.key});
@@ -14,19 +18,18 @@ class CustomSearchBar extends StatelessWidget {
             child: Container(
               height: 36,
               decoration: BoxDecoration(
-                color: Color(0xFFF6F6F6),
+                color: AppColors.textFieldBorderColor,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: TextFormField(
                 textAlignVertical: TextAlignVertical.center,
-                style: TextStyle(fontSize: 16),
+                // style: TextStyle(fontSize: 16),
                 decoration: InputDecoration(
                   hintText: 'Search',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
+                  hintStyle: AppStyle.hintStyle,
                   prefixIcon: IconButton(
                     onPressed: () {},
-                    icon: SvgPicture.asset('assets/icons/search_icon.svg'),
-                    color: Colors.grey,
+                    icon: SvgPicture.asset(AppImages.iconSearchBar),
                     iconSize: 20,
                   ),
                   border: InputBorder.none,
@@ -42,7 +45,7 @@ class CustomSearchBar extends StatelessWidget {
             height: 36,
             width: 36,
             decoration: BoxDecoration(
-              border: Border.all(color: const Color(0xFFE0E0E0)),
+              border: Border.all(color: AppColors.borderIconFilter),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
@@ -51,7 +54,7 @@ class CustomSearchBar extends StatelessWidget {
                 constraints: const BoxConstraints(),
                 icon: const Icon(
                   Icons.filter_list,
-                  color: Colors.grey,
+                  color: AppColors.subtitleListTile,
                   size: 20,
                 ),
                 onPressed: () {},

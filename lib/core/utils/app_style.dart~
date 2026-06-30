@@ -56,11 +56,6 @@ class AppStyle {
     fontFamily: "Inter",
     fontWeight: FontWeight.w700,
   );
-  static const styleScheduleRegular16 = TextStyle(
-    color: Color(0xFF000846),
-    fontSize: 16,
-    fontWeight: FontWeight.w400
-  );
 
   //////////////////////////////////////////////
   //Semi Bold

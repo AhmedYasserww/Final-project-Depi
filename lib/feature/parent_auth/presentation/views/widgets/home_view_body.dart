@@ -30,17 +30,22 @@ class HomeViewBody extends StatelessWidget {
         child: Column(
           children: [
 
+            /// HEADER
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'Overview',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF343B6E),
+                  const Flexible(
+                    child: Text(
+                      'Overview',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xFF343B6E),
+                      ),
                     ),
                   ),
                   Container(
@@ -73,29 +78,34 @@ class HomeViewBody extends StatelessWidget {
 
                       const SizedBox(height: 8),
 
-                      GridView.count(
+                      /// STATS GRID
+                      GridView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 8,
-                        mainAxisSpacing: 8,
-                        childAspectRatio: 1.7,
-                        children: stats
-                            .map(
-                              (e) => CustomStatCard(
+                        itemCount: stats.length,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 8,
+                          mainAxisSpacing: 8,
+                          childAspectRatio: 1.4,
+                        ),
+                        itemBuilder: (context, index) {
+                          final e = stats[index];
+                          return CustomStatCard(
                             value: e[0] as String,
                             desc: e[1] as String,
                             icon: e[2] as IconData,
                             color: e[3] as Color,
-                          ),
-                        )
-                            .toList(),
+                          );
+                        },
                       ),
 
                       const SizedBox(height: 32),
 
                       const Text(
                         'Lessons',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -103,8 +113,12 @@ class HomeViewBody extends StatelessWidget {
                         ),
                       ),
 
+                      const SizedBox(height: 4),
+
                       const Text(
                         'Choose a category to begin a lesson.',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 17,
                           color: Color(0xFF7A7A7A),
@@ -113,21 +127,24 @@ class HomeViewBody extends StatelessWidget {
 
                       const SizedBox(height: 16),
 
-                      GridView.count(
+                      /// LESSONS GRID
+                      GridView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        childAspectRatio: 176.5 / 100,
-                        children: lessons
-                            .map(
-                              (e) => CustomCategoryCard(
+                        itemCount: lessons.length,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          childAspectRatio: 1.6,
+                        ),
+                        itemBuilder: (context, index) {
+                          final e = lessons[index];
+                          return CustomCategoryCard(
                             title: e[0] as String,
                             icon: e[1] as String,
-                          ),
-                        )
-                            .toList(),
+                          );
+                        },
                       ),
 
                       const SizedBox(height: 20),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kids_education_learning/core/utils/app_color.dart';
 import 'package:kids_education_learning/core/utils/app_style.dart';
 
@@ -32,45 +31,86 @@ class CustomTeacherCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CircleAvatar(
                 radius: 24,
                 backgroundColor: Colors.grey.shade200,
                 backgroundImage: AssetImage(image),
               ),
+
               const Spacer(),
-              Image.asset(flagIcon, width: 125),
+
+              Image.asset(
+                flagIcon,
+                width: 28,
+                height: 20,
+                fit: BoxFit.contain,
+              ),
             ],
           ),
 
           const SizedBox(height: 8),
 
-          Text(name, style: AppStyle.styleBold16),
-          const SizedBox(height: 5),
-          Text(sessions, style: AppStyle.styleRegular14),
-          Text(reviews, style: AppStyle.styleGreyRegular14),
-          const SizedBox(height: 4),
-          Text(price, style: AppStyle.styleBold14),
-          const SizedBox(height: 8),
+          /// NAME
+          Text(
+            name,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: AppStyle.styleBold16,
+          ),
 
+          const SizedBox(height: 4),
+
+          /// SESSIONS
+          Text(
+            sessions,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: AppStyle.styleRegular14,
+          ),
+
+          /// REVIEWS
+          Text(
+            reviews,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: AppStyle.styleGreyRegular14,
+          ),
+
+          const SizedBox(height: 4),
+
+          /// PRICE
+          Text(
+            price,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: AppStyle.styleBold14,
+          ),
+
+          const Spacer(),
+
+          /// BUTTON
           SizedBox(
             width: double.infinity,
             child: OutlinedButton(
               onPressed: () {},
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 8),
+                minimumSize: const Size.fromHeight(36),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: const Text(
-                "View Profile",
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.darkBlueColor,
+              child: const FittedBox(
+                child: Text(
+                  "View Profile",
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.darkBlueColor,
+                  ),
                 ),
               ),
             ),

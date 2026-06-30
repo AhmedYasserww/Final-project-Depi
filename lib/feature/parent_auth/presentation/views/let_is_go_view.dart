@@ -3,6 +3,7 @@ import 'package:kids_education_learning/feature/parent_auth/presentation/views/w
 
 class LetIsGoView extends StatelessWidget {
   const LetIsGoView({super.key});
+  static const String routeName = "let_is_go_view";
 
   @override
   Widget build(BuildContext context) {
