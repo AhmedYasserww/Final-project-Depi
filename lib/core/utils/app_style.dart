@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kids_education_learning/core/utils/app_color.dart';
 
 class AppStyle {
   //Bold
@@ -364,6 +365,19 @@ class AppStyle {
     fontSize: 18,
     fontFamily: "Inter",
     fontWeight: FontWeight.w400,
+  );
+  static const achievementsStyle = TextStyle(
+    color: Color(0xFF707070),
+    fontSize: 16,
+    fontFamily: "Inter",
+    fontWeight: FontWeight.w600,
+  );
+
+    static const TextStyle linkTerms = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+    decoration: TextDecoration.underline,
+    color: AppColors.primaryTextColor,
   );
 
 }

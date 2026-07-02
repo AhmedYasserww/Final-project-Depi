@@ -16,11 +16,12 @@ class CustomButton extends StatelessWidget {
     this.border,
     this.radius,
     this.widget,
+    this.isLoading = false,
   });
 
   final String text;
   final TextStyle? textStyle;
-  final void Function() onTap;
+  final VoidCallback? onTap;
   final Color? buttonColor;
   final Color? textButtonColor;
   final double? height;
@@ -28,10 +29,13 @@ class CustomButton extends StatelessWidget {
   final double? radius;
   final Widget? widget;
 
+  /// New
+  final bool isLoading;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: isLoading ? null : onTap,
       child: Container(
         width: double.infinity,
         height: height ?? 48,
@@ -43,20 +47,31 @@ class CustomButton extends StatelessWidget {
           color: buttonColor ?? AppColors.buttonColor,
         ),
         child: Center(
-          child: Row(
-            spacing: 12,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (widget != null) widget!,
-              Text(
-                text,
-                style: (textStyle ?? AppStyle.styleWhiteRegular16).copyWith(
-
-                color: textButtonColor ?? Colors.white,
+          child: isLoading
+              ? const SizedBox(
+                  width: 22,
+                  height: 22,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2.5,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  ),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (widget != null) ...[
+                      widget!,
+                      const SizedBox(width: 12),
+                    ],
+                    Text(
+                      text,
+                      style: (textStyle ?? AppStyle.styleWhiteRegular16)
+                          .copyWith(
+                        color: textButtonColor ?? Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
         ),
       ),
     );

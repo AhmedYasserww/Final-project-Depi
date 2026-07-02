@@ -8,9 +8,9 @@ import 'core/service_locator/service_locator.dart';
 import 'feature/bottom_nav_bar/presentation/views/bottom_nav_bar_view.dart';
 import 'feature/parent_auth/presentation/views/create_account_view.dart';
 import 'feature/parent_auth/presentation/views/log_in_view.dart';
+import 'feature/parent_auth/presentation/views/profile_view.dart';
 import 'feature/parent_auth/presentation/views/widgets/create_account_view_body.dart';
 import 'feature/parent_auth/presentation/views/widgets/teacher_details_view_body.dart';
-
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +20,7 @@ void main() {
     //   enabled: !kReleaseMode,
     //   builder: (context) => MyApp(),
     // ),
-     MyApp(),
+    MyApp(),
   );
 }
 
@@ -42,9 +42,11 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-      
       onGenerateRoute: onGenerateRoutes,
       initialRoute: LogInView.routeName,
+      home: ProfileView(),
+      // onGenerateRoute: onGenerateRoutes,
+      // initialRoute: CreateAccountView.routeName,
     );
   }
 }

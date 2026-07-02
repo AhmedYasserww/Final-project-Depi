@@ -94,6 +94,8 @@ class AppImages {
   static const String moreIcon = "assets/images/more.svg";
   static const String profilePic = 'assets/images/prof pic.png';
   static const String iconSearchBar = 'assets/images/prof pic.png';
+  static const String profilePhoto = 'assets/images/koala.png';
+  static const String vector = 'assets/images/vector.png';
 
 
 }
