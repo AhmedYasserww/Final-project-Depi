@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:kids_education_learning/core/utils/app_color.dart';
 import 'package:kids_education_learning/core/utils/app_style.dart';
+import 'package:kids_education_learning/core/widgets/custom_button.dart';
 import 'package:kids_education_learning/core/widgets/profile_widgets/custom_icon_button.dart';
 import 'package:kids_education_learning/core/widgets/profile_widgets/custom_tab_button.dart';
 import 'package:kids_education_learning/core/widgets/profile_widgets/custom_stat_card.dart';
 import 'package:kids_education_learning/core/widgets/profile_widgets/custom_session_card.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/widgets/create_course_bottom_sheet.dart';
 
 class TeacherProfileViewBody extends StatefulWidget {
   const TeacherProfileViewBody({super.key});
@@ -47,6 +49,7 @@ class _TeacherProfileViewBodyState extends State<TeacherProfileViewBody> {
                 ],
               ),
               const SizedBox(height: 30),
+
               /// Avatar
               ClipRRect(
                 borderRadius: BorderRadius.circular(50),
@@ -81,10 +84,7 @@ class _TeacherProfileViewBodyState extends State<TeacherProfileViewBody> {
               ),
 
               const SizedBox(height: 4),
-              Text(
-                '\$80/hr',
-                style: AppStyle.styleBoldShop16,
-              ),
+              Text('\$80/hr', style: AppStyle.styleBoldShop16),
               const SizedBox(height: 16),
 
               /// Tabs
@@ -92,16 +92,9 @@ class _TeacherProfileViewBodyState extends State<TeacherProfileViewBody> {
                 children: [
                   CustomTabButton(
                     label: 'Overview',
-                    isSelected: _selectedTab == 0,
                     onTap: () => setState(() => _selectedTab = 0),
                   ),
                   const SizedBox(width: 10),
-                  CustomTabButton(
-                    label: 'Reviews',
-                    badge: '19',
-                    isSelected: _selectedTab == 1,
-                    onTap: () => setState(() => _selectedTab = 1),
-                  ),
                 ],
               ),
 
@@ -166,12 +159,10 @@ class _TeacherProfileViewBodyState extends State<TeacherProfileViewBody> {
               ),
 
               const SizedBox(height: 20),
-              const Divider(
-                color: Color(0xFFE0E0E0),
-                thickness: 1,
-              ),
+              const Divider(color: Color(0xFFE0E0E0), thickness: 1),
 
               const SizedBox(height: 20),
+
               /// Available Sessions
               const Text(
                 'Available sessions',
@@ -190,6 +181,7 @@ class _TeacherProfileViewBodyState extends State<TeacherProfileViewBody> {
               ),
 
               const SizedBox(height: 16),
+
               /// Session Cards
               const Row(
                 children: [
@@ -209,6 +201,12 @@ class _TeacherProfileViewBodyState extends State<TeacherProfileViewBody> {
                 ],
               ),
               const SizedBox(height: 24),
+              CustomButton(
+                text: 'Add Course',
+                onTap: () async {
+                  await showCreateCourseBottomSheet(context);
+                },
+              ),
             ],
           ),
         ),

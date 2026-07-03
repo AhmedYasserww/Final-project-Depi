@@ -19,7 +19,7 @@ class BookingConfirmedDialog extends StatelessWidget {
             SizedBox(
               height: 48,
               width: 48,
-              child: Image.asset("assets/images/booking_confirmed.png"),
+              child: Image.asset("assets/icons/booking_confirmed.png"),
             ),
             const SizedBox(width: 12),
             const Text(

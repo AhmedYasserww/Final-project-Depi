@@ -120,14 +120,11 @@ class _TeacherProfileContentState extends State<_TeacherProfileContent> {
               children: [
                 CustomTabButton(
                   label: 'Overview',
-                  isSelected: _selectedTab == 0,
                   onTap: () => setState(() => _selectedTab = 0),
                 ),
                 const SizedBox(width: 10),
                 CustomTabButton(
                   label: 'Reviews',
-                  badge: '0',
-                  isSelected: _selectedTab == 1,
                   onTap: () => setState(() => _selectedTab = 1),
                 ),
               ],

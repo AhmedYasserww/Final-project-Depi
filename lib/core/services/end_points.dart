@@ -6,4 +6,5 @@ class EndPoints {
   static const String category = 'Category/all';
   static const String teachers = 'Schedule/teachers';
   static const String teacherProfileById = 'Schedule/teacher';
+  static const String addCourse = 'Lesson';
 }
