@@ -11,6 +11,7 @@ class CustomTeacherCard extends StatelessWidget {
     required this.price,
     required this.flagIcon,
     required this.image,
+    required this.onViewProfile,
   });
 
   final String name;
@@ -19,6 +20,7 @@ class CustomTeacherCard extends StatelessWidget {
   final String price;
   final String flagIcon;
   final String image;
+  final VoidCallback onViewProfile;
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +33,14 @@ class CustomTeacherCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           Row(
             children: [
               CircleAvatar(
                 radius: 24,
                 backgroundColor: Colors.grey.shade200,
-                backgroundImage: AssetImage(image),
+                backgroundImage: _resolveImage(image),
               ),
-
               const Spacer(),
-
               Image.asset(
                 flagIcon,
                 width: 28,
@@ -50,52 +49,40 @@ class CustomTeacherCard extends StatelessWidget {
               ),
             ],
           ),
-
           const SizedBox(height: 8),
-
-          /// NAME
           Text(
             name,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: AppStyle.styleBold16,
           ),
-
           const SizedBox(height: 4),
-
-          /// SESSIONS
-          Text(
-            sessions,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: AppStyle.styleRegular14,
-          ),
-
-          /// REVIEWS
-          Text(
-            reviews,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: AppStyle.styleGreyRegular14,
-          ),
-
+          if (sessions.isNotEmpty)
+            Text(
+              sessions,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: AppStyle.styleRegular14,
+            ),
+          if (reviews.isNotEmpty)
+            Text(
+              reviews,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: AppStyle.styleGreyRegular14,
+            ),
           const SizedBox(height: 4),
-
-          /// PRICE
           Text(
             price,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: AppStyle.styleBold14,
           ),
-
           const Spacer(),
-
-          /// BUTTON
           SizedBox(
             width: double.infinity,
             child: OutlinedButton(
-              onPressed: () {},
+              onPressed: onViewProfile,
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 minimumSize: const Size.fromHeight(36),
@@ -118,5 +105,15 @@ class CustomTeacherCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  ImageProvider _resolveImage(String path) {
+    if (path.isEmpty) {
+      return const AssetImage('assets/images/avatar.png'); // 👈 ظبط الـ default اللي عندك
+    }
+    if (path.startsWith('http')) {
+      return NetworkImage(path);
+    }
+    return AssetImage(path);
   }
 }

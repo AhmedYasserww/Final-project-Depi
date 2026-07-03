@@ -96,6 +96,7 @@ class AppImages {
   static const String iconSearchBar = 'assets/images/prof pic.png';
   static const String profilePhoto = 'assets/images/koala.png';
   static const String vector = 'assets/images/vector.png';
+  static const String profileIcon = 'assets/images/profile.svg';
 
 
 }

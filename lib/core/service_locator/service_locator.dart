@@ -9,6 +9,7 @@ import 'package:kids_education_learning/feature/parent_auth/presentation/manager
 
 import '../../feature/parent_auth/data/repos/auth_repo_imp.dart';
 import '../../feature/parent_auth/presentation/manager/log_in_cubit/login_cubit.dart';
+import '../../feature/teacher/data/repos/teacher_repo_imp.dart';
 import '../services/api_service.dart';
 
 final getIt = GetIt.instance;
@@ -39,5 +40,8 @@ void setupServiceLocator() {
 
   getIt.registerFactory<CategoryCubit>(
     () => CategoryCubit(getIt<CategoryRepoImpl>()),
+  );
+  getIt.registerLazySingleton<TeacherRepoImpl>(
+        () => TeacherRepoImpl(apiService: getIt.get<ApiService>()),
   );
 }

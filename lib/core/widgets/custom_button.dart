@@ -51,29 +51,29 @@ class CustomButton extends StatelessWidget {
         child: Center(
           child: isLoading
               ? const SizedBox(
-                  width: 22,
-                  height: 22,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2.5,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  ),
-                )
+            width: 22,
+            height: 22,
+            child: CircularProgressIndicator(
+              strokeWidth: 2.5,
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            ),
+          )
               : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (widget != null) ...[
-                      widget!,
-                      const SizedBox(width: 12),
-                    ],
-                    Text(
-                      text,
-                      style: (textStyle ?? AppStyle.styleWhiteRegular16)
-                          .copyWith(
-                        color: textButtonColor ?? Colors.white,
-                      ),
-                    ),
-                  ],
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (widget != null) ...[
+                widget!,
+                const SizedBox(width: 12),
+              ],
+              Text(
+                text,
+                style: (textStyle ?? AppStyle.styleWhiteRegular16)
+                    .copyWith(
+                  color: textButtonColor ?? Colors.white,
                 ),
+              ),
+            ],
+          ),
         ),
       ),
     );

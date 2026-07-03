@@ -199,8 +199,12 @@ class _TeacherScheduleViewBodyState extends State<TeacherScheduleViewBody> {
               onTap: _selectedLocations.isEmpty
                   ? () {}
                   : () {
-                      Navigator.of(context).pushNamed(LetIsGoView.routeName);
-                    },
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const LetIsGoView(isTeacher: true),
+                  ),
+                );
+              },
               buttonColor: _selectedLocations.isEmpty
                   ? Colors.grey
                   : null,

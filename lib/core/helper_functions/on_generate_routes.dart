@@ -10,6 +10,8 @@ import 'package:kids_education_learning/feature/parent_auth/presentation/views/a
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/create_account_view.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/home_view.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/shop_view.dart';
+import '../../feature/achievements/presentations/views/lesson_flow_view.dart';
+import '../../feature/achievements/presentations/views/lessons_match_view.dart';
 import '../../feature/bottom_nav_bar/presentation/views/bottom_nav_bar_view.dart';
 import '../../feature/parent_auth/presentation/views/choose_activity_view.dart';
 import '../../feature/parent_auth/presentation/views/choose_goal_view.dart';
@@ -19,7 +21,9 @@ import '../../feature/parent_auth/presentation/views/schedul_view.dart';
 import '../../feature/parent_auth/presentation/views/log_in_view.dart';
 import '../../feature/parent_auth/presentation/views/lessons_view.dart';
 import '../../feature/parent_auth/presentation/views/teacher_detailes_view.dart';
+import '../../feature/parent_auth/presentation/views/teacher_profile_parent_view.dart';
 import '../../feature/parent_auth/presentation/views/teacher_schedule_view.dart';
+import '../../feature/splash/presentations/views/splash_view.dart';
 
 Route<dynamic> onGenerateRoutes(RouteSettings settings) {
   switch (settings.name) {
@@ -69,8 +73,15 @@ Route<dynamic> onGenerateRoutes(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => const TeacherScheduleView(),
       );
-    case LetIsGoView.routeName:
-      return MaterialPageRoute(builder: (context) => const LetIsGoView());
+    case LessonFlowView.routeName:
+      return MaterialPageRoute(builder: (context) => const LessonFlowView());
+    case TeacherProfileParentView.routeName:
+      final teacherId = settings.arguments as String;
+      return MaterialPageRoute(
+        builder: (_) => TeacherProfileParentView(teacherId: teacherId),
+      );
+      case SplashScreen.routeName:
+      return MaterialPageRoute(builder: (context) => SplashScreen());
 
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());

@@ -1,19 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kids_education_learning/core/utils/app_dimensions.dart';
-import 'package:kids_education_learning/core/utils/app_images.dart';
-import 'package:kids_education_learning/core/utils/app_style.dart';
-import 'package:kids_education_learning/core/widgets/custom_text_field.dart';
-import 'package:kids_education_learning/core/widgets/custom_teacher_card.dart';
 
-class ScheduleViewBody extends StatefulWidget {
+import '../../../../../core/service_locator/service_locator.dart';
+import '../../../../../core/utils/app_dimensions.dart';
+import '../../../../../core/utils/app_style.dart';
+import '../../../../../core/widgets/custom_text_field.dart';
+import '../../../../teacher/data/repos/teacher_repo_imp.dart';
+import '../../../../teacher/presentations/manager/get_teachers_cubit/get_teachers_cubit.dart';
+import '../../../../teacher/presentations/manager/get_teachers_cubit/get_teachers_state.dart';
+import '../../../../teacher/presentations/views/widgets/teachers_grid_view.dart';
+
+
+class ScheduleViewBody extends StatelessWidget {
   const ScheduleViewBody({super.key});
 
   @override
-  State<ScheduleViewBody> createState() => _ScheduleViewBodyState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => GetTeachersCubit(
+        teacherRepo: getIt.get<TeacherRepoImpl>(),
+      )..getTeachers(),
+      child: const _ScheduleViewContent(),
+    );
+  }
 }
 
-class _ScheduleViewBodyState extends State<ScheduleViewBody> {
+class _ScheduleViewContent extends StatelessWidget {
+  const _ScheduleViewContent();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -26,7 +41,6 @@ class _ScheduleViewBodyState extends State<ScheduleViewBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             /// TITLE
             const Flexible(
               child: Text(
@@ -36,16 +50,13 @@ class _ScheduleViewBodyState extends State<ScheduleViewBody> {
                 style: AppStyle.styleBold32,
               ),
             ),
-
             const SizedBox(height: 8),
-
             const Text(
               "Find a suitable teacher to schedule lesson for your child.",
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: AppStyle.styleGreyRegular16,
             ),
-
             const SizedBox(height: 16),
 
             /// SEARCH
@@ -78,47 +89,25 @@ class _ScheduleViewBodyState extends State<ScheduleViewBody> {
                 ),
               ],
             ),
-
             const SizedBox(height: 20),
 
             /// TEACHERS GRID
             Expanded(
-              child: GridView.builder(
-                itemCount: 2,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: 0.72,
-                ),
-                itemBuilder: (context, index) {
-                  final teachers = [
-                    {
-                      "name": "Sarah Eastwood",
-                      "sessions": "43 sessions",
-                      "reviews": "(19 reviews)",
-                      "price": "\$80/hr",
-                      "image": AppImages.imageWom
-                    },
-                    {
-                      "name": "Noah Dawson",
-                      "sessions": "58 sessions",
-                      "reviews": "(32 reviews)",
-                      "price": "\$80/hr",
-                      "image": AppImages.imageMan
+              child: BlocBuilder<GetTeachersCubit, GetTeachersState>(
+                builder: (context, state) {
+                  if (state is GetTeachersLoading || state is GetTeachersInitial) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (state is GetTeachersFailure) {
+                    return Center(child: Text(state.errorMessage));
+                  }
+                  if (state is GetTeachersSuccess) {
+                    if (state.teachers.isEmpty) {
+                      return const Center(child: Text('No teachers available'));
                     }
-                  ];
-
-                  final teacher = teachers[index];
-
-                  return CustomTeacherCard(
-                    name: teacher["name"]!,
-                    sessions: teacher["sessions"]!,
-                    reviews: teacher["reviews"]!,
-                    price: teacher["price"]!,
-                    flagIcon: AppImages.country,
-                    image: teacher["image"]!,
-                  );
+                    return TeachersGridView(teachers: state.teachers);
+                  }
+                  return const SizedBox.shrink();
                 },
               ),
             ),
