@@ -28,8 +28,8 @@ class TeacherNavBarView extends StatelessWidget {
         ),
         NavBarItem(
           title: "Profile",
-          outlinedIcon: AppImages.profile,
-          filledIcon: AppImages.profile,
+          outlinedIcon: AppImages.profileIcon,
+          filledIcon: AppImages.profileIcon,
           screen: const TeacherProfileView(),
         ),
       ],

@@ -30,6 +30,7 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
 
   bool _isParentSelected = true;
   bool _obscurePassword = true;
+  bool _autoValidate = false;
 
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
@@ -47,6 +48,8 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
   }
 
   void _submit() {
+    setState(() => _autoValidate = true);
+
     if (!_formKey.currentState!.validate()) {
       return;
     }
@@ -84,6 +87,9 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
               ),
               child: Form(
                 key: _formKey,
+                autovalidateMode: _autoValidate
+                    ? AutovalidateMode.onUserInteraction
+                    : AutovalidateMode.disabled,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -106,6 +112,7 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
                                 controller: _parentNameController,
                                 validator: Validators.validateName,
                                 isFilled: false,
+                                hintText: "Enter your name",
                               ),
                             ],
                           )
@@ -118,6 +125,7 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
                                 controller: _teacherNameController,
                                 validator: Validators.validateName,
                                 isFilled: false,
+                                hintText: "Enter your name",
                               ),
                             ],
                           ),
@@ -126,8 +134,7 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
                     LabelText(label: 'Password'),
                     SizedBox(height: 4),
                     _buildPasswordField(),
-                    const SizedBox(height: 10),
-                    TermsAndPrivacyText(onTermsTap: () {}, onPrivacyTap: () {}),
+                 //   TermsAndPrivacyText(onTermsTap: () {}, onPrivacyTap: () {}),
                     const SizedBox(height: 24),
                     _buildSignUpButton(),
                     const SizedBox(height: 16),

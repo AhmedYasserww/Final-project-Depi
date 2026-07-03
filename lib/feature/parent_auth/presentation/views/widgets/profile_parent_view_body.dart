@@ -10,8 +10,8 @@ import '../../../../../core/widgets/custom_subtitle_text_in_screen.dart';
 import '../../../../../core/widgets/custom_switch_profile.dart';
 import '../../../../../core/widgets/custom_title_text_in_screen.dart';
 
-class ProfileViewBody extends StatelessWidget {
-  const ProfileViewBody({super.key});
+class ProfileParentViewBody extends StatelessWidget {
+  const ProfileParentViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {

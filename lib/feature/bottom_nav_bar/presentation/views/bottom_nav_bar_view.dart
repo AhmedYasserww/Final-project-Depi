@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kids_education_learning/feature/bottom_nav_bar/presentation/nav_bar_item.dart';
 
 class CustomNavigationBar extends StatefulWidget {
+  static const String routeName = 'bottom-nav-bar';
   final List<NavBarItem> items;
 
   const CustomNavigationBar({super.key, required this.items});

@@ -113,7 +113,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   BlocBuilder<LoginCubit, LoginState>(
                     builder: (context, state) {
                       return CustomButton(
-                        text: 'Continue',
+                        text: 'SignIn',
                         isLoading: state is LoginLoading,
                         onTap: _onLogin,
                         buttonColor: AppColors.buttonColor,

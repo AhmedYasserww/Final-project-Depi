@@ -84,8 +84,12 @@ class _ChooseActivityViewBodyState extends State<ChooseActivityViewBody> {
               onTap: _selectedActivities.isEmpty
                   ? () {}
                   : () {
-                      Navigator.of(context).pushNamed(LetIsGoView.routeName);
-                    },
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const LetIsGoView(isTeacher: false),
+                  ),
+                );
+              },
               buttonColor: _selectedActivities.isEmpty
                   ? Colors.grey
                   : AppColors.buttonColor,
