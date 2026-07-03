@@ -39,13 +39,13 @@ class _TeacherProfileViewBodyState extends State<TeacherProfileViewBody> {
                       fontFamily: 'Inter',
                     ),
                   ),
-                  Row(
-                    children: [
-                      CustomIconButton(icon: Icons.edit_outlined),
-                      SizedBox(width: 8),
-                      CustomIconButton(icon: Icons.settings_outlined),
-                    ],
-                  ),
+                  // Row(
+                  //   children: [
+                  //     CustomIconButton(icon: Icons.edit_outlined),
+                  //     SizedBox(width: 8),
+                  //     CustomIconButton(icon: Icons.settings_outlined),
+                  //   ],
+                  // ),
                 ],
               ),
               const SizedBox(height: 30),

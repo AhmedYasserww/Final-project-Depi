@@ -54,10 +54,10 @@ class _LessonsViewBodyState extends State<LessonsViewBody> {
               SizedBox(height: 24),
               CustomeLessonsCard(childName: "Jacob", state: "Active", instructorName:"Sarah Eastwood", date:"18/11/24",duration: "30 Minutes", category: "Mixed"),
               CustomeLessonsCard(childName: "Jacob", state: "Completed", instructorName:"Sarah Eastwood", date:"15/11/24",duration: "30 Minutes", category: "Mixed"),
-              CustomeLessonsCard(childName: "Jacob", state: "Completed", instructorName:"Sarah Eastwood", date:"18/11/24",duration: "1hr", category: "Mixed"),
-              CustomeLessonsCard(childName: "Jacob", state: "Completed", instructorName:"Sarah Eastwood", date:"18/11/24",duration: "30 Minutes", category: "Mixed"),
-              CustomeLessonsCard(childName: "Jacob", state: "Completed", instructorName:"Sarah Eastwood", date:"18/11/24",duration: "30 Minutes", category: "Mixed"),
-              CustomeLessonsCard(childName: "Jacob", state: "Completed", instructorName:"Sarah Eastwood", date:"18/11/24",duration: "30 Minutes", category: "Mixed"),
+              // CustomeLessonsCard(childName: "Jacob", state: "Completed", instructorName:"Sarah Eastwood", date:"18/11/24",duration: "1hr", category: "Mixed"),
+              // CustomeLessonsCard(childName: "Jacob", state: "Completed", instructorName:"Sarah Eastwood", date:"18/11/24",duration: "30 Minutes", category: "Mixed"),
+              // CustomeLessonsCard(childName: "Jacob", state: "Completed", instructorName:"Sarah Eastwood", date:"18/11/24",duration: "30 Minutes", category: "Mixed"),
+              // CustomeLessonsCard(childName: "Jacob", state: "Completed", instructorName:"Sarah Eastwood", date:"18/11/24",duration: "30 Minutes", category: "Mixed"),
 
 
             ],

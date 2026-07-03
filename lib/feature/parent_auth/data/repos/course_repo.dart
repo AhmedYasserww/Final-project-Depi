@@ -9,4 +9,7 @@ abstract class CourseRepo {
     required String videoPath,
     required String videoName,
   });
+
+  Future<List<CourseEntity>> getTeacherLessons({required String teacherId});
+  Future<String> reserveLesson({required String lessonId});
 }

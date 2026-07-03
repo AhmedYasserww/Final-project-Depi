@@ -44,4 +44,48 @@ class CourseRepoImpl implements CourseRepo {
 
     throw Exception(message);
   }
+
+  @override
+  Future<List<CourseEntity>> getTeacherLessons({
+    required String teacherId,
+  }) async {
+    final response = await apiService.get(
+      endPoint: '${EndPoints.lessonByTeacher}/$teacherId',
+    );
+
+    if (response is Map<String, dynamic> &&
+        response['succeeded'] == true &&
+        response['data'] is List) {
+      return (response['data'] as List)
+          .map((json) => CourseModel.fromJson(json as Map<String, dynamic>))
+          .toList();
+    }
+
+    final message = (response is Map<String, dynamic>)
+        ? (response['message']?.toString() ?? 'Failed to load lessons')
+        : 'Failed to load lessons';
+
+    throw Exception(message);
+  }
+
+  @override
+Future<String> reserveLesson({required String lessonId}) async {
+  final response = await apiService.post(
+    endPoint: '${EndPoints.reserveLesson}/$lessonId',
+    data: const {},
+  );
+
+  if (response is Map<String, dynamic> && response['succeeded'] == true) {
+    return response['data']?.toString() ?? 'Lesson reserved successfully';
+  }
+
+  final message = (response is Map<String, dynamic>)
+      ? (response['message']?.toString() ??
+          (response['errors'] is List && (response['errors'] as List).isNotEmpty
+              ? response['errors'][0].toString()
+              : 'Failed to reserve lesson'))
+      : 'Failed to reserve lesson';
+
+  throw Exception(message);
+}
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kids_education_learning/core/utils/app_color.dart';
 import 'package:kids_education_learning/core/utils/app_dimensions.dart';
 import 'package:kids_education_learning/core/utils/app_style.dart';
+import 'package:kids_education_learning/feature/achievements/presentations/views/lesson_flow_view.dart';
 
 class CustomeLessonsCard extends StatefulWidget {
   const CustomeLessonsCard({
@@ -70,9 +72,14 @@ class _CustomeLessonsCardState extends State<CustomeLessonsCard> {
                         SizedBox(
                           width: 48,
                           height: 48,
-                          child: Image.asset(
-                            "assets/icons/start_lesson_icon.jpg",
-                            fit: BoxFit.contain,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, LessonFlowView.routeName);
+                            },
+                            child: Image.asset(
+                              "assets/icons/start_lesson_icon.jpg",
+                              fit: BoxFit.contain,
+                            ),
                           ),
                         ),
                     ],
