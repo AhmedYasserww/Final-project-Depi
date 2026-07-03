@@ -1,6 +1,5 @@
 import 'package:kids_education_learning/feature/parent_auth/data/entites/course_entity.dart';
 
-
 abstract class CourseRepo {
   Future<CourseEntity> addCourse({
     required String title,
@@ -12,4 +11,5 @@ abstract class CourseRepo {
 
   Future<List<CourseEntity>> getTeacherLessons({required String teacherId});
   Future<String> reserveLesson({required String lessonId});
+  Future<List<CourseEntity>> getParentLessons();
 }

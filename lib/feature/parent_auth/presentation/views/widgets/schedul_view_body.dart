@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/manager/schedule_lesson/schedule_lesson_cubit.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/manager/schedule_lesson/schedule_lesson_state.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/widgets/scheule_lesson_card.dart';
 
 import '../../../../../core/service_locator/service_locator.dart';
 import '../../../../../core/utils/app_dimensions.dart';
@@ -11,16 +14,22 @@ import '../../../../teacher/presentations/manager/get_teachers_cubit/get_teacher
 import '../../../../teacher/presentations/manager/get_teachers_cubit/get_teachers_state.dart';
 import '../../../../teacher/presentations/views/widgets/teachers_grid_view.dart';
 
-
 class ScheduleViewBody extends StatelessWidget {
   const ScheduleViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => GetTeachersCubit(
-        teacherRepo: getIt.get<TeacherRepoImpl>(),
-      )..getTeachers(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => GetTeachersCubit(
+            teacherRepo: getIt.get<TeacherRepoImpl>(),
+          )..getTeachers(),
+        ),
+        BlocProvider(
+          create: (_) => getIt<ScheduleLessonCubit>()..getScheduledLessons(),
+        ),
+      ],
       child: const _ScheduleViewContent(),
     );
   }
@@ -41,13 +50,7 @@ class _ScheduleViewContent extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// TITLE
-            Text(
-              "Schedule",
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: AppStyle.styleBold32,
-            ),
+            Text("Schedule", maxLines: 1, overflow: TextOverflow.ellipsis, style: AppStyle.styleBold32),
             const SizedBox(height: 8),
             const Text(
               "Find a suitable teacher to schedule lesson for your child.",
@@ -56,6 +59,33 @@ class _ScheduleViewContent extends StatelessWidget {
               style: AppStyle.styleGreyRegular16,
             ),
             const SizedBox(height: 16),
+
+            /// Scheduled lessons section — now a list, not a single item
+            BlocBuilder<ScheduleLessonCubit, ScheduleLessonState>(
+              builder: (context, state) {
+                if (state is ScheduleLessonLoading || state is ScheduleLessonInitial) {
+                  return const SizedBox.shrink();
+                }
+                if (state is ScheduleLessonError) {
+                  return const SizedBox.shrink(); // مفيش لازمة نعطل الشاشة كلها لو الجزء ده فشل
+                }
+                if (state is ScheduleLessonSuccess) {
+                  if (state.lessons.isEmpty) return const SizedBox.shrink();
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Your Lessons', style: AppStyle.styleBold20),
+                        const SizedBox(height: 10),
+                        ...state.lessons.map((lesson) => ScheduledLessonCard(lesson: lesson)),
+                      ],
+                    ),
+                  );
+                }
+                return const SizedBox.shrink();
+              },
+            ),
 
             /// SEARCH
             Row(
@@ -67,10 +97,7 @@ class _ScheduleViewContent extends StatelessWidget {
                       prefixIcon: SizedBox(
                         width: 22,
                         height: 22,
-                        child: SvgPicture.asset(
-                          "assets/icons/search_icon.svg",
-                          fit: BoxFit.scaleDown,
-                        ),
+                        child: SvgPicture.asset("assets/icons/search_icon.svg", fit: BoxFit.scaleDown),
                       ),
                       hintText: "Search",
                     ),
@@ -79,11 +106,7 @@ class _ScheduleViewContent extends StatelessWidget {
                 const SizedBox(width: 8),
                 GestureDetector(
                   onTap: () {},
-                  child: SvgPicture.asset(
-                    "assets/icons/filter_icon.svg",
-                    width: 34,
-                    height: 34,
-                  ),
+                  child: SvgPicture.asset("assets/icons/filter_icon.svg", width: 34, height: 34),
                 ),
               ],
             ),

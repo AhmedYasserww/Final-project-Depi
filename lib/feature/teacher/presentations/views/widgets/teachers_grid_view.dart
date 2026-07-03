@@ -25,7 +25,7 @@ class TeachersGridView extends StatelessWidget {
         return CustomTeacherCard(
           name: teacher.fullName,
           sessions: '${teacher.completedLesson} sessions',
-          reviews: '', // مفيش reviews في الـ API لحد دلوقتي
+          reviews: '', 
           price: '\$${teacher.hourlyRate.toStringAsFixed(0)}/hr',
           flagIcon: AppImages.country,
           image: teacher.profileImage,

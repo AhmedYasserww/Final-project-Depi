@@ -10,6 +10,7 @@ import 'package:kids_education_learning/feature/parent_auth/presentation/views/a
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/create_account_view.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/home_view.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/shop_view.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/widgets/lesson_video_played_view.dart';
 import '../../feature/achievements/presentations/views/lesson_flow_view.dart';
 import '../../feature/achievements/presentations/views/lessons_match_view.dart';
 import '../../feature/bottom_nav_bar/presentation/views/bottom_nav_bar_view.dart';
@@ -82,6 +83,15 @@ Route<dynamic> onGenerateRoutes(RouteSettings settings) {
       );
       case SplashScreen.routeName:
       return MaterialPageRoute(builder: (context) => SplashScreen());
+
+      case LessonVideoPlayerView.routeName:
+  final args = settings.arguments as Map<String, String>;
+  return MaterialPageRoute(
+    builder: (_) => LessonVideoPlayerView(
+      videoUrl: args['videoUrl']!,
+      title: args['title']!,
+    ),
+  );
 
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());

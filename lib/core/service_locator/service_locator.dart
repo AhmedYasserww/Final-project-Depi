@@ -7,6 +7,7 @@ import 'package:kids_education_learning/feature/parent_auth/data/repos/course_re
 import 'package:kids_education_learning/feature/parent_auth/data/repos/working_hours_repo_imp.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/category_cubit/category_cubit.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/course_cubit/course_cubit.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/manager/schedule_lesson/schedule_lesson_cubit.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/parent_register/parent_register_cubit.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/reserve_lesson/reserve_lesson_cubit.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_lessons/teacher_lesson_cubit.dart';
@@ -74,5 +75,9 @@ void setupServiceLocator() {
   getIt.registerFactory<WorkingHoursCubit>(
     () =>
         WorkingHoursCubit(workingHoursRepo: getIt.get<WorkingHoursRepoImpl>()),
+  );
+
+  getIt.registerFactory<ScheduleLessonCubit>(
+    () => ScheduleLessonCubit(courseRepo: getIt.get<CourseRepoImpl>()),
   );
 }
