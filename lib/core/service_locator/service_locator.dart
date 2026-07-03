@@ -4,10 +4,14 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:kids_education_learning/feature/parent_auth/data/repos/category_repo_imp.dart';
 import 'package:kids_education_learning/feature/parent_auth/data/repos/course_repo_imp.dart';
+import 'package:kids_education_learning/feature/parent_auth/data/repos/working_hours_repo_imp.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/category_cubit/category_cubit.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/course_cubit/course_cubit.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/parent_register/parent_register_cubit.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/manager/reserve_lesson/reserve_lesson_cubit.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_lessons/teacher_lesson_cubit.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_profile/teacher_profile_cubit.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/manager/working_hours/working_hours_cubit.dart';
 
 import '../../feature/parent_auth/data/repos/auth_repo_imp.dart';
 import '../../feature/parent_auth/presentation/manager/log_in_cubit/login_cubit.dart';
@@ -53,5 +57,22 @@ void setupServiceLocator() {
 
   getIt.registerFactory<CourseCubit>(
     () => CourseCubit(courseRepo: getIt.get<CourseRepoImpl>()),
+  );
+
+  getIt.registerFactory<TeacherLessonsCubit>(
+    () => TeacherLessonsCubit(courseRepo: getIt.get<CourseRepoImpl>()),
+  );
+
+  getIt.registerFactory<ReserveLessonCubit>(
+    () => ReserveLessonCubit(courseRepo: getIt.get<CourseRepoImpl>()),
+  );
+
+  getIt.registerLazySingleton<WorkingHoursRepoImpl>(
+    () => WorkingHoursRepoImpl(apiService: getIt.get<ApiService>()),
+  );
+
+  getIt.registerFactory<WorkingHoursCubit>(
+    () =>
+        WorkingHoursCubit(workingHoursRepo: getIt.get<WorkingHoursRepoImpl>()),
   );
 }

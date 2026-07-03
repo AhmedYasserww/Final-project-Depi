@@ -205,7 +205,7 @@ class ApiService {
   /// PUT REQUEST
   Future<dynamic> put({
     required String endPoint,
-    required Map<String, dynamic> data,
+    required dynamic data,
     String? token,
   }) async {
     try {

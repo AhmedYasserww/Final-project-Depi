@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kids_education_learning/core/widgets/custom_button.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/widgets/teacher_lesson_view.dart';
 import '../../../../../core/utils/app_color.dart';
 import '../../../../../core/utils/app_style.dart';
-import '../../../../../core/widgets/profile_widgets/custom_icon_button.dart';
-import '../../../../../core/widgets/profile_widgets/custom_tab_button.dart';
 import '../../../../teacher/presentations/manager/get_teacher_profile_cubit/get_teacher_profile_cubit.dart';
 import '../../../../teacher/presentations/manager/get_teacher_profile_cubit/get_teacher_profile_state.dart';
 import '../../../../teacher/presentations/views/widgets/custom_availability_row.dart';
 import '../../../../teacher/presentations/views/widgets/custom_profile_stat_card.dart';
 import '../../../../teacher/presentations/views/widgets/week_day_helper.dart';
 import '../../../data/entites/teacher_entity.dart';
-import 'confirm_booking_sheet.dart';
-import 'custom_book_card.dart';
-import 'select_data_sheet.dart';
 
 class TeacherProfileParentViewBody extends StatelessWidget {
   const TeacherProfileParentViewBody({super.key});
@@ -43,13 +40,10 @@ class _TeacherProfileContent extends StatefulWidget {
   final TeacherEntity teacher;
 
   @override
-  State<_TeacherProfileContent> createState() =>
-      _TeacherProfileContentState();
+  State<_TeacherProfileContent> createState() => _TeacherProfileContentState();
 }
 
 class _TeacherProfileContentState extends State<_TeacherProfileContent> {
-  int _selectedTab = 0;
-
   @override
   Widget build(BuildContext context) {
     final teacher = widget.teacher;
@@ -62,8 +56,13 @@ class _TeacherProfileContentState extends State<_TeacherProfileContent> {
           children: [
             /// Header
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                GestureDetector(
+                  onTap: () => Navigator.of(context).pop(),
+                  child: Icon(Icons.arrow_back, color: AppColors.blackColor),
+                ),
+                SizedBox(width: 8),
                 Text(
                   'Profile',
                   style: TextStyle(
@@ -72,13 +71,6 @@ class _TeacherProfileContentState extends State<_TeacherProfileContent> {
                     color: AppColors.blackColor,
                     fontFamily: 'Inter',
                   ),
-                ),
-                Row(
-                  children: [
-                    CustomIconButton(icon: Icons.edit_outlined),
-                    SizedBox(width: 8),
-                    CustomIconButton(icon: Icons.settings_outlined),
-                  ],
                 ),
               ],
             ),
@@ -115,23 +107,6 @@ class _TeacherProfileContentState extends State<_TeacherProfileContent> {
             ),
             const SizedBox(height: 16),
 
-            /// Tabs
-            Row(
-              children: [
-                CustomTabButton(
-                  label: 'Overview',
-                  onTap: () => setState(() => _selectedTab = 0),
-                ),
-                const SizedBox(width: 10),
-                CustomTabButton(
-                  label: 'Reviews',
-                  onTap: () => setState(() => _selectedTab = 1),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-
-            /// Stats
             Row(
               children: [
                 Expanded(
@@ -194,18 +169,18 @@ class _TeacherProfileContentState extends State<_TeacherProfileContent> {
 
             const SizedBox(height: 24),
 
-
-            /// Session Cards
-            CustomBookCard(
-              duration: '30 minutes',
-              label: 'Lesson',
-              onBook: () => _openBookingFlow(context, '30 minutes'),
-            ),
-            const SizedBox(height: 16),
-            CustomBookCard(
-              duration: '1 hour',
-              label: 'Lesson',
-              onBook: () => _openBookingFlow(context, '1 hour'),
+            CustomButton(
+              text: "Book The Teacher",
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => TeacherLessonsView(
+                      teacherId: teacher.id,
+                      teacherName: teacher.fullName,
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -216,7 +191,7 @@ class _TeacherProfileContentState extends State<_TeacherProfileContent> {
   List<Widget> _buildWeeklyAvailability(TeacherEntity teacher) {
     return WeekDayHelper.orderedDays.map((day) {
       final match = teacher.weeklyAvailability.where(
-            (a) => a.day.toLowerCase() == day,
+        (a) => a.day.toLowerCase() == day,
       );
 
       final availability = match.isNotEmpty ? match.first : null;
@@ -227,40 +202,11 @@ class _TeacherProfileContentState extends State<_TeacherProfileContent> {
         isActive: isActive,
         timeRange: isActive
             ? WeekDayHelper.formatTimeRange(
-          availability!.startTime,
-          availability.endTime,
-        )
+                availability!.startTime,
+                availability.endTime,
+              )
             : null,
       );
     }).toList();
   }
-}
-
-void _openBookingFlow(BuildContext context, String duration) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    backgroundColor: Colors.transparent,
-    builder: (_) => SelectDateSheet(
-      lessonDuration: duration,
-      onDateConfirmed: (date) {
-        showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          backgroundColor: Colors.transparent,
-          builder: (_) => ConfirmBookingSheet(
-            lessonDuration: duration,
-            date: date,
-            childName: 'Jacob', // TODO: replace with real child picker
-            category: 'Super Shapes', // TODO: replace with real category picker
-            paymentMethod: 'Mastercard •••• 6533', // TODO: pull from payment cubit
-            onConfirm: () {
-              Navigator.pop(context);
-              // TODO: dispatch to a BookingCubit / call your booking API here
-            },
-          ),
-        );
-      },
-    ),
-  );
 }

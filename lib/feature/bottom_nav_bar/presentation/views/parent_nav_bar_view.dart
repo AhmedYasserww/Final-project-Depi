@@ -17,9 +17,9 @@ class ParentNavBarView extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomNavigationBar(items: [
       NavBarItem(title: "Home", outlinedIcon: AppImages.homeIcon, filledIcon: AppImages.homeFilled, screen: HomeView()),
-      //NavBarItem(title: "Lessons", outlinedIcon: AppImages.lessonIcon, filledIcon: AppImages.productFilled, screen: LessonsView()),
+      NavBarItem(title: "Lessons", outlinedIcon: AppImages.lessonIcon, filledIcon: AppImages.productFilled, screen: LessonsView()),
       NavBarItem(title: "Schedule", outlinedIcon: AppImages.scheduleIcon, filledIcon: AppImages.cartFilled, screen: ScheduleView()),
-      //NavBarItem(title: "Inbox", outlinedIcon: AppImages.inboxIcon, filledIcon: AppImages.moreIcon, screen: InboxChatView()),
+      // NavBarItem(title: "Inbox", outlinedIcon: AppImages.inboxIcon, filledIcon: AppImages.moreIcon, screen: InboxChatView()),
       NavBarItem(title: "Profile", outlinedIcon: AppImages.profileIcon, filledIcon: AppImages.moreIcon, screen: ProfileParentView()),
     ]);
   }
