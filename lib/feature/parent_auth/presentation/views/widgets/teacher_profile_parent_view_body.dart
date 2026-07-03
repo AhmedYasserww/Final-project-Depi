@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:kids_education_learning/core/utils/app_color.dart';
 import 'package:kids_education_learning/core/utils/app_style.dart';
-import 'package:kids_education_learning/core/widgets/custom_button.dart';
+import 'package:kids_education_learning/core/widgets/booking_confirmed_dialog.dart';
+import 'package:kids_education_learning/core/widgets/custom_book_card.dart';
 import 'package:kids_education_learning/core/widgets/profile_widgets/custom_icon_button.dart';
 import 'package:kids_education_learning/core/widgets/profile_widgets/custom_tab_button.dart';
 import 'package:kids_education_learning/core/widgets/profile_widgets/custom_stat_card.dart';
-import 'package:kids_education_learning/core/widgets/profile_widgets/custom_session_card.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/widgets/create_course_bottom_sheet.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/confirm_booking_sheet.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/select_date_sheet.dart';
 
-class TeacherProfileViewBody extends StatefulWidget {
-  const TeacherProfileViewBody({super.key});
+class TeacherProfileParentViewBody extends StatefulWidget {
+  const TeacherProfileParentViewBody({super.key});
   @override
-  State<TeacherProfileViewBody> createState() => _TeacherProfileViewBodyState();
+  State<TeacherProfileParentViewBody> createState() => _TeacherProfileParentViewBodyState();
 }
 
-class _TeacherProfileViewBodyState extends State<TeacherProfileViewBody> {
+class _TeacherProfileParentViewBodyState extends State<TeacherProfileParentViewBody> {
   int _selectedTab = 0;
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,6 @@ class _TeacherProfileViewBodyState extends State<TeacherProfileViewBody> {
                 ],
               ),
               const SizedBox(height: 30),
-
               /// Avatar
               ClipRRect(
                 borderRadius: BorderRadius.circular(50),
@@ -84,7 +84,10 @@ class _TeacherProfileViewBodyState extends State<TeacherProfileViewBody> {
               ),
 
               const SizedBox(height: 4),
-              Text('\$80/hr', style: AppStyle.styleBoldShop16),
+              Text(
+                '\$80/hr',
+                style: AppStyle.styleBoldShop16,
+              ),
               const SizedBox(height: 16),
 
               /// Tabs
@@ -92,9 +95,16 @@ class _TeacherProfileViewBodyState extends State<TeacherProfileViewBody> {
                 children: [
                   CustomTabButton(
                     label: 'Overview',
+                  //  isSelected: _selectedTab == 0,
                     onTap: () => setState(() => _selectedTab = 0),
                   ),
                   const SizedBox(width: 10),
+                  CustomTabButton(
+                    label: 'Reviews',
+                    //badge: '19',
+                    //isSelected: _selectedTab == 1,
+                    onTap: () => setState(() => _selectedTab = 1),
+                  ),
                 ],
               ),
 
@@ -159,10 +169,12 @@ class _TeacherProfileViewBodyState extends State<TeacherProfileViewBody> {
               ),
 
               const SizedBox(height: 20),
-              const Divider(color: Color(0xFFE0E0E0), thickness: 1),
+              const Divider(
+                color: Color(0xFFE0E0E0),
+                thickness: 1,
+              ),
 
               const SizedBox(height: 20),
-
               /// Available Sessions
               const Text(
                 'Available sessions',
@@ -176,46 +188,22 @@ class _TeacherProfileViewBodyState extends State<TeacherProfileViewBody> {
 
               const SizedBox(height: 6),
               Text(
-                'These are the session times your clients can book.',
+                'Book 1:1 sessions from the options based on your child’s needs',
                 style: AppStyle.styleGreyRegular16,
               ),
 
               const SizedBox(height: 16),
-
               /// Session Cards
-              const Row(
-                children: [
-                  Expanded(
-                    child: CustomSessionCard(
-                      duration: '30 minutes',
-                      label: 'Lesson',
-                    ),
-                  ),
-                  SizedBox(width: 12),
-                  Expanded(
-                    child: CustomSessionCard(
-                      duration: '1 hour',
-                      label: 'Lesson',
-                    ),
-                  ),
-                ],
+              CustomBookCard(
+                duration: '30 minutes',
+                label: 'Lesson',
+                onBook: () => _openBookingFlow(context, '30 minutes'),
               ),
-              const SizedBox(height: 24),
-              CustomButton(
-                text: 'Add Course',
-                onTap: () async {
-                  final result = await showModalBottomSheet<CourseUploadResult>(
-                    context: context,
-                    isScrollControlled: true,
-                    backgroundColor: Colors.transparent,
-                    builder: (context) => const CreateCourseBottomSheet(),
-                  );
-
-                  if (result != null) {
-                    // result.videoPath, result.videoName, result.category
-                    // hand this to your CourseCubit / Firebase upload logic
-                  }
-                },
+              const SizedBox(height: 16),
+              CustomBookCard(
+                duration: '1 hour',
+                label: 'Lesson',
+                onBook: () => _openBookingFlow(context, '1 hour'),
               ),
             ],
           ),
@@ -223,4 +211,43 @@ class _TeacherProfileViewBodyState extends State<TeacherProfileViewBody> {
       ),
     );
   }
+}
+
+void _openBookingFlow(BuildContext context, String duration) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.transparent,
+    builder: (_) => SelectDateSheet(
+      lessonDuration: duration,
+      onDateConfirmed: (date) {
+        showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          builder: (_) => ConfirmBookingSheet(
+            lessonDuration: duration,
+            date: date,
+            childName: 'Jacob',
+            category: 'Super Shapes',
+            paymentMethod: 'Mastercard •••• 6533',
+            onConfirm: () {
+              Navigator.popUntil(context, (r) => r.isFirst);
+              showDialog(
+                context: context,
+                barrierDismissible: true,
+                builder: (_) => const BookingConfirmedDialog(),
+              );
+              Future.delayed(const Duration(seconds: 2), () {
+                if (context.mounted) {
+                  Navigator.of(context, rootNavigator: true).pop();
+                }
+              });
+              // TODO: dispatch to a BookingCubit / call your booking API here
+            },
+          ),
+        );
+      },
+    ),
+  );
 }

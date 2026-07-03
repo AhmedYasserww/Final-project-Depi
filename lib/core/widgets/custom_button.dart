@@ -17,6 +17,7 @@ class CustomButton extends StatelessWidget {
     this.radius,
     this.widget,
     this.isLoading = false,
+    this.width
   });
 
   final String text;
@@ -28,6 +29,7 @@ class CustomButton extends StatelessWidget {
   final BoxBorder? border;
   final double? radius;
   final Widget? widget;
+  final double? width;
 
   /// New
   final bool isLoading;
@@ -37,7 +39,7 @@ class CustomButton extends StatelessWidget {
     return InkWell(
       onTap: isLoading ? null : onTap,
       child: Container(
-        width: double.infinity,
+        width: width ?? double.infinity,
         height: height ?? 48,
         decoration: BoxDecoration(
           border: border,
