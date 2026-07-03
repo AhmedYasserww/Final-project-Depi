@@ -1,36 +1,34 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:kids_education_learning/core/utils/app_color.dart';
-import 'package:kids_education_learning/core/utils/app_style.dart';
-import 'package:kids_education_learning/core/widgets/custom_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kids_education_learning/core/service_locator/service_locator.dart';
+import 'package:kids_education_learning/core/widgets/category_chips.dart';
+import 'package:kids_education_learning/core/widgets/course_text_field.dart';
+import 'package:kids_education_learning/core/widgets/video_upload.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/widgets/course_uploaded_dialog.dart';
+import '../../../../../core/utils/app_color.dart';
+import '../../../../../core/utils/app_style.dart';
+import '../../../../../core/widgets/custom_button.dart';
+import '../../../presentation/manager/course_cubit/course_cubit.dart';
+import '../../../presentation/manager/course_cubit/course_state.dart';
 
-/// Result returned from [CreateCourseBottomSheet] when the teacher
-/// finishes filling the form. Hand this off to your upload/Cubit logic.
-class CourseUploadResult {
-  final String videoPath;
-  final String videoName;
-  final String category;
-
-  const CourseUploadResult({
-    required this.videoPath,
-    required this.videoName,
-    required this.category,
-  });
+/// Shows the "Add Course" bottom sheet.
+/// Returns `true` if a course was successfully uploaded, so the
+/// caller (e.g. TeacherProfileViewBody) can refresh its course list.
+Future<bool?> showCreateCourseBottomSheet(BuildContext context) {
+  return showModalBottomSheet<bool>(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.transparent,
+    builder: (_) => BlocProvider(
+      create: (_) => getIt<CourseCubit>(),
+      child: const CreateCourseBottomSheet(),
+    ),
+  );
 }
 
-/// Bottom sheet shown when the teacher taps "Add Course".
-/// Lets them pick a video and choose a category.
 class CreateCourseBottomSheet extends StatefulWidget {
   const CreateCourseBottomSheet({super.key});
-
-  static const List<String> categories = [
-    "Storytelling",
-    "Alphabet Games",
-    "Rhyming Games",
-    "Counting Games",
-    "Shapes and Colors",
-    "Drawing and Colouring",
-  ];
 
   @override
   State<CreateCourseBottomSheet> createState() =>
@@ -38,245 +36,180 @@ class CreateCourseBottomSheet extends StatefulWidget {
 }
 
 class _CreateCourseBottomSheetState extends State<CreateCourseBottomSheet> {
+  final _titleController = TextEditingController();
+  final _descriptionController = TextEditingController();
+
   PlatformFile? _pickedVideo;
-  String? _selectedCategory;
-  bool _isPicking = false;
+  int? _selectedCategoryId;
 
-  bool get _canSubmit => _pickedVideo != null && _selectedCategory != null;
+  bool get _canSubmit =>
+      _pickedVideo != null &&
+      _selectedCategoryId != null &&
+      _titleController.text.trim().isNotEmpty &&
+      _descriptionController.text.trim().isNotEmpty;
 
-  Future<void> _pickVideo() async {
-    setState(() => _isPicking = true);
-    try {
-      final result = await FilePicker.pickFiles(
-        type: FileType.video,
-      );
-      if (result != null && result.files.isNotEmpty) {
-        setState(() => _pickedVideo = result.files.single);
-      }
-    } finally {
-      if (mounted) setState(() => _isPicking = false);
-    }
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
   }
-
-  void _removeVideo() => setState(() => _pickedVideo = null);
 
   void _submit() {
     if (!_canSubmit) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Please add a video and pick a category'),
+          content: Text(
+            'Please fill in the title, description, video and category',
+          ),
         ),
       );
       return;
     }
-    Navigator.of(context).pop(
-      CourseUploadResult(
-        videoPath: _pickedVideo!.path!,
-        videoName: _pickedVideo!.name,
-        category: _selectedCategory!,
-      ),
+
+    context.read<CourseCubit>().addCourse(
+      title: _titleController.text.trim(),
+      description: _descriptionController.text.trim(),
+      categoryId: _selectedCategoryId!,
+      videoPath: _pickedVideo!.path!,
+      videoName: _pickedVideo!.name,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-      ),
-      child: DraggableScrollableSheet(
-        initialChildSize: 0.75,
-        minChildSize: 0.5,
-        maxChildSize: 0.95,
-        expand: false,
-        builder: (context, scrollController) {
-          return Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-            ),
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
+    return BlocConsumer<CourseCubit, CourseState>(
+      listener: (context, state) async {
+        if (state is CourseSuccess) {
+          await showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (_) => const CourseUploadedDialog(),
+          );
+          if (context.mounted) {
+            Navigator.of(
+              context,
+            ).pop(true); // closes the bottom sheet, returns true
+          }
+        } else if (state is CourseError) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
+        }
+      },
+      builder: (context, state) {
+        final isLoading = state is CourseLoading;
+
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: DraggableScrollableSheet(
+            initialChildSize: 0.85,
+            minChildSize: 0.5,
+            maxChildSize: 0.95,
+            expand: false,
+            builder: (context, scrollController) {
+              return Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
                 ),
-                Expanded(
-                  child: ListView(
-                    controller: scrollController,
-                    padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 10),
+                    Container(
+                      width: 40,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListView(
+                        controller: scrollController,
+                        padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
                         children: [
-                          const Text(
-                            'Add Course',
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w800,
-                              color: AppColors.labelTextColor,
-                              fontFamily: 'Inter',
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Add Course',
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w800,
+                                  color: AppColors.labelTextColor,
+                                  fontFamily: 'Inter',
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: isLoading
+                                    ? null
+                                    : () => Navigator.of(context).pop(),
+                                icon: const Icon(Icons.close),
+                              ),
+                            ],
                           ),
-                          IconButton(
-                            onPressed: () => Navigator.of(context).pop(),
-                            icon: const Icon(Icons.close),
+                          const SizedBox(height: 20),
+
+                          Text('Title', style: AppStyle.styleGreyRegular16),
+                          const SizedBox(height: 8),
+                          CourseTextField(
+                            controller: _titleController,
+                            hint: 'e.g. Learning the Alphabet',
+                          ),
+
+                          const SizedBox(height: 20),
+                          Text(
+                            'Description',
+                            style: AppStyle.styleGreyRegular16,
+                          ),
+                          const SizedBox(height: 8),
+                          CourseTextField(
+                            controller: _descriptionController,
+                            hint: 'What will kids learn in this course?',
+                            maxLines: 4,
+                          ),
+
+                          const SizedBox(height: 20),
+                          Text(
+                            'Course video',
+                            style: AppStyle.styleGreyRegular16,
+                          ),
+                          const SizedBox(height: 8),
+                          VideoUploadBox(
+                            pickedVideo: _pickedVideo,
+                            onPicked: (file) =>
+                                setState(() => _pickedVideo = file),
+                            onRemove: () => setState(() => _pickedVideo = null),
+                          ),
+
+                          const SizedBox(height: 24),
+                          Text('Category', style: AppStyle.styleGreyRegular16),
+                          const SizedBox(height: 10),
+                          CategoryChips(
+                            selectedCategoryId: _selectedCategoryId,
+                            onSelected: (id) =>
+                                setState(() => _selectedCategoryId = id),
+                          ),
+
+                          const SizedBox(height: 32),
+                          CustomButton(
+                            text: 'Upload Course',
+                            isLoading: state is CourseLoading,
+                            onTap: isLoading ? () {} : _submit,
                           ),
                         ],
-                      ),
-                      const SizedBox(height: 20),
-
-                      Text('Course video', style: AppStyle.styleGreyRegular16),
-                      const SizedBox(height: 8),
-                      _VideoUploadBox(
-                        pickedVideo: _pickedVideo,
-                        isPicking: _isPicking,
-                        onTap: _pickVideo,
-                        onRemove: _removeVideo,
-                      ),
-
-                      const SizedBox(height: 24),
-
-                      Text('Category', style: AppStyle.styleGreyRegular16),
-                      const SizedBox(height: 10),
-                      Wrap(
-                        spacing: 10,
-                        runSpacing: 10,
-                        children: CreateCourseBottomSheet.categories.map((c) {
-                          final bool selected = c == _selectedCategory;
-                          return ChoiceChip(
-                            label: Text(c),
-                            selected: selected,
-                            onSelected: (_) =>
-                                setState(() => _selectedCategory = c),
-                            selectedColor: AppColors.primaryColor,
-                            backgroundColor: const Color(0xFFF3F3F7),
-                            labelStyle: TextStyle(
-                              color:
-                                  selected ? Colors.white : AppColors.blackColor,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: 'Inter',
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              side: BorderSide(
-                                color: selected
-                                    ? AppColors.primaryColor
-                                    : const Color(0xFFE0E0E0),
-                              ),
-                            ),
-                            showCheckmark: false,
-                          );
-                        }).toList(),
-                      ),
-
-                      const SizedBox(height: 32),
-                      CustomButton(
-                        text: 'Upload Course',
-                        onTap: _submit,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
-
-class _VideoUploadBox extends StatelessWidget {
-  final PlatformFile? pickedVideo;
-  final bool isPicking;
-  final VoidCallback onTap;
-  final VoidCallback onRemove;
-
-  const _VideoUploadBox({
-    required this.pickedVideo,
-    required this.isPicking,
-    required this.onTap,
-    required this.onRemove,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    if (pickedVideo != null) {
-      return Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: const Color(0xFFE0E0E0)),
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 48,
-              height: 48,
-              decoration: BoxDecoration(
-                color: AppColors.primaryColor.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Icon(Icons.play_circle_fill, color: AppColors.primaryColor),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                pickedVideo!.name,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Inter',
-                ),
-              ),
-            ),
-            IconButton(
-              onPressed: onRemove,
-              icon: const Icon(Icons.delete_outline, color: Colors.redAccent),
-            ),
-          ],
-        ),
-      );
-    }
-
-    return InkWell(
-      onTap: isPicking ? null : onTap,
-      borderRadius: BorderRadius.circular(16),
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 28),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: const Color(0xFFE0E0E0)),
-          color: const Color(0xFFFAFAFC),
-        ),
-        child: Center(
-          child: isPicking
-              ? const CircularProgressIndicator()
-              : Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.videocam_outlined,
-                        size: 32, color: AppColors.primaryColor),
-                    const SizedBox(height: 8),
-                    const Text(
-                      'Tap to upload a video',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'Inter',
                       ),
                     ),
                   ],
                 ),
-        ),
-      ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }

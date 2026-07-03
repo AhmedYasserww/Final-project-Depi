@@ -20,12 +20,12 @@ class TeacherNavBarView extends StatelessWidget {
           filledIcon: AppImages.homeFilled,
           screen: TeacherHomeView(),
         ),
-        NavBarItem(
-          title: "Inbox",
-          outlinedIcon: AppImages.inboxIcon,
-          filledIcon: AppImages.moreIcon,
-          screen: const InboxChatView(),
-        ),
+        // NavBarItem(
+        //   title: "Inbox",
+        //   outlinedIcon: AppImages.inboxIcon,
+        //   filledIcon: AppImages.moreIcon,
+        //   screen: const InboxChatView(),
+        // ),
         NavBarItem(
           title: "Profile",
           outlinedIcon: AppImages.profileIcon,

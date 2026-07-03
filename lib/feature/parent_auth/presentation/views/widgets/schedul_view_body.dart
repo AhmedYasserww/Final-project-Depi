@@ -42,13 +42,11 @@ class _ScheduleViewContent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             /// TITLE
-            const Flexible(
-              child: Text(
-                "Schedule",
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: AppStyle.styleBold32,
-              ),
+            Text(
+              "Schedule",
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: AppStyle.styleBold32,
             ),
             const SizedBox(height: 8),
             const Text(

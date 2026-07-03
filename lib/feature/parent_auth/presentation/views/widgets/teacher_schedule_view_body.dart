@@ -210,12 +210,7 @@ class _TeacherScheduleViewBodyState extends State<TeacherScheduleViewBody> {
                   : null,
             ),
             SizedBox(height: 16),
-            CustomButton(
-              text: "Skip for now",
-              onTap: () {},
-              buttonColor: AppColors.backGroundColor,
-              textStyle: AppStyle.styleScheduleSemiBold16,
-            ),
+            
           ],
         ),
       ),

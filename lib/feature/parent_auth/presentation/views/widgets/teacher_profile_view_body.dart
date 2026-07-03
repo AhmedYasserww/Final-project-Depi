@@ -204,17 +204,7 @@ class _TeacherProfileViewBodyState extends State<TeacherProfileViewBody> {
               CustomButton(
                 text: 'Add Course',
                 onTap: () async {
-                  final result = await showModalBottomSheet<CourseUploadResult>(
-                    context: context,
-                    isScrollControlled: true,
-                    backgroundColor: Colors.transparent,
-                    builder: (context) => const CreateCourseBottomSheet(),
-                  );
-
-                  if (result != null) {
-                    // result.videoPath, result.videoName, result.category
-                    // hand this to your CourseCubit / Firebase upload logic
-                  }
+                  await showCreateCourseBottomSheet(context);
                 },
               ),
             ],
