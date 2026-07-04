@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:kids_education_learning/core/utils/app_color.dart';
 import 'package:kids_education_learning/core/utils/app_dimensions.dart';
 import 'package:kids_education_learning/core/utils/app_style.dart';
 import 'package:kids_education_learning/feature/achievements/presentations/views/lesson_flow_view.dart';
+import 'package:kids_education_learning/feature/parent_auth/presentation/views/widgets/lesson_video_played_view.dart';
 
 class CustomeLessonsCard extends StatefulWidget {
   const CustomeLessonsCard({
@@ -12,15 +12,15 @@ class CustomeLessonsCard extends StatefulWidget {
     required this.state,
     required this.instructorName,
     required this.date,
-    required this.duration,
     required this.category,
+    required this.videoUrl,
   });
   final String childName;
   final String state;
   final String instructorName;
   final String date;
-  final String duration;
   final String category;
+  final String videoUrl;
   @override
   State<CustomeLessonsCard> createState() => _CustomeLessonsCardState();
 }
@@ -74,7 +74,14 @@ class _CustomeLessonsCardState extends State<CustomeLessonsCard> {
                           height: 48,
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(context, LessonFlowView.routeName);
+                              Navigator.pushNamed(
+                                context,
+                                LessonVideoPlayerView.routeName,
+                                arguments: {
+                                  'videoUrl': widget.videoUrl,
+                                  'title': widget.childName,
+                                },
+                              );
                             },
                             child: Image.asset(
                               "assets/icons/start_lesson_icon.jpg",
@@ -91,11 +98,11 @@ class _CustomeLessonsCardState extends State<CustomeLessonsCard> {
                 "Instructor: ${widget.instructorName}",
                 style: AppStyle.styleRegular14,
               ),
-              SizedBox(height: 2),
               Text(
-                "${widget.date} • ${widget.duration} • Category: Mixed",
-                style: AppStyle.styleGreyRegular14,
+                "Instructor: ${widget.category}",
+                style: AppStyle.styleRegular14,
               ),
+              SizedBox(height: 2),
             ],
           ),
         ),

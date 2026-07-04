@@ -46,6 +46,7 @@ dependencies:
   flutter_tts: ^4.0.2
   file_picker: ^11.0.2
   equatable: ^2.0.8
+  video_player: ^2.11.1
 
 
 dev_dependencies:

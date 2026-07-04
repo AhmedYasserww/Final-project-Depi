@@ -69,22 +69,49 @@ class CourseRepoImpl implements CourseRepo {
   }
 
   @override
-Future<String> reserveLesson({required String lessonId}) async {
-  final response = await apiService.post(
-    endPoint: '${EndPoints.reserveLesson}/$lessonId',
-    data: const {},
-  );
+  Future<String> reserveLesson({required String lessonId}) async {
+    final response = await apiService.post(
+      endPoint: '${EndPoints.reserveLesson}/$lessonId',
+      data: const {},
+    );
+
+    if (response is Map<String, dynamic> && response['succeeded'] == true) {
+      return response['data']?.toString() ?? 'Lesson reserved successfully';
+    }
+
+    final message = (response is Map<String, dynamic>)
+        ? (response['message']?.toString() ??
+              (response['errors'] is List &&
+                      (response['errors'] as List).isNotEmpty
+                  ? response['errors'][0].toString()
+                  : 'Failed to reserve lesson'))
+        : 'Failed to reserve lesson';
+
+    throw Exception(message);
+  }
+
+  @override
+Future<List<CourseEntity>> getParentLessons() async {
+  final response = await apiService.get(endPoint: EndPoints.parentLesson);
 
   if (response is Map<String, dynamic> && response['succeeded'] == true) {
-    return response['data']?.toString() ?? 'Lesson reserved successfully';
+    final data = response['data'];
+    if (data == null) return [];
+    if (data is List) {
+      return data
+          .map((json) => CourseModel.fromJson(json as Map<String, dynamic>))
+          .toList();
+    }
+    // fallback: لو رجعت object واحد لأي سبب (بعض الـ APIs بترجع شكل مختلف حسب الحالة)
+    if (data is Map<String, dynamic>) {
+      return [CourseModel.fromJson(data)];
+    }
+    return [];
   }
 
   final message = (response is Map<String, dynamic>)
-      ? (response['message']?.toString() ??
-          (response['errors'] is List && (response['errors'] as List).isNotEmpty
-              ? response['errors'][0].toString()
-              : 'Failed to reserve lesson'))
-      : 'Failed to reserve lesson';
+      ? (response['message']?.toString() ?? 'Failed to load lessons')
+      : 'Failed to load lessons';
 
   throw Exception(message);
 }

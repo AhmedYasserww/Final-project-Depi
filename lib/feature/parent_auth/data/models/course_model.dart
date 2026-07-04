@@ -8,8 +8,10 @@ class CourseModel extends CourseEntity {
     required super.description,
     required super.teacherId,
     required super.categoryId,
+    required super.lessonImageUrl,
     required super.lessonVideoUrl,
     required super.categoryName,
+    required super.isCompleted,
   });
 
   factory CourseModel.fromJson(Map<String, dynamic> json) {
@@ -21,8 +23,10 @@ class CourseModel extends CourseEntity {
       categoryId: json['categoryId'] is int
           ? json['categoryId']
           : int.tryParse(json['categoryId'].toString()) ?? 0,
+      lessonImageUrl: json['lessonImageUrl'] ?? '',
       lessonVideoUrl: json['lessonVideoUrl'] ?? '',
       categoryName: json['categoryName'] ?? '',
+      isCompleted: json['isCompleted'] ?? false,
     );
   }
 }

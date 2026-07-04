@@ -10,4 +10,5 @@ class EndPoints {
   static const String lessonByTeacher = 'Lesson/teacher';
   static const String reserveLesson = 'Lesson/reserve';
   static const String teacherWorkingHours = 'Account/teacher/hours';
+  static const String parentLesson = 'Lesson/parent';
 }
