@@ -13,6 +13,9 @@ import 'package:kids_education_learning/feature/parent_auth/presentation/manager
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_lessons/teacher_lesson_cubit.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_profile/teacher_profile_cubit.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/working_hours/working_hours_cubit.dart';
+import 'package:kids_education_learning/feature/teacher/data/repos/teacher_home_repo.dart';
+import 'package:kids_education_learning/feature/teacher/data/repos/teacher_home_repo_imp.dart';
+import 'package:kids_education_learning/feature/teacher/presentations/manager/teacher_home_cubit/teacher_home_cubit.dart';
 
 import '../../feature/parent_auth/data/repos/auth_repo_imp.dart';
 import '../../feature/parent_auth/presentation/manager/log_in_cubit/login_cubit.dart';
@@ -80,4 +83,12 @@ void setupServiceLocator() {
   getIt.registerFactory<ScheduleLessonCubit>(
     () => ScheduleLessonCubit(courseRepo: getIt.get<CourseRepoImpl>()),
   );
+
+  getIt.registerLazySingleton<TeacherHomeRepo>(
+  () => TeacherHomeRepoImpl(apiService: getIt<ApiService>()),
+);
+
+getIt.registerFactory<TeacherHomeCubit>(
+  () => TeacherHomeCubit(teacherHomeRepo: getIt<TeacherHomeRepo>()),
+);
 }
