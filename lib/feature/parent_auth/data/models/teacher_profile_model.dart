@@ -12,6 +12,8 @@ class TeacherProfileModel extends TeacherProfileEntity {
     required super.bio,
     required super.country,
     required super.hourlyRate,
+    super.lessonsCompleted,
+    super.scheduledLessons,
   });
 
   factory TeacherProfileModel.fromJson(Map<String, dynamic> json) {
@@ -24,6 +26,9 @@ class TeacherProfileModel extends TeacherProfileEntity {
       bio:               json['bio']               ?? '',
       country:           json['country']            ?? '',
       hourlyRate:        (json['hourlyRate'] as num?)?.toDouble() ?? 0.0,
+      // عدّل أسامي المفاتيح دي لو الـ response الحقيقي مختلف
+      lessonsCompleted:  json['lessonsCompleted']  ?? 0,
+      scheduledLessons:  json['scheduledLessons']  ?? 0,
     );
   }
 }

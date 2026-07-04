@@ -6,6 +6,7 @@ abstract class TeacherProfileState {}
 
 class TeacherProfileInitial extends TeacherProfileState {}
 
+// ── Update flow ──
 class TeacherProfileLoading extends TeacherProfileState {}
 
 class TeacherProfileSuccess extends TeacherProfileState {
@@ -18,8 +19,20 @@ class TeacherProfileFailure extends TeacherProfileState {
   TeacherProfileFailure(this.errorMessage);
 }
 
-// Separate state just for image picking (so UI doesn't reset on image change)
 class TeacherProfileImagePicked extends TeacherProfileState {
   final String imagePath;
   TeacherProfileImagePicked(this.imagePath);
+}
+
+// ── Get/Load flow ──
+class TeacherProfileLoadingFetch extends TeacherProfileState {}
+
+class TeacherProfileLoaded extends TeacherProfileState {
+  final TeacherProfileEntity profile;
+  TeacherProfileLoaded(this.profile);
+}
+
+class TeacherProfileLoadFailure extends TeacherProfileState {
+  final String errorMessage;
+  TeacherProfileLoadFailure(this.errorMessage);
 }

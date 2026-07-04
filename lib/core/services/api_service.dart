@@ -70,7 +70,6 @@ class ApiService {
   }
 
   /// GET REQUEST
-  ///
   Future<dynamic> get({
     required String endPoint,
     String? token,
@@ -88,9 +87,7 @@ class ApiService {
 
       return response.data;
     } on DioException catch (e) {
-      throw Exception(
-        "GET Error: ${e.response?.statusCode} - ${e.response?.data}",
-      );
+      return _handleDioError(e);
     }
   }
 

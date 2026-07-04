@@ -11,8 +11,17 @@ class TeacherProfileCubit extends Cubit<TeacherProfileState> {
   TeacherProfileCubit({required this.authRepo}) : super(TeacherProfileInitial());
 
   String? pickedImagePath;
-
   final ImagePicker _picker = ImagePicker();
+
+  /// جلب بيانات البروفايل (GET)
+  Future<void> getTeacherProfile() async {
+    emit(TeacherProfileLoadingFetch());
+    final result = await authRepo.getTeacherProfile();
+    result.fold(
+          (failure) => emit(TeacherProfileLoadFailure(failure.errorMessage)),
+          (profile) => emit(TeacherProfileLoaded(profile)),
+    );
+  }
 
   Future<void> pickImage() async {
     final XFile? image = await _picker.pickImage(
@@ -25,12 +34,12 @@ class TeacherProfileCubit extends Cubit<TeacherProfileState> {
     }
   }
 
+  /// تحديث بيانات البروفايل (PUT)
   Future<void> updateProfile({
     required String country,
     required String hourlyRate,
     required String bio,
   }) async {
-    // Basic validation
     if (country.isEmpty) {
       emit(TeacherProfileFailure("Please select a country"));
       return;
@@ -59,8 +68,8 @@ class TeacherProfileCubit extends Cubit<TeacherProfileState> {
     );
 
     result.fold(
-      (failure) => emit(TeacherProfileFailure(failure.errorMessage)),
-      (profile) => emit(TeacherProfileSuccess(profile)),
+          (failure) => emit(TeacherProfileFailure(failure.errorMessage)),
+          (profile) => emit(TeacherProfileSuccess(profile)),
     );
   }
 }

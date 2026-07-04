@@ -9,6 +9,8 @@ class TeacherProfileEntity {
   final String bio;
   final String country;
   final double hourlyRate;
+  final int lessonsCompleted;
+  final int scheduledLessons;
 
   TeacherProfileEntity({
     required this.id,
@@ -19,5 +21,7 @@ class TeacherProfileEntity {
     required this.bio,
     required this.country,
     required this.hourlyRate,
+    this.lessonsCompleted = 0,
+    this.scheduledLessons = 0,
   });
 }
