@@ -16,24 +16,30 @@ class CustomButton extends StatelessWidget {
     this.border,
     this.radius,
     this.widget,
+    this.isLoading = false,
+    this.width
   });
 
   final String text;
   final TextStyle? textStyle;
-  final void Function() onTap;
+  final VoidCallback? onTap;
   final Color? buttonColor;
   final Color? textButtonColor;
   final double? height;
   final BoxBorder? border;
   final double? radius;
   final Widget? widget;
+  final double? width;
+
+  /// New
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: isLoading ? null : onTap,
       child: Container(
-        width: double.infinity,
+        width: width ?? double.infinity,
         height: height ?? 48,
         decoration: BoxDecoration(
           border: border,
@@ -43,16 +49,27 @@ class CustomButton extends StatelessWidget {
           color: buttonColor ?? AppColors.buttonColor,
         ),
         child: Center(
-          child: Row(
-            spacing: 12,
+          child: isLoading
+              ? const SizedBox(
+            width: 22,
+            height: 22,
+            child: CircularProgressIndicator(
+              strokeWidth: 2.5,
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            ),
+          )
+              : Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (widget != null) widget!,
+              if (widget != null) ...[
+                widget!,
+                const SizedBox(width: 12),
+              ],
               Text(
                 text,
-                style: (textStyle ?? AppStyle.styleWhiteRegular16).copyWith(
-
-                color: textButtonColor ?? Colors.white,
+                style: (textStyle ?? AppStyle.styleWhiteRegular16)
+                    .copyWith(
+                  color: textButtonColor ?? Colors.white,
                 ),
               ),
             ],

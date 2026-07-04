@@ -8,7 +8,7 @@ class AppImages {
   static const String checkIcon = 'assets/images/check_icon.svg';
   static const String facebookLogo = 'assets/images/facebook_icon.svg';
   static const String googleLogo = 'assets/images/google_icon.svg';
-  static const String profile = 'assets/images/profile.png';
+  static const String profile = 'assets/images/profile.svg';
   static const String searchIcon = 'assets/images/search.svg';
   static const String filterIcon = 'assets/images/filterIcon.svg';
   static const String offerImage = 'assets/images/Offer_1.png';
@@ -94,6 +94,9 @@ class AppImages {
   static const String moreIcon = "assets/images/more.svg";
   static const String profilePic = 'assets/images/prof pic.png';
   static const String iconSearchBar = 'assets/images/prof pic.png';
+  static const String profilePhoto = 'assets/images/koala.png';
+  static const String vector = 'assets/images/vector.png';
+  static const String profileIcon = 'assets/images/profile.svg';
 
 
 }

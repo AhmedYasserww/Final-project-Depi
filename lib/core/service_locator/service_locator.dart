@@ -1,17 +1,93 @@
+
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:kids_education_learning/feature/parent/data/repos/category_repo_imp.dart';
+import 'package:kids_education_learning/feature/auth/presentaions/auth_teacher/data/repos/working_hours_repo_imp.dart';
 
-import '../../feature/parent_auth/data/repos/auth_repo_imp.dart';
-import '../../feature/parent_auth/presentation/manager/log_in_cubit/login_cubit.dart';
+import 'package:kids_education_learning/feature/teacher/data/repos/teacher_home_repo.dart';
+import 'package:kids_education_learning/feature/teacher/data/repos/teacher_home_repo_imp.dart';
+import '../../feature/auth/data/repos/auth_repo_imp.dart';
+import '../../feature/auth/presentaions/auth_parent/presentaitions/manager/parent_register/parent_register_cubit.dart';
+import '../../feature/auth/presentaions/auth_teacher/presentations/manager/course_cubit/course_cubit.dart';
+import '../../feature/auth/presentaions/auth_teacher/presentations/manager/teacher_home_cubit/teacher_home_cubit.dart';
+import '../../feature/auth/presentaions/auth_teacher/presentations/manager/teacher_lessons/teacher_lesson_cubit.dart';
+import '../../feature/auth/presentaions/auth_teacher/presentations/manager/teacher_profile/teacher_profile_cubit.dart';
+import '../../feature/auth/presentaions/auth_teacher/presentations/manager/working_hours/working_hours_cubit.dart';
+import '../../feature/auth/presentaions/manager/log_in_cubit/login_cubit.dart';
+import '../../feature/parent/data/repos/course_repo_imp.dart';
+import '../../feature/parent/presentations/manager/category_cubit/category_cubit.dart';
+import '../../feature/parent/presentations/manager/reserve_lesson/reserve_lesson_cubit.dart';
+import '../../feature/parent/presentations/manager/schedule_lesson/schedule_lesson_cubit.dart';
+import '../../feature/teacher/data/repos/teacher_repo_imp.dart';
 import '../services/api_service.dart';
 
 final getIt = GetIt.instance;
 
 void setupServiceLocator() {
   getIt.registerSingleton<ApiService>(ApiService(dio: Dio()));
-  getIt.registerSingleton<AuthRepoImpl>(AuthRepoImpl(apiService:getIt.get<ApiService>(),));
-  getIt.registerFactory<LoginCubit>(
-        () => LoginCubit(getIt.get<AuthRepoImpl>()),
-  );
-}
 
+  getIt.registerSingleton<AuthRepoImpl>(
+    AuthRepoImpl(apiService: getIt.get<ApiService>()),
+  );
+
+  getIt.registerFactory<LoginCubit>(
+    () => LoginCubit(getIt.get<AuthRepoImpl>()),
+  );
+
+  getIt.registerFactory<TeacherProfileCubit>(
+    () => TeacherProfileCubit(authRepo: getIt.get<AuthRepoImpl>()),
+  );
+
+  //  ParentRegisterCubit
+  getIt.registerFactory<ParentRegisterCubit>(
+    () => ParentRegisterCubit(authRepo: getIt.get<AuthRepoImpl>()),
+  );
+
+  getIt.registerSingleton<CategoryRepoImpl>(
+    CategoryRepoImpl(apiService: getIt<ApiService>()),
+  );
+
+  getIt.registerFactory<CategoryCubit>(
+    () => CategoryCubit(getIt<CategoryRepoImpl>()),
+  );
+  getIt.registerLazySingleton<TeacherRepoImpl>(
+    () => TeacherRepoImpl(apiService: getIt.get<ApiService>()),
+  );
+
+  getIt.registerLazySingleton<CourseRepoImpl>(
+    () => CourseRepoImpl(apiService: getIt.get<ApiService>()),
+  );
+
+  getIt.registerFactory<CourseCubit>(
+    () => CourseCubit(courseRepo: getIt.get<CourseRepoImpl>()),
+  );
+
+  getIt.registerFactory<TeacherLessonsCubit>(
+    () => TeacherLessonsCubit(courseRepo: getIt.get<CourseRepoImpl>()),
+  );
+
+  getIt.registerFactory<ReserveLessonCubit>(
+    () => ReserveLessonCubit(courseRepo: getIt.get<CourseRepoImpl>()),
+  );
+
+  getIt.registerLazySingleton<WorkingHoursRepoImpl>(
+    () => WorkingHoursRepoImpl(apiService: getIt.get<ApiService>()),
+  );
+
+  getIt.registerFactory<WorkingHoursCubit>(
+    () =>
+        WorkingHoursCubit(workingHoursRepo: getIt.get<WorkingHoursRepoImpl>()),
+  );
+
+  getIt.registerFactory<ScheduleLessonCubit>(
+    () => ScheduleLessonCubit(courseRepo: getIt.get<CourseRepoImpl>()),
+  );
+
+  getIt.registerLazySingleton<TeacherHomeRepo>(
+  () => TeacherHomeRepoImpl(apiService: getIt<ApiService>()),
+);
+
+getIt.registerFactory<TeacherHomeCubit>(
+  () => TeacherHomeCubit(teacherHomeRepo: getIt<TeacherHomeRepo>()),
+);
+}

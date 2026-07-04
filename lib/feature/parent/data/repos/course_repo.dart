@@ -1,0 +1,15 @@
+import 'package:kids_education_learning/feature/teacher/data/entites/course_entity.dart';
+
+abstract class CourseRepo {
+  Future<CourseEntity> addCourse({
+    required String title,
+    required String description,
+    required int categoryId,
+    required String videoPath,
+    required String videoName,
+  });
+
+  Future<List<CourseEntity>> getTeacherLessons({required String teacherId});
+  Future<String> reserveLesson({required String lessonId});
+  Future<List<CourseEntity>> getParentLessons();
+}
