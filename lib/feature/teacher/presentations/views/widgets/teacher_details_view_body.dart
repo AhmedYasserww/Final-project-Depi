@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kids_education_learning/core/utils/app_color.dart';
 import 'package:kids_education_learning/core/utils/app_style.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_profile/teacher_profile_cubit.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_profile/teacher_profile_state.dart';
-
 import '../../../../../core/utils/app_dimensions.dart';
 import '../../../../../core/utils/app_images.dart';
 import '../../../../../core/widgets/custom_button.dart';
-import '../../../../../core/widgets/custom_country_text_field.dart';
+import '../../../../auth/presentaions/auth_teacher/presentations/manager/teacher_profile/teacher_profile_cubit.dart';
+import '../../../../auth/presentaions/auth_teacher/presentations/manager/teacher_profile/teacher_profile_state.dart';
+import '../../../../auth/presentaions/auth_teacher/presentations/widgets/custom_country_text_field.dart';
 import '../../../../../core/widgets/custom_label_text.dart';
 import '../../../../../core/widgets/custom_subtitle_text_in_screen.dart';
 import '../../../../../core/widgets/custom_text_field.dart';

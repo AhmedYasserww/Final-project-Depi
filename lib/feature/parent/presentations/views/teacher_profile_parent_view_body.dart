@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kids_education_learning/core/widgets/custom_button.dart';
 import '../../../../core/utils/app_color.dart';
 import '../../../../core/utils/app_style.dart';
-import '../../../teacher/presentations/manager/get_teacher_profile_cubit/get_teacher_profile_cubit.dart';
-import '../../../teacher/presentations/manager/get_teacher_profile_cubit/get_teacher_profile_state.dart';
+import '../../../auth/presentaions/auth_teacher/presentations/manager/get_teacher_profile_cubit/get_teacher_profile_cubit.dart';
+import '../../../auth/presentaions/auth_teacher/presentations/manager/get_teacher_profile_cubit/get_teacher_profile_state.dart';
+import '../../../teacher/data/entites/teacher_entity.dart';
 import '../../../teacher/presentations/views/widgets/custom_availability_row.dart';
 import '../../../teacher/presentations/views/widgets/custom_profile_stat_card.dart';
 import '../../../teacher/presentations/views/widgets/teacher_lesson_view.dart';
 import '../../../teacher/presentations/views/widgets/week_day_helper.dart';
-import '../../../parent_auth/data/entites/teacher_entity.dart';
 
 class TeacherProfileParentViewBody extends StatelessWidget {
   const TeacherProfileParentViewBody({super.key});

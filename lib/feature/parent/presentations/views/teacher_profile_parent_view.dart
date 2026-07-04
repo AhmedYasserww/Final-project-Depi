@@ -4,8 +4,8 @@ import 'package:kids_education_learning/feature/parent/presentations/views/teach
 
 import '../../../../core/service_locator/service_locator.dart';
 import '../../../../core/utils/app_color.dart';
+import '../../../auth/presentaions/auth_teacher/presentations/manager/get_teacher_profile_cubit/get_teacher_profile_cubit.dart';
 import '../../../teacher/data/repos/teacher_repo_imp.dart';
-import '../../../teacher/presentations/manager/get_teacher_profile_cubit/get_teacher_profile_cubit.dart';
 
 class TeacherProfileParentView extends StatelessWidget {
   const TeacherProfileParentView({super.key, required this.teacherId});

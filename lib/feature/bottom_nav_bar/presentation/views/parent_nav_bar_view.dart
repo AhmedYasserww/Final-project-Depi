@@ -3,10 +3,8 @@ import 'package:kids_education_learning/feature/bottom_nav_bar/presentation/nav_
 import 'package:kids_education_learning/feature/parent/presentations/views/profile_parent_view.dart';
 import '../../../../core/utils/app_images.dart';
 import '../../../parent/presentations/views/home_view.dart';
-import '../../../chat/presentation/views/inbox_chat_view.dart';
 import '../../../parent/presentations/views/lessons_view.dart';
 import '../../../parent/presentations/views/schedul_view.dart';
-import '../../../parent_auth/presentation/views/shop_view.dart';
 import 'bottom_nav_bar_view.dart';
 
 class ParentNavBarView extends StatelessWidget {

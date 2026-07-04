@@ -6,9 +6,10 @@ import 'package:kids_education_learning/core/utils/app_style.dart';
 import 'package:kids_education_learning/core/widgets/custom_button.dart';
 import 'package:kids_education_learning/core/widgets/profile_widgets/custom_stat_card.dart';
 import 'package:kids_education_learning/core/widgets/profile_widgets/custom_session_card.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_profile/teacher_profile_cubit.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_profile/teacher_profile_state.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/widgets/create_course_bottom_sheet.dart';
+import 'package:kids_education_learning/feature/teacher/presentations/views/widgets/create_course_bottom_sheet.dart';
+
+import '../../../../auth/presentaions/auth_teacher/presentations/manager/teacher_profile/teacher_profile_cubit.dart';
+import '../../../../auth/presentaions/auth_teacher/presentations/manager/teacher_profile/teacher_profile_state.dart';
 
 class TeacherProfileViewBody extends StatefulWidget {
   const TeacherProfileViewBody({super.key});

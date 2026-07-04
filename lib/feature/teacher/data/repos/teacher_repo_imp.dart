@@ -4,8 +4,8 @@ import 'package:kids_education_learning/feature/teacher/data/repos/teacher_repo.
 
 import '../../../../core/services/api_service.dart';
 import '../../../../core/services/end_points.dart';
-import '../../../parent_auth/data/entites/teacher_entity.dart';
-import '../../../parent_auth/data/models/teacher_model.dart';
+import '../entites/teacher_entity.dart';
+import '../models/teacher_model.dart';
 
 class TeacherRepoImpl implements TeacherRepo {
   TeacherRepoImpl({required this.apiService});

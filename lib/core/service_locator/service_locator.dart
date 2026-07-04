@@ -1,24 +1,23 @@
-// core/di/service_locator.dart
 
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:kids_education_learning/feature/parent_auth/data/repos/category_repo_imp.dart';
-import 'package:kids_education_learning/feature/parent_auth/data/repos/course_repo_imp.dart';
-import 'package:kids_education_learning/feature/parent_auth/data/repos/working_hours_repo_imp.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/manager/category_cubit/category_cubit.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/manager/course_cubit/course_cubit.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/manager/schedule_lesson/schedule_lesson_cubit.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/manager/parent_register/parent_register_cubit.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/manager/reserve_lesson/reserve_lesson_cubit.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_lessons/teacher_lesson_cubit.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_profile/teacher_profile_cubit.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/manager/working_hours/working_hours_cubit.dart';
+import 'package:kids_education_learning/feature/parent/data/repos/category_repo_imp.dart';
+import 'package:kids_education_learning/feature/auth/presentaions/auth_teacher/data/repos/working_hours_repo_imp.dart';
+
 import 'package:kids_education_learning/feature/teacher/data/repos/teacher_home_repo.dart';
 import 'package:kids_education_learning/feature/teacher/data/repos/teacher_home_repo_imp.dart';
-import 'package:kids_education_learning/feature/teacher/presentations/manager/teacher_home_cubit/teacher_home_cubit.dart';
-
-import '../../feature/parent_auth/data/repos/auth_repo_imp.dart';
-import '../../feature/parent_auth/presentation/manager/log_in_cubit/login_cubit.dart';
+import '../../feature/auth/data/repos/auth_repo_imp.dart';
+import '../../feature/auth/presentaions/auth_parent/presentaitions/manager/parent_register/parent_register_cubit.dart';
+import '../../feature/auth/presentaions/auth_teacher/presentations/manager/course_cubit/course_cubit.dart';
+import '../../feature/auth/presentaions/auth_teacher/presentations/manager/teacher_home_cubit/teacher_home_cubit.dart';
+import '../../feature/auth/presentaions/auth_teacher/presentations/manager/teacher_lessons/teacher_lesson_cubit.dart';
+import '../../feature/auth/presentaions/auth_teacher/presentations/manager/teacher_profile/teacher_profile_cubit.dart';
+import '../../feature/auth/presentaions/auth_teacher/presentations/manager/working_hours/working_hours_cubit.dart';
+import '../../feature/auth/presentaions/manager/log_in_cubit/login_cubit.dart';
+import '../../feature/parent/data/repos/course_repo_imp.dart';
+import '../../feature/parent/presentations/manager/category_cubit/category_cubit.dart';
+import '../../feature/parent/presentations/manager/reserve_lesson/reserve_lesson_cubit.dart';
+import '../../feature/parent/presentations/manager/schedule_lesson/schedule_lesson_cubit.dart';
 import '../../feature/teacher/data/repos/teacher_repo_imp.dart';
 import '../services/api_service.dart';
 

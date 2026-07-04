@@ -8,7 +8,7 @@ import 'package:kids_education_learning/core/widgets/custom_subtitle_text_in_scr
 import 'package:kids_education_learning/core/widgets/custom_text_field.dart';
 import 'package:kids_education_learning/core/widgets/custom_title_text_in_screen.dart';
 
-import '../../../../auth/presentaions/auth_parent/views/choose_goal_view.dart';
+import '../../../../auth/presentaions/auth_parent/presentaitions/views/choose_goal_view.dart';
 
 class AddChildNameViewBody extends StatefulWidget {
   const AddChildNameViewBody({super.key});

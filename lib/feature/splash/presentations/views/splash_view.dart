@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/widgets/log_in_view_body.dart';
+import 'package:kids_education_learning/feature/auth/presentaions/views/widgets/log_in_view_body.dart';
 
 import '../../../auth/presentaions/views/log_in_view.dart';
 

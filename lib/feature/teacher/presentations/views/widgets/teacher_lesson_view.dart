@@ -3,12 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kids_education_learning/core/service_locator/service_locator.dart';
 import 'package:kids_education_learning/core/utils/app_color.dart';
 import 'package:kids_education_learning/core/utils/app_style.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_lessons/teacher_lesson_cubit.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_lessons/teacher_lesson_state.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/manager/reserve_lesson/reserve_lesson_cubit.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/manager/reserve_lesson/reserve_lesson_state.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/widgets/lesson_list_tile.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/widgets/lesson_reserved_dialog.dart';
+import 'package:kids_education_learning/feature/parent/presentations/views/widgets/lesson_reserved_dialog.dart';
+
+import '../../../../auth/presentaions/auth_teacher/presentations/manager/teacher_lessons/teacher_lesson_cubit.dart';
+import '../../../../auth/presentaions/auth_teacher/presentations/manager/teacher_lessons/teacher_lesson_state.dart';
+import '../../../../parent/presentations/manager/reserve_lesson/reserve_lesson_cubit.dart';
+import '../../../../parent/presentations/manager/reserve_lesson/reserve_lesson_state.dart';
+import '../../../../parent/presentations/views/widgets/lesson_list_tile.dart';
 
 class TeacherLessonsView extends StatelessWidget {
   final String teacherId;

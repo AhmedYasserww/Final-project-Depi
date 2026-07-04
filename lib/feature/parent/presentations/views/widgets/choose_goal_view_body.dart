@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kids_education_learning/core/utils/app_color.dart';
 import 'package:kids_education_learning/core/widgets/custom_button.dart';
-import 'package:kids_education_learning/core/widgets/custom_goal_button.dart';
 
-import '../../../../auth/presentaions/auth_parent/views/choose_activity_view.dart';
+import '../../../../auth/presentaions/auth_parent/presentaitions/views/choose_activity_view.dart';
+import '../../../../auth/presentaions/auth_parent/presentaitions/views/widgets/custom_goal_button.dart';
 
 class ChooseGoalViewBody extends StatefulWidget {
   const ChooseGoalViewBody({super.key});

@@ -4,9 +4,9 @@ import 'package:kids_education_learning/core/service_locator/service_locator.dar
 import 'package:kids_education_learning/core/utils/app_color.dart';
 import 'package:kids_education_learning/core/utils/app_style.dart';
 import 'package:kids_education_learning/feature/parent/presentations/views/widgets/custom_lesson_card_father.dart';
-import 'package:kids_education_learning/core/widgets/custom_stat_card_father.dart';
-import 'package:kids_education_learning/feature/teacher/presentations/manager/teacher_home_cubit/teacher_home_cubit.dart';
+import 'package:kids_education_learning/feature/teacher/presentations/views/widgets/custom_stat_card_father.dart';
 
+import '../../../../auth/presentaions/auth_teacher/presentations/manager/teacher_home_cubit/teacher_home_cubit.dart';
 class TeacherHomeViewBody extends StatelessWidget {
   const TeacherHomeViewBody({super.key});
 

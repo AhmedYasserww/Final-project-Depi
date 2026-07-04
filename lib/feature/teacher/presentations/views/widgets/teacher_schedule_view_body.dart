@@ -4,10 +4,9 @@ import 'package:kids_education_learning/core/utils/app_dimensions.dart';
 import 'package:kids_education_learning/core/utils/app_style.dart';
 import 'package:kids_education_learning/feature/parent/presentations/views/widgets/custom_activity_button.dart';
 import 'package:kids_education_learning/core/widgets/custom_button.dart';
-import 'package:kids_education_learning/core/widgets/custom_location_button.dart';
-import 'package:kids_education_learning/core/widgets/custom_slider_thump_shape.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/working_hours/teacher_working_hours_bottom_sheet.dart';
-
+import 'package:kids_education_learning/feature/auth/presentaions/auth_teacher/presentations/widgets/custom_location_button.dart';
+import 'package:kids_education_learning/feature/auth/presentaions/auth_teacher/presentations/widgets/custom_slider_thump_shape.dart';
+import '../../../../auth/presentaions/auth_teacher/presentations/widgets/working_hours/teacher_working_hours_bottom_sheet.dart';
 import '../../../../splash/presentations/views/let_is_go_view.dart';
 
 class TeacherScheduleViewBody extends StatefulWidget {

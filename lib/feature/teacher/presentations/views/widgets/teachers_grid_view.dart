@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/app_images.dart';
-import '../../../../../core/widgets/custom_teacher_card.dart';
-import '../../../../parent_auth/data/entites/teacher_entity.dart';
+import '../../../data/entites/teacher_entity.dart';
+import 'custom_teacher_card.dart';
 import '../../../../parent/presentations/views/teacher_profile_parent_view.dart';
 
 class TeachersGridView extends StatelessWidget {
