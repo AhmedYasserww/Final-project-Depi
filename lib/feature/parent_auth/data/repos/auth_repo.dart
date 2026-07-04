@@ -27,7 +27,9 @@ abstract class AuthRepo {
     String? imagePath,
   });
 
-  //  Parent Register -
+  // ✅ جديد
+  Future<Either<Failure, TeacherProfileEntity>> getTeacherProfile();
+
   Future<Either<Failure, ParentRegisterEntity>> parentRegister({
     required String email,
     required String password,
