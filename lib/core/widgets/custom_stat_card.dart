@@ -7,41 +7,46 @@ class CustomStatCard extends StatelessWidget {
     required this.desc,
     required this.icon,
     required this.color,
+    this.onTab
   });
 
   final String value;
   final String desc;
   final IconData icon;
   final Color color;
+  final VoidCallback? onTab;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: _box(),
-      child: Stack(
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(value,
-                  style: const TextStyle(
-                      fontSize: 36,
-                      fontWeight: FontWeight.w800,
-                      color: Color(0xFF343B6E))),
-              Text(desc,
-                  style: const TextStyle(
-                      fontSize: 14,
-                      color: Color(0xFF343B6E))),
-            ],
-          ),
-          Positioned(
-            right: 0,
-            top: 0,
-            child: Icon(icon, color: color, size: 24),
-          )
-        ],
+    return GestureDetector(
+      onTap: onTab,
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: _box(),
+        child: Stack(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(value,
+                    style: const TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.w800,
+                        color: Color(0xFF343B6E))),
+                Text(desc,
+                    style: const TextStyle(
+                        fontSize: 14,
+                        color: Color(0xFF343B6E))),
+              ],
+            ),
+            Positioned(
+              right: 0,
+              top: 0,
+              child: Icon(icon, color: color, size: 24),
+            )
+          ],
+        ),
       ),
     );
   }

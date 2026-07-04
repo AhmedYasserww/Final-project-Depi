@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kids_education_learning/core/utils/app_color.dart';
 import 'package:kids_education_learning/core/widgets/custom_stat_card.dart';
 import 'package:kids_education_learning/core/widgets/custom_category_card.dart';
+import 'package:kids_education_learning/feature/achievements/presentations/views/lesson_flow_view.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/category_cubit/category_cubit.dart';
 
 class HomeViewBody extends StatefulWidget {
@@ -13,14 +14,6 @@ class HomeViewBody extends StatefulWidget {
 }
 
 class _HomeViewBodyState extends State<HomeViewBody> {
-
-  static const stats = [
-    ['1', 'Lesson(s)\nin progress', Icons.rocket_launch, Colors.red],
-    ['10', 'Lessons\ncompleted', Icons.check_circle, Colors.green],
-    ['4', 'Categories\ncompleted', Icons.grid_view_rounded, Colors.deepPurple],
-    ['5', 'Achievements', Icons.emoji_events, Colors.amber],
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,26 +68,59 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     children: [
                       const SizedBox(height: 8),
 
-                      /// STATS GRID
-                      GridView.builder(
+                      /// STATS GRID (hardcoded cards)
+                      GridView(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: stats.length,
                         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 8,
                           mainAxisSpacing: 8,
                           childAspectRatio: 1.4,
                         ),
-                        itemBuilder: (context, index) {
-                          final e = stats[index];
-                          return CustomStatCard(
-                            value: e[0] as String,
-                            desc: e[1] as String,
-                            icon: e[2] as IconData,
-                            color: e[3] as Color,
-                          );
-                        },
+                        children: [
+                          CustomStatCard(
+                            value: '1',
+                            desc: 'Lesson(s)\nin progress',
+                            icon: Icons.rocket_launch,
+                            color: Colors.red,
+                            onTab: () {
+                              // Handle card tap
+                            },
+                          ),
+                          CustomStatCard(
+                            value: '10',
+                            desc: 'Lessons\ncompleted',
+                            icon: Icons.check_circle,
+                            color: Colors.green,
+                            onTab: () {
+                              // Handle card tap
+                            },
+                          ),
+                          CustomStatCard(
+                            value: '4',
+                            desc: 'Categories\ncompleted',
+                            icon: Icons.grid_view_rounded,
+                            color: Colors.deepPurple,
+                            onTab: () {
+                              // Handle card tap
+                            },
+                          ),
+                          CustomStatCard(
+                            value: '5',
+                            desc: 'Quises',
+                            icon: Icons.emoji_events,
+                            color: Colors.amber,
+                            onTab: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const LessonFlowView(),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
 
                       const SizedBox(height: 32),
