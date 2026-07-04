@@ -121,7 +121,7 @@ class AuthRepoImpl implements AuthRepo {
     }
   }
 
-  // ──────────────────────────── TEACHER PROFILE ────────────────────────────
+  // ──────────────────────────── UPDATE TEACHER PROFILE ─────────────────────
   @override
   Future<Either<Failure, TeacherProfileEntity>> updateTeacherProfile({
     required String country,
@@ -143,7 +143,7 @@ class AuthRepoImpl implements AuthRepo {
         data: formData,
       );
 
-      log("👤 Teacher Profile Response: $response");
+      log("👤 Update Teacher Profile Response: $response");
 
       if (response is Map<String, dynamic>) {
         final message   = response['message'];
@@ -158,10 +158,47 @@ class AuthRepoImpl implements AuthRepo {
         return left(ServerFailure(errorMessage: "Unexpected response format"));
       }
     } on DioException catch (e) {
-      log('❌ DioException (TeacherProfile): ${e.message}');
+      log('❌ DioException (UpdateTeacherProfile): ${e.message}');
       return left(ServerFailure.fromDioError(e));
     } catch (e) {
-      log('❌ Unexpected Error (TeacherProfile): $e');
+      log('❌ Unexpected Error (UpdateTeacherProfile): $e');
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
+
+  // ──────────────────────────── GET TEACHER PROFILE ────────────────────────
+  @override
+  Future<Either<Failure, TeacherProfileEntity>> getTeacherProfile() async {
+    try {
+      final response = await apiService.get(
+        endPoint: EndPoints.teacherProfile,
+      );
+
+      log("👤 Get Teacher Profile Response: $response");
+
+      if (response is Map<String, dynamic>) {
+        final message   = response['message'];
+        final succeeded = response['succeeded'];
+        final data      = response['data'];
+
+        if (succeeded == true && data != null) {
+          return right(TeacherProfileModel.fromJson(data));
+        } else if (succeeded == null && response['id'] != null) {
+          // في حالة الـ API بيرجع الأوبجكت مباشرة من غير wrapper
+          return right(TeacherProfileModel.fromJson(response));
+        } else {
+          return left(
+            ServerFailure(errorMessage: message ?? "Failed to load profile"),
+          );
+        }
+      } else {
+        return left(ServerFailure(errorMessage: "Unexpected response format"));
+      }
+    } on DioException catch (e) {
+      log('❌ DioException (GetTeacherProfile): ${e.message}');
+      return left(ServerFailure.fromDioError(e));
+    } catch (e) {
+      log('❌ Unexpected Error (GetTeacherProfile): $e');
       return left(ServerFailure(errorMessage: e.toString()));
     }
   }
