@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kids_education_learning/core/utils/app_images.dart';
 import 'package:kids_education_learning/core/utils/app_style.dart';
 
-import '../utils/app_color.dart';
+import '../../../../../core/utils/app_color.dart';
 
 class CustomChatListView extends StatelessWidget {
   CustomChatListView({super.key});

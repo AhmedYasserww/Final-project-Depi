@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/widgets/inbox_chat_view_body.dart';
+import 'package:kids_education_learning/feature/chat/presentation/views/widgets/inbox_chat_view_body.dart';
 
 class InboxChatView extends StatelessWidget {
   const InboxChatView({super.key});

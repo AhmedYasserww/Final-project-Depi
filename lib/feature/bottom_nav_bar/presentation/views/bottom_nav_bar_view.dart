@@ -1,4 +1,3 @@
-// core/widgets/custom_navigation_bar.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kids_education_learning/feature/bottom_nav_bar/presentation/nav_bar_item.dart';
@@ -22,10 +21,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       top: false,
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: IndexedStack(
-          index: selectedIndex,
-          children: widget.items.map((e) => e.screen).toList(),
-        ),
+        body: widget.items[selectedIndex].screen,
         bottomNavigationBar: Container(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           decoration: BoxDecoration(
@@ -42,7 +38,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(
               widget.items.length,
-              (index) => _navItem(index, widget.items[index]),
+                  (index) => _navItem(index, widget.items[index]),
             ),
           ),
         ),
@@ -69,30 +65,30 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 offset: selected ? const Offset(0, -16) : Offset.zero,
                 child: selected
                     ? Container(
-                        width: 54,
-                        height: 54,
-                        decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-                        alignment: Alignment.center,
-                        child: Container(
-                          width: 44,
-                          height: 44,
-                          padding: const EdgeInsets.all(10),
-                          decoration: const ShapeDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment(0.0, 1.0),
-                              end: Alignment(1.0, -1.0),
-                              colors: [Color(0xFFA4CAFE), Color(0xFF3F83F8)],
-                            ),
-                            shape: OvalBorder(),
-                          ),
-                          child: SvgPicture.asset(
-                            item.outlinedIcon,
-                            width: 24,
-                            height: 24,
-                            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                          ),
-                        ),
-                      )
+                  width: 54,
+                  height: 54,
+                  decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: 44,
+                    height: 44,
+                    padding: const EdgeInsets.all(10),
+                    decoration: const ShapeDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment(0.0, 1.0),
+                        end: Alignment(1.0, -1.0),
+                        colors: [Color(0xFFA4CAFE), Color(0xFF3F83F8)],
+                      ),
+                      shape: OvalBorder(),
+                    ),
+                    child: SvgPicture.asset(
+                      item.outlinedIcon,
+                      width: 24,
+                      height: 24,
+                      colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                    ),
+                  ),
+                )
                     : SvgPicture.asset(item.outlinedIcon, width: 24, height: 24),
               ),
             ),

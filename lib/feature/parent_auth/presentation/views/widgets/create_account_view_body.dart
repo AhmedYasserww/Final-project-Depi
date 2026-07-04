@@ -14,9 +14,9 @@ import 'package:kids_education_learning/feature/parent_auth/presentation/manager
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/parent_register/parent_register_state.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_register/teacher_register_cubit.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_register/teacher_register_state.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/add_child_name_view.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/log_in_view.dart';
-import '../teacher_detailes_view.dart';
+import 'package:kids_education_learning/feature/auth/presentaions/auth_parent/views/add_child_name_view.dart';
+import '../../../../auth/presentaions/auth_teacher/presentations/views/teacher_detailes_view.dart';
+import '../../../../auth/presentaions/views/log_in_view.dart';
 
 class CreateAccountViewBody extends StatefulWidget {
   const CreateAccountViewBody({super.key});

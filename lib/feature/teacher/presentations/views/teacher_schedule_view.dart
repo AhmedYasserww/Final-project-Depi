@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/widgets/teacher_schedule_view_body.dart';
+import 'package:kids_education_learning/feature/teacher/presentations/views/widgets/teacher_schedule_view_body.dart';
 
 class TeacherScheduleView extends StatelessWidget {
   const TeacherScheduleView({super.key});

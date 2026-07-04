@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kids_education_learning/core/service_locator/service_locator.dart';
 import 'package:kids_education_learning/core/utils/app_color.dart';
 import 'package:kids_education_learning/core/utils/app_style.dart';
-import 'package:kids_education_learning/core/widgets/custom_lesson_card_father.dart';
+import 'package:kids_education_learning/feature/parent/presentations/views/widgets/custom_lesson_card_father.dart';
 import 'package:kids_education_learning/core/widgets/custom_stat_card_father.dart';
 import 'package:kids_education_learning/feature/teacher/presentations/manager/teacher_home_cubit/teacher_home_cubit.dart';
 

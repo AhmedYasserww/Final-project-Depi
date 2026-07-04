@@ -99,7 +99,7 @@ class _CustomeLessonsCardState extends State<CustomeLessonsCard> {
                 style: AppStyle.styleRegular14,
               ),
               Text(
-                "Instructor: ${widget.category}",
+                "Category: ${widget.category}",
                 style: AppStyle.styleRegular14,
               ),
               SizedBox(height: 2),

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/widgets/log_in_view_body.dart';
 import '../../../../core/service_locator/service_locator.dart';
-import '../../data/repos/auth_repo_imp.dart';
-import '../manager/log_in_cubit/login_cubit.dart';
+import '../../../parent_auth/data/repos/auth_repo_imp.dart';
+import '../../../parent_auth/presentation/manager/log_in_cubit/login_cubit.dart';
 
 class LogInView extends StatelessWidget {
   const LogInView({super.key});

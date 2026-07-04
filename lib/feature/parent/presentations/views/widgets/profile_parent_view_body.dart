@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:kids_education_learning/core/widgets/custom_add_child.dart';
 import '../../../../../core/utils/app_dimensions.dart';
 import '../../../../../core/utils/app_images.dart';
-import '../../../../../core/widgets/custom_achivement_card.dart';
+import 'custom_achivement_card.dart';
 import '../../../../../core/widgets/custom_free_plan_card.dart';
 import '../../../../../core/widgets/custom_personal_info.dart';
 import '../../../../../core/widgets/custom_profile_image.dart';
 import '../../../../../core/widgets/custom_subtitle_text_in_screen.dart';
 import '../../../../../core/widgets/custom_switch_profile.dart';
 import '../../../../../core/widgets/custom_title_text_in_screen.dart';
+import 'custom_add_child.dart';
 
 class ProfileParentViewBody extends StatelessWidget {
   const ProfileParentViewBody({super.key});

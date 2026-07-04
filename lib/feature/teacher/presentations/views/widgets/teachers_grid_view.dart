@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/utils/app_images.dart';
 import '../../../../../core/widgets/custom_teacher_card.dart';
 import '../../../../parent_auth/data/entites/teacher_entity.dart';
-import '../../../../parent_auth/presentation/views/teacher_profile_parent_view.dart';
+import '../../../../parent/presentations/views/teacher_profile_parent_view.dart';
 
 class TeachersGridView extends StatelessWidget {
   const TeachersGridView({super.key, required this.teachers});

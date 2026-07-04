@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/widgets/teacher_profile_parent_view_body.dart';
+import 'package:kids_education_learning/feature/parent/presentations/views/teacher_profile_parent_view_body.dart';
 
 import '../../../../core/service_locator/service_locator.dart';
 import '../../../../core/utils/app_color.dart';

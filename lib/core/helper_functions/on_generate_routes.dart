@@ -6,24 +6,24 @@ import 'package:kids_education_learning/feature/bottom_nav_bar/presentation/view
 import 'package:kids_education_learning/feature/parent_auth/data/repos/auth_repo_imp.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_profile/teacher_profile_cubit.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/manager/teacher_register/teacher_register_cubit.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/add_child_name_view.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/create_account_view.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/home_view.dart';
+import 'package:kids_education_learning/feature/auth/presentaions/auth_parent/views/add_child_name_view.dart';
+import 'package:kids_education_learning/feature/auth/presentaions/views/create_account_view.dart';
+import 'package:kids_education_learning/feature/parent/presentations/views/home_view.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/shop_view.dart';
 import 'package:kids_education_learning/feature/parent_auth/presentation/views/widgets/lesson_video_played_view.dart';
 import '../../feature/achievements/presentations/views/lesson_flow_view.dart';
 import '../../feature/achievements/presentations/views/lessons_match_view.dart';
+import '../../feature/auth/presentaions/auth_parent/views/choose_activity_view.dart';
+import '../../feature/auth/presentaions/auth_parent/views/choose_goal_view.dart';
+import '../../feature/auth/presentaions/views/log_in_view.dart';
 import '../../feature/bottom_nav_bar/presentation/views/bottom_nav_bar_view.dart';
-import '../../feature/parent_auth/presentation/views/choose_activity_view.dart';
-import '../../feature/parent_auth/presentation/views/choose_goal_view.dart';
-import '../../feature/parent_auth/presentation/views/inbox_chat_view.dart';
-import '../../feature/parent_auth/presentation/views/let_is_go_view.dart';
-import '../../feature/parent_auth/presentation/views/schedul_view.dart';
-import '../../feature/parent_auth/presentation/views/log_in_view.dart';
-import '../../feature/parent_auth/presentation/views/lessons_view.dart';
-import '../../feature/parent_auth/presentation/views/teacher_detailes_view.dart';
-import '../../feature/parent_auth/presentation/views/teacher_profile_parent_view.dart';
-import '../../feature/parent_auth/presentation/views/teacher_schedule_view.dart';
+import '../../feature/chat/presentation/views/inbox_chat_view.dart';
+import '../../feature/splash/presentations/views/let_is_go_view.dart';
+import '../../feature/parent/presentations/views/schedul_view.dart';
+import '../../feature/parent/presentations/views/lessons_view.dart';
+import '../../feature/auth/presentaions/auth_teacher/presentations/views/teacher_detailes_view.dart';
+import '../../feature/parent/presentations/views/teacher_profile_parent_view.dart';
+import '../../feature/teacher/presentations/views/teacher_schedule_view.dart';
 import '../../feature/splash/presentations/views/splash_view.dart';
 
 Route<dynamic> onGenerateRoutes(RouteSettings settings) {

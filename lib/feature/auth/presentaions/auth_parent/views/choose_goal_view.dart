@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kids_education_learning/core/utils/app_color.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/widgets/choose_goal_view_body.dart';
+import '../../../../parent/presentations/views/widgets/choose_goal_view_body.dart';
 
 class ChooseGoalView extends StatelessWidget {
   const ChooseGoalView({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/widgets/add_child_name_view_body.dart';
+import 'package:kids_education_learning/feature/parent/presentations/views/widgets/add_child_name_view_body.dart';
 
 class AddChildNameView extends StatelessWidget {
   const AddChildNameView({super.key});

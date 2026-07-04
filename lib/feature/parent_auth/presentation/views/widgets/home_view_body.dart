@@ -67,8 +67,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 8),
-
-                      /// STATS GRID (hardcoded cards)
                       GridView(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -108,7 +106,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                           ),
                           CustomStatCard(
                             value: '5',
-                            desc: 'Quises',
+                            desc: 'Quizzes',
                             icon: Icons.emoji_events,
                             color: Colors.amber,
                             onTab: () {

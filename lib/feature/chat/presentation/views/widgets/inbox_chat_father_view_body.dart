@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kids_education_learning/core/widgets/custom_chat_message_father.dart';
+import 'package:kids_education_learning/feature/chat/presentation/views/widgets/custom_chat_message_father.dart';
 import 'package:kids_education_learning/core/widgets/custom_search_bar.dart';
 import 'package:kids_education_learning/core/widgets/custom_subtitle_text_in_screen.dart';
 import 'package:kids_education_learning/core/widgets/custom_title_text_in_screen.dart';

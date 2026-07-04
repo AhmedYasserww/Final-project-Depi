@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kids_education_learning/feature/bottom_nav_bar/presentation/nav_bar_item.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/inbox_chat_view.dart';
-import 'package:kids_education_learning/feature/parent_auth/presentation/views/teacher_profile_view.dart';
+import 'package:kids_education_learning/feature/chat/presentation/views/inbox_chat_view.dart';
 import '../../../../core/utils/app_images.dart';
-import '../../../parent_auth/presentation/views/teacher_home_view.dart';
+import '../../../teacher/presentations/views/teacher_profile_view.dart';
+import '../../../teacher/teacher_home_view.dart';
 import 'bottom_nav_bar_view.dart';
 
 class TeacherNavBarView extends StatelessWidget {
